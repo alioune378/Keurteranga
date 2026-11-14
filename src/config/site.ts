@@ -9,7 +9,7 @@
 export const site = {
   name: 'Kër Téranga',
   founderName: null as string | null, // [À compléter] — founder's full name
-  email: 'kerterangasenegal@gmail.com' as string | null,
+  email: 'hello@kerteranga.com' as string | null,
   phoneDisplay: '+221 77 146 27 18' as string | null,
   phoneHref: '+221771462718' as string | null,
   whatsapp: '221771462718' as string | null, // digits only
