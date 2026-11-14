@@ -48,8 +48,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(siteUrl()),
     title: { default: t('title'), template: '%s · Kër Téranga' },
-    ...pageMetadata({ locale, pathname: '/', description: t('description') }),
-    icons: { icon: '/favicon.svg' }
+    ...pageMetadata({ locale, pathname: '/', description: t('description') })
   };
 }
 

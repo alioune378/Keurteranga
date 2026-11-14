@@ -13,7 +13,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
       <header className="sticky top-0 z-30 border-b border-sand-200 bg-cream/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
           <Link href="/admin" aria-label="Tableau de bord">
-            <Logo className="scale-90 origin-left" />
+            <Logo className="h-11 md:h-12" />
           </Link>
           <div className="flex items-center gap-3 text-sm">
             <span className="hidden text-ink-soft sm:inline">{profile?.full_name || user.email}</span>

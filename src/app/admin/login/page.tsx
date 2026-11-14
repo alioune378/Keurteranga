@@ -8,7 +8,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <main className="flex min-h-svh items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex justify-center">
-          <Logo />
+          <Logo className="h-24 md:h-24" />
         </div>
         <div className="card p-7">
           <h1 className="text-2xl">Espace administrateur</h1>

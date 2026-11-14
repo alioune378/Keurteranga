@@ -60,7 +60,7 @@ export function Header() {
       </a>
       <div className="container flex h-[4.5rem] items-center justify-between gap-6 md:h-20">
         <Link href="/" aria-label="Kër Téranga" className="shrink-0">
-          <Logo />
+          <Logo priority />
         </Link>
 
         <nav aria-label={t('home')} className="hidden lg:block">
@@ -128,7 +128,7 @@ export function Header() {
               transition={{ type: 'tween', duration: 0.4, ease: [0.22, 0.61, 0.36, 1] }}
             >
               <div className="flex h-[4.5rem] items-center justify-between px-6">
-                <Logo light />
+                <Logo light className="h-12 md:h-12" />
                 <button
                   type="button"
                   onClick={() => setOpen(false)}

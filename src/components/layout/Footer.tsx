@@ -19,7 +19,7 @@ export function Footer() {
       <div className="pattern-weave absolute inset-0 opacity-40" aria-hidden="true" />
       <div className="container relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <Logo light />
+          <Logo light className="h-24 md:h-28" />
           <p className="mt-5 max-w-sm leading-relaxed text-cream/70">{t('footer.tagline')}</p>
           <Link href="/reservation" className="btn-gold mt-7">
             {t('nav.book')}

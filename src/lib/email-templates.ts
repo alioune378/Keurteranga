@@ -31,8 +31,7 @@ function layout(locale: Locale, title: string, body: string, preheader = '') {
 <tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid ${C.sand};">
   <tr><td style="background:${C.green};padding:28px 32px;">
-    <div style="font-family:Georgia,'Times New Roman',serif;font-size:26px;color:#ffffff;letter-spacing:.5px;">Kër Téranga</div>
-    <div style="height:3px;width:48px;background:${C.gold};margin-top:10px;border-radius:2px;"></div>
+    <img src="${siteUrl('/images/logo/logo-ker-teranga-light.png')}" alt="Kër Téranga" width="150" style="display:block;width:150px;height:auto;border:0;">
   </td></tr>
   <tr><td style="padding:32px;">${body}</td></tr>
   <tr><td style="background:${C.greenDark};padding:22px 32px;color:#cfe3d7;font-size:13px;line-height:1.7;">

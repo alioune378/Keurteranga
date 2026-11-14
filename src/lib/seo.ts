@@ -39,7 +39,7 @@ export function pageMetadata(opts: {
       url,
       title: title ? `${title} · ${site.name}` : site.name,
       description,
-      // 👉 add /public/images/og.jpg (1200×630) for social sharing previews
+      // social sharing preview built from the official logo (replace with a photo later if desired)
       images: [{ url: image || '/images/og.jpg', width: 1200, height: 630, alt: site.name }]
     },
     twitter: {
@@ -60,6 +60,7 @@ export function organizationJsonLd(locale: Locale) {
     email: site.email,
     telephone: site.phoneDisplay,
     image: siteUrl('/images/og.jpg'),
+    logo: siteUrl('/images/logo/logo-ker-teranga.png'),
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.address.street,
