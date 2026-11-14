@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "title": "Kër Téranga — Senegalese cooking workshops & culture in Dakar",
+    "description": "Discover Senegal through its flavours, traditions and Teranga. Thiéboudiène workshop in Dakar, in English and French.",
+    "aboutTitle": "About",
+    "experiencesTitle": "Our experiences",
+    "contactTitle": "Contact",
+    "bookingTitle": "Book my spot"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experiences": "Our experiences",
+    "contact": "Contact",
+    "book": "Book my spot",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "language": "Language",
+    "skip": "Skip to content"
+  },
+  "footer": {
+    "tagline": "The house of Teranga — food, culture and sharing in the heart of Dakar.",
+    "quickLinks": "Navigation",
+    "follow": "Follow us",
+    "contact": "Contact",
+    "rights": "All rights reserved.",
+    "admin": "Admin area"
+  },
+  "whatsapp": {
+    "label": "Message us on WhatsApp",
+    "message": "Hello Kër Téranga, I'd like some information about your workshops."
+  },
+  "photo": {
+    "placeholder": "Photo to insert"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Dakar · Senegal",
+      "title": "Discover Senegal through its flavours, its traditions and its Teranga.",
+      "subtitle": "Authentic cooking and cultural workshops in small groups — to cook, understand and share.",
+      "ctaPrimary": "Book my spot",
+      "ctaSecondary": "Discover the workshop"
+    },
+    "intro": {
+      "eyebrow": "The concept",
+      "title": "An open house, a shared table",
+      "text1": "Kër Téranga opens the doors of Senegalese culture through its most generous expression: its food. Here you don't watch, you take part: you discover the ingredients, cook, taste and listen to the stories behind every gesture.",
+      "text2": "Each workshop is a moment of transmission, guided by the founder, an ambassador of Senegalese gastronomy, so you leave with new skills, memories and a little piece of Senegal in your heart.",
+      "cta": "Our story"
+    },
+    "featured": {
+      "eyebrow": "Signature experience",
+      "title": "Thiéboudiène Workshop",
+      "text": "Cook Senegal's national dish together — listed as UNESCO Intangible Cultural Heritage — from the market to the shared bowl.",
+      "cta": "Book this workshop",
+      "details": "See details"
+    },
+    "highlights": {
+      "eyebrow": "What awaits you",
+      "title": "Much more than a cooking class",
+      "gastronomy": {
+        "title": "Gastronomy",
+        "text": "Market produce, spices and the techniques that make Senegalese cuisine so rich."
+      },
+      "traditions": {
+        "title": "Traditions",
+        "text": "History, symbols and rituals: understand what a meal says about Senegalese society."
+      },
+      "teranga": {
+        "title": "Teranga",
+        "text": "Senegalese hospitality, lived from the welcome to the shared bowl."
+      },
+      "transmission": {
+        "title": "Transmission",
+        "text": "Family know-how, generously shared so you can cook it again at home."
+      }
+    },
+    "story": {
+      "eyebrow": "In pictures",
+      "title": "From the market to the shared bowl",
+      "text": "The colours, scents and smiles of a Kër Téranga workshop."
+    },
+    "testimonials": {
+      "eyebrow": "They shared our table",
+      "title": "Testimonials",
+      "placeholder": "Reviews from your first guests will appear here (src/config/testimonials.ts)."
+    },
+    "trust": {
+      "smallGroups": "Hands-on experience",
+      "smallGroupsText": "You cook together — you don't just watch",
+      "languages": "English & French",
+      "languagesText": "Workshops hosted in your language",
+      "market": "Local ingredients",
+      "marketText": "Discover what goes into thiéboudiène",
+      "ambassador": "Culture & history",
+      "ambassadorText": "Cultural presentation projected on screen"
+    },
+    "final": {
+      "title": "Your place around the bowl is waiting",
+      "text": "Pick your date and book in a few clicks. No online payment required.",
+      "cta": "Book my spot"
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "A home, a culture, a way of welcoming",
+    "intro": "Kër Téranga was born from a simple belief: the best way to understand a country is to sit at its table.",
+    "name": {
+      "title": "The meaning of our name",
+      "ker": "Kër",
+      "kerText": "\"home\" in Wolof — the place where you welcome, gather and pass things on.",
+      "teranga": "Téranga",
+      "terangaText": "Senegalese hospitality, a founding value made of generosity, sharing and respect for others.",
+      "together": "Kër Téranga means \"the house of hospitality\": a place where every visitor is welcomed like family."
+    },
+    "history": {
+      "title": "Our story",
+      "text": "[To be completed: the story of Kër Téranga, told by the founder.]"
+    },
+    "mission": {
+      "title": "Our mission",
+      "text": "To bring Senegalese culture to life through authentic, accessible and warm food experiences that celebrate local produce and the people who grow, sell and cook it."
+    },
+    "vision": {
+      "title": "Our vision",
+      "text": "To become a reference for cultural and culinary tourism in Senegal, and a living embassy of Teranga for travellers from all over the world."
+    },
+    "heritage": {
+      "title": "Our commitment to heritage",
+      "text": "Our workshops are designed to pass culture on faithfully, without folklore or caricature:",
+      "points": [
+        "Recipes and techniques that respect tradition",
+        "A cultural presentation projected on screen",
+        "Discovering the local ingredients of thiéboudiène",
+        "Celebrating a dish listed as UNESCO heritage in 2021"
+      ]
+    },
+    "founder": {
+      "eyebrow": "The founder",
+      "title": "An ambassador of Senegalese gastronomy",
+      "nameTbc": "[Founder's name to be completed]",
+      "role": "Founder of Kër Téranga, she introduces visitors from all over the world to Senegalese food and culture.",
+      "bio": "[To be completed: the founder's biography — background, relationship with cooking, family heritage. Text to be provided by Kër Téranga.]",
+      "photo": "Real portrait of the founder to insert"
+    },
+    "cta": {
+      "title": "Come and experience Teranga",
+      "button": "Discover our experiences"
+    }
+  },
+  "experiences": {
+    "eyebrow": "Our experiences",
+    "title": "Cook, understand, share",
+    "intro": "Immersive small-group workshops to discover Senegal from the inside.",
+    "from": "From",
+    "perPerson": "per person",
+    "duration": "Duration",
+    "languages": "Languages",
+    "group": "Group",
+    "location": "Location",
+    "price": "Price",
+    "participants": "{min} to {max} people",
+    "included": "What's included",
+    "flowEyebrow": "Programme",
+    "flowTitle": "How the workshop unfolds",
+    "presentationTitle": "Cultural presentation",
+    "presentationText": "Every workshop includes an on-screen presentation — the story of the dish, maps, photographs and cultural landmarks — so you understand what you are cooking.",
+    "about": "The experience",
+    "gallery": "Gallery",
+    "book": "Book my spot",
+    "discover": "Discover",
+    "back": "All experiences",
+    "comingSoonTitle": "More experiences coming soon",
+    "comingSoonText": "More workshops are in the making. Follow us to hear about what's next.",
+    "languageNames": {
+      "fr": "French",
+      "en": "English"
+    },
+    "noPayment": "Free booking, no online payment — pay on site.",
+    "notFound": "This experience doesn't exist or is no longer available.",
+    "cutoff": "Online booking until {hours, plural, =0 {the start time} one {# hour before} other {# hours before}} the workshop"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's talk about your visit",
+    "intro": "A question, a group request or a specific date in mind? Write to us — we reply quickly.",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "whatsappCta": "Message on WhatsApp",
+    "address": "Address",
+    "follow": "Social media",
+    "mapTitle": "Location map",
+    "form": {
+      "title": "Send a message",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "subject": "Subject",
+      "message": "Your message",
+      "send": "Send",
+      "sending": "Sending…",
+      "success": "Thank you! Your message has been sent. We'll get back to you very soon.",
+      "error": "Your message could not be sent. Please try again or message us on WhatsApp.",
+      "consent": "I agree that Kër Téranga may use this information to reply to my request.",
+      "errors": {
+        "required": "This field is required.",
+        "email": "Invalid email address.",
+        "RATE_LIMITED": "Too many submissions. Please try again later.",
+        "NOT_CONFIGURED": "This form isn't activated yet. Please contact us directly.",
+        "generic": "Your message could not be sent. Please try again or message us on WhatsApp."
+      }
+    }
+  },
+  "booking": {
+    "eyebrow": "Booking",
+    "title": "Book my spot",
+    "intro": "Choose your experience, date and time. Your booking is confirmed instantly and requires no online payment.",
+    "steps": {
+      "experience": "Experience",
+      "date": "Date & time",
+      "participants": "Guests",
+      "details": "Your details",
+      "review": "Summary"
+    },
+    "stepOf": "Step {current} of {total}",
+    "chooseExperience": "Which experience would you like?",
+    "chooseDate": "Choose a date",
+    "chooseSlot": "Choose a time",
+    "loading": "Loading availability…",
+    "noSlots": "No availability this month. Try next month or contact us.",
+    "legendAvailable": "Available",
+    "legendFull": "Full",
+    "legendUnavailable": "Unavailable",
+    "full": "Full",
+    "spotsLeft": "{count, plural, =0 {Full} =1 {# spot left} other {# spots left}}",
+    "selectDateFirst": "Select a date in the calendar first.",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "participants": "Number of guests",
+    "participantsHint": "{count, plural, =1 {# spot available} other {# spots available}} for this time",
+    "decrease": "Remove a guest",
+    "increase": "Add a guest",
+    "language": "Workshop language",
+    "languageFr": "French",
+    "languageEn": "English",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "dialCode": "Dial code",
+    "country": "Country of residence",
+    "countryPlaceholder": "Select a country",
+    "otherCountry": "Other country",
+    "requests": "Special requests",
+    "requestsPlaceholder": "Allergies, dietary needs, special occasion, accessibility…",
+    "optional": "optional",
+    "summary": {
+      "title": "Check your booking",
+      "experience": "Experience",
+      "date": "Date",
+      "time": "Time",
+      "participants": "Guests",
+      "language": "Language",
+      "contact": "Contact",
+      "requests": "Requests",
+      "total": "Estimated total",
+      "totalNote": "Payable on site. No online payment.",
+      "edit": "Edit",
+      "priceTbc": "Confirmed by Kër Téranga"
+    },
+    "consent": "I agree that Kër Téranga may use this information to manage my booking and contact me about it (no marketing use).",
+    "next": "Continue",
+    "back": "Back",
+    "confirm": "Confirm my booking",
+    "confirming": "Confirming…",
+    "success": {
+      "title": "Your booking is confirmed!",
+      "text": "Dalal ak jàmm — welcome! A confirmation email is on its way to {email}.",
+      "reference": "Reference",
+      "next": "Keep your reference. The exact address and practical information will be sent to you before the workshop.",
+      "another": "Make another booking",
+      "home": "Back to home",
+      "emailDelay": "No email within a few minutes? Please check your spam folder."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again or contact us on WhatsApp.",
+      "NOT_ENOUGH_SPOTS": "There are no longer enough spots for this time. Availability has been refreshed: choose another time or reduce the number of guests.",
+      "SESSION_CLOSED": "This time slot has just been closed. Please choose another one.",
+      "SESSION_PAST": "This time slot is in the past. Please choose another one.",
+      "DATE_BLOCKED": "This date is no longer available. Please choose another one.",
+      "INVALID_PARTICIPANTS": "The number of guests isn't valid for this experience.",
+      "INVALID_INPUT": "Some information is missing or invalid.",
+      "SESSION_NOT_FOUND": "This time slot no longer exists. Please choose another one.",
+      "required": "This field is required.",
+      "email": "Invalid email address.",
+      "phone": "Invalid phone number.",
+      "RATE_LIMITED": "Too many attempts. Please wait a few minutes or contact us.",
+      "NOT_CONFIGURED": "The booking system isn't activated yet. In the meantime, contact us to book your spot.",
+      "consent": "Please accept the use of your information for the booking."
+    },
+    "partner": {
+      "title": "Are you a hotel, travel agency, tour operator, company or association and would like to work with Kër Téranga?",
+      "text": "Private workshops, group offers, team events, cultural partnerships: let's design a tailor-made experience together.",
+      "cta": "Become a partner",
+      "formTitle": "Become a partner",
+      "organization": "Organisation name",
+      "type": "Type of organisation",
+      "types": {
+        "hotel": "Hotel / accommodation",
+        "agency": "Travel agency",
+        "tour_operator": "Tour operator",
+        "corporate": "Company / corporate group",
+        "association": "Association / cultural organisation",
+        "other": "Other"
+      },
+      "contactName": "Contact name",
+      "email": "Work email",
+      "phone": "Phone",
+      "country": "Country",
+      "message": "Your project",
+      "send": "Send request",
+      "sending": "Sending…",
+      "success": "Thank you! Your partnership request has been received. We'll be in touch very soon.",
+      "error": "Your request could not be sent. Please try again.",
+      "close": "Close",
+      "groupSize": "Estimated group size",
+      "consent": "I agree that Kër Téranga may use this information to reply to my request.",
+      "typePlaceholder": "Select"
+    },
+    "notConfigured": {
+      "title": "Online booking coming soon",
+      "text": "The booking system isn't activated yet. In the meantime, contact us to book your spot.",
+      "cta": "Contact us"
+    },
+    "timeZoneNote": "Times shown in Dakar time (GMT)",
+    "realtime": "Availability updated in real time"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you're looking for doesn't exist or has moved.",
+    "cta": "Back to home"
+  },
+  "placeholder": {
+    "tbc": "[To be completed]",
+    "priceTbc": "Price to be confirmed",
+    "groupTbc": "Group size to be confirmed",
+    "illustration": "Illustration",
+    "illustrationNote": "Temporary illustrations — photos of Kër Téranga workshops coming soon."
+  }
+}
