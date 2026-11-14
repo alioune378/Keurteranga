@@ -53,34 +53,31 @@ export function PartnerSection({ className }: { className?: string }) {
   }, [open]);
 
   return (
-    <section id="partenaires" aria-labelledby="partners-title" className={cn('scroll-mt-20 border-t border-sand-200 bg-white', className)}>
-      <div className="container grid gap-10 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
-          <p className="eyebrow">{t('eyebrow')}</p>
-          <h2 id="partners-title" className="mt-4 text-display-lg">{t('heading')}</h2>
-          <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-soft">{t('title')}</p>
-          <p className="mt-3 text-[1.05rem] leading-relaxed text-ink-soft">{t('text')}</p>
-          <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className="btn-green btn-lg mt-8" aria-haspopup="dialog">
-            {t('cta')}
-          </button>
+    <section id="partenaires" aria-labelledby="partners-title" className={cn('scroll-mt-20 bg-white pb-14 md:pb-20', className)}>
+      <div className="container">
+        <div className="grid gap-8 rounded-4xl border border-sand-200 p-6 md:p-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">{t('eyebrow')}</p>
+            <h2 id="partners-title" className="mt-3 text-display-lg">{t('heading')}</h2>
+            <p className="mt-4 leading-relaxed text-ink-soft">{t('text')}</p>
+            <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className="btn-green mt-6" aria-haspopup="dialog">
+              {t('cta')}
+            </button>
+          </div>
+          <ul className="grid gap-3 self-center sm:grid-cols-2 lg:col-span-7">
+            {AUDIENCES.map(({ key, Icon }) => (
+              <li key={key} className="flex gap-3 rounded-3xl bg-sand-100 p-4 md:p-5">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-terracotta-500">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="text-base">{t(`audiences.${key}.title`)}</h3>
+                  <p className="mt-0.5 text-sm leading-relaxed text-ink-soft">{t(`audiences.${key}.text`)}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="grid self-center border-t border-sand-200 sm:grid-cols-2 lg:col-span-7">
-          {AUDIENCES.map(({ key, Icon }, i) => (
-            <li
-              key={key}
-              className={cn(
-                'flex gap-4 border-b border-sand-200 py-6 sm:px-6',
-                i % 2 === 0 ? 'sm:border-r sm:pl-0' : 'sm:pr-0'
-              )}
-            >
-              <Icon className="mt-1 h-5 w-5 shrink-0 text-terracotta-500" aria-hidden="true" />
-              <div>
-                <h3 className="text-[1.45rem] leading-tight">{t(`audiences.${key}.title`)}</h3>
-                <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink-soft">{t(`audiences.${key}.text`)}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
 
       {mounted &&
@@ -98,15 +95,15 @@ export function PartnerSection({ className }: { className?: string }) {
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="partner-title"
-                  className="max-h-[92dvh] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-2xl bg-white pb-[env(safe-area-inset-bottom)] text-ink shadow-lift sm:rounded-2xl"
+                  className="max-h-[92dvh] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-3xl bg-white pb-[env(safe-area-inset-bottom)] text-ink shadow-lift sm:rounded-3xl"
                   initial={{ y: 40, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 40, opacity: 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 0.61, 0.36, 1] }}
                 >
                   <div className="sticky top-0 z-10 flex items-center justify-between border-b border-sand-200 bg-white px-6 py-4">
-                    <h2 id="partner-title" className="text-2xl">{t('formTitle')}</h2>
-                    <button type="button" onClick={() => setOpen(false)} aria-label={t('close')} className="inline-flex h-11 w-11 items-center justify-center rounded-md hover:bg-sand-100" autoFocus>
+                    <h2 id="partner-title" className="text-xl">{t('formTitle')}</h2>
+                    <button type="button" onClick={() => setOpen(false)} aria-label={t('close')} className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sand-100 hover:bg-sand-200" autoFocus>
                       <X className="h-5 w-5" />
                     </button>
                   </div>
@@ -179,7 +176,7 @@ function PartnerForm({ onClose }: { onClose: () => void }) {
         </Field>
         <Consent label={t('consent')} error={err('consent')} />
         {state.status === 'error' && state.error !== 'INVALID_INPUT' && (
-          <p className="rounded-lg bg-terracotta-100 p-4 text-sm text-terracotta-700" role="alert">
+          <p className="rounded-2xl bg-terracotta-100 p-4 text-sm text-terracotta-700" role="alert">
             {tf(`errors.${state.error === 'RATE_LIMITED' || state.error === 'NOT_CONFIGURED' ? state.error : 'generic'}`)}
           </p>
         )}

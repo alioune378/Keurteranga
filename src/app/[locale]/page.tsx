@@ -1,6 +1,5 @@
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, CalendarDays, Check, Clock, Languages, MapPin, PartyPopper, Sparkles, Users } from 'lucide-react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { photos, site, type SitePhoto } from '@/config/site';
@@ -14,8 +13,6 @@ import { formatPrice, pick } from '@/lib/utils';
 
 export const revalidate = 300;
 
-const accent = (chunks: ReactNode) => <em className="accent">{chunks}</em>;
-
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
@@ -27,238 +24,261 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const experiences = await getExperiences();
   const featured = experiences.find((e) => e.featured) ?? experiences[0];
   const featuredCover = featured ? coverOf(featured) : null;
-  const languageNames = te.raw('languageNames') as Record<string, string>;
 
   const P = (p: SitePhoto) => ({ src: p.src, alt: p.alt[locale], illustration: p.illustration });
 
-  const journey = [
-    { key: 'market', p: photos.storyMarket },
+  const bookHref = featured ? { pathname: '/reservation' as const, query: { experience: featured.slug } } : ('/reservation' as const);
+  const featuredHref = featured
+    ? ({ pathname: '/experiences/[slug]', params: { slug: featured.slug } } as const)
+    : ('/experiences' as const);
+  const duration = featured ? pick(featured.duration, locale) : null;
+  const price = featured?.price_xof != null ? formatPrice(featured.price_xof, locale) : null;
+
+  const moments = [
+    { key: 'market', p: photos.aboutMarket },
     { key: 'prep', p: photos.storyHands },
     { key: 'cook', p: photos.storyPot },
     { key: 'share', p: photos.tasting }
   ] as const;
 
-  const moments = ['ingredients', 'gestures', 'history', 'sharing'] as const;
-  const bookingSteps = ['date', 'party', 'confirm'] as const;
-
-  const featuredHref = featured
-    ? ({ pathname: '/experiences/[slug]', params: { slug: featured.slug } } as const)
-    : ('/experiences' as const);
+  const how = [
+    { key: 'date', Icon: CalendarDays },
+    { key: 'party', Icon: Users },
+    { key: 'confirm', Icon: PartyPopper }
+  ] as const;
 
   return (
     <>
-      {/* ───────────────────────── 1–3 · HERO ───────────────────────── */}
-      <section className="bg-white">
-        <div className="container grid items-center gap-8 pb-14 pt-8 md:gap-12 md:pb-20 md:pt-12 lg:grid-cols-12 lg:gap-14 lg:pb-24">
-          <Reveal className="lg:col-span-5">
-            <p className="eyebrow">{t('hero.eyebrow')}</p>
-            <h1 className="mt-5 text-display-2xl text-forest-700">{t.rich('hero.title', { accent })}</h1>
-            <p className="mt-5 max-w-md text-[1.05rem] leading-relaxed text-ink-soft md:mt-6 md:text-lg">{t('hero.subtitle')}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 md:mt-9">
-              <Link href={featured ? { pathname: '/reservation', query: { experience: featured.slug } } : '/reservation'} className="btn-gold btn-lg">
-                {t('hero.ctaPrimary')}
-              </Link>
-              <Link href={featuredHref} className="link-arrow">
-                {t('hero.ctaSecondary')} <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
+      {/* ───────────── HERO · photo mosaic ───────────── */}
+      <section className="bg-white pb-10 pt-3 md:pb-16 md:pt-4">
+        <div className="container">
+          <div className="grid gap-3 lg:h-[34rem] lg:grid-cols-12 lg:gap-4">
+            {/* main visual + copy */}
+            <div className="relative lg:col-span-8 lg:overflow-hidden lg:rounded-3xl">
+              {/* 👉 PHOTO: replace photos.hero (src/config/site.ts) with an authentic workshop photo */}
+              <Photo {...P(photos.hero)} priority tone="green" className="aspect-[3/2] w-full rounded-3xl lg:aspect-auto lg:h-full lg:rounded-none" sizes="(min-width:1024px) 62vw, 100vw" />
+              <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-forest-900/85 via-forest-900/30 to-transparent lg:block" aria-hidden="true" />
+              <Reveal className="relative -mt-10 mx-2 rounded-3xl bg-white p-5 shadow-lift sm:mx-4 sm:p-7 lg:absolute lg:inset-x-0 lg:bottom-0 lg:mx-0 lg:mt-0 lg:max-w-2xl lg:rounded-none lg:bg-transparent lg:p-10 lg:shadow-none">
+                <p className="eyebrow lg:bg-white/15 lg:text-gold-200">{t('hero.tag')}</p>
+                <h1 className="mt-3 text-display-2xl lg:text-white">{t('hero.title')}</h1>
+                <p className="mt-3 max-w-xl text-[1.02rem] leading-relaxed text-ink-soft lg:text-lg lg:text-white/85">{t('hero.subtitle')}</p>
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <Link href={bookHref} className="btn-gold btn-lg">
+                    {t('hero.cta')}
+                  </Link>
+                  <Link href={featuredHref} className="btn-outline btn-lg lg:border-transparent lg:bg-white/15 lg:text-white lg:backdrop-blur lg:hover:bg-white lg:hover:text-forest-700">
+                    {t('hero.secondary')}
+                  </Link>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
-
-          <Reveal delay={0.1} className="relative lg:col-span-7">
-            {/* 👉 PHOTO: replace photos.hero (src/config/site.ts) with an authentic workshop photo */}
-            <Photo {...P(photos.hero)} priority tone="green" className="aspect-[3/2] w-full rounded-sm" sizes="(min-width:1024px) 58vw, 100vw" />
-            <div className="absolute -bottom-8 -left-8 hidden w-[38%] border-[6px] border-white bg-white shadow-lift xl:block">
-              <Photo {...P(photos.intro)} className="aspect-[3/2] w-full" sizes="260px" />
+            {/* side visuals (desktop) */}
+            <div className="hidden gap-4 lg:col-span-4 lg:grid lg:grid-rows-2">
+              <Photo {...P(photos.storyGuests)} className="h-full rounded-3xl" sizes="33vw" />
+              <Photo {...P(photos.storyMarket)} className="h-full rounded-3xl rounded-br-[4rem]" sizes="33vw" />
             </div>
-            <p className="mt-3 flex items-center justify-end gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
-              <span className="h-px w-6 bg-gold-400" aria-hidden="true" /> {t('hero.caption')}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+          </div>
 
-      {/* ───────────────────────── 4 · INTRODUCTION ───────────────────────── */}
-      <section className="border-y border-sand-200 bg-white">
-        <div className="container py-14 md:py-20">
-          <Reveal className="mx-auto max-w-4xl text-center">
-            <p className="eyebrow justify-center">{t('intro.eyebrow')}</p>
-            <p className="mt-6 font-display text-[1.7rem] leading-[1.25] text-forest-700 md:text-[2.4rem] md:leading-[1.2]">
-              {t.rich('intro.statement', { accent })}
-            </p>
-          </Reveal>
-          <ul className="mx-auto mt-10 grid max-w-4xl gap-px overflow-hidden rounded-sm border border-sand-200 bg-sand-200 sm:grid-cols-3 md:mt-14">
-            {(['handsOn', 'languages', 'place'] as const).map((k) => (
-              <li key={k} className="bg-white px-5 py-5 text-center">
-                <span className="block font-display text-xl text-forest-700">{t(`intro.facts.${k}.title`)}</span>
-                <span className="mt-1 block text-sm text-ink-muted">{t(`intro.facts.${k}.text`)}</span>
-              </li>
-            ))}
+          {/* quick facts */}
+          <ul className="no-scrollbar -mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:mt-5 md:flex-wrap md:justify-center md:overflow-visible md:px-0">
+            {duration && (
+              <li className="chip shrink-0"><Clock className="h-4 w-4 text-terracotta-500" aria-hidden="true" />{duration}</li>
+            )}
+            <li className="chip shrink-0"><Languages className="h-4 w-4 text-terracotta-500" aria-hidden="true" />{t('hero.chips.languages')}</li>
+            <li className="chip shrink-0"><MapPin className="h-4 w-4 text-terracotta-500" aria-hidden="true" />{t('hero.chips.place')}</li>
+            <li className="chip shrink-0"><Sparkles className="h-4 w-4 text-terracotta-500" aria-hidden="true" />{t('hero.chips.unesco')}</li>
           </ul>
         </div>
       </section>
 
-      {/* ───────────────────────── 5 · TERANGA STORY ───────────────────────── */}
-      <section className="section bg-white">
-        <div className="container grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-7">
-            <Photo {...P(photos.storyBowl)} className="aspect-[3/2] w-full rounded-sm" sizes="(min-width:1024px) 58vw, 100vw" />
-          </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-5">
-            <p className="eyebrow">{t('teranga.eyebrow')}</p>
-            <h2 className="mt-4 text-display-lg">{t('teranga.title')}</h2>
-            <p className="mt-6 text-[1.05rem] leading-relaxed text-ink-soft">{t('teranga.text1')}</p>
-            <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">{t('teranga.text2')}</p>
-            <figure className="mt-8 border-l-2 border-gold-400 pl-5">
-              <blockquote lang="wo" className="font-display text-[1.9rem] italic leading-tight text-terracotta-500">
-                Dalal ak jàmm
-              </blockquote>
-              <figcaption className="mt-1 text-sm text-ink-muted">{t('teranga.greeting')}</figcaption>
-            </figure>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ───────────────────────── 6 · SIGNATURE WORKSHOP ───────────────────────── */}
+      {/* ───────────── EXPERIENCE PREVIEW · listing card ───────────── */}
       {featured && (
-        <section className="bg-forest-700 text-white" aria-labelledby="workshop-title">
-          <div className="container py-16 md:py-24">
-            <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-16">
-              <Reveal className="lg:col-span-6">
-                <p className="eyebrow eyebrow-light">{t('workshop.eyebrow')}</p>
-                <h2 id="workshop-title" className="mt-4 text-display-xl text-white">
-                  {pick(featured.title, locale) ?? te('title')}
-                </h2>
-              </Reveal>
-              <Reveal delay={0.08} className="lg:col-span-6">
-                <p className="text-[1.05rem] leading-relaxed text-white/80 md:text-lg">{t('workshop.lead')}</p>
-              </Reveal>
-            </div>
-
-            <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-12 lg:gap-16">
-              <Reveal className="lg:col-span-7">
+        <section className="bg-white pb-14 md:pb-20" aria-labelledby="preview-title">
+          <div className="container">
+            <Reveal className="grid overflow-hidden rounded-4xl bg-forest-700 text-white md:grid-cols-2">
+              <div className="relative">
                 <Photo
                   src={featuredCover?.src ?? photos.featured.src}
                   alt={pick(featuredCover?.alt, locale) ?? photos.featured.alt[locale]}
                   illustration={featuredCover ? featuredCover.illustration : photos.featured.illustration}
                   tone="green"
-                  className="aspect-[3/2] w-full rounded-sm"
-                  sizes="(min-width:1024px) 58vw, 100vw"
+                  className="aspect-[3/2] w-full md:aspect-auto md:h-full"
+                  sizes="(min-width:768px) 50vw, 100vw"
                 />
-              </Reveal>
-              <div className="lg:col-span-5">
-                <ol className="border-t border-white/15">
-                  {moments.map((k, i) => (
-                    <Reveal as="li" key={k} delay={i * 0.05} className="flex gap-5 border-b border-white/15 py-5">
-                      <span className="pt-1 font-sans text-xs font-semibold tabular-nums text-gold-300">0{i + 1}</span>
-                      <div>
-                        <h3 className="text-[1.5rem] leading-tight text-white">{t(`workshop.moments.${k}.title`)}</h3>
-                        <p className="mt-1 text-[0.95rem] leading-relaxed text-white/70">{t(`workshop.moments.${k}.text`)}</p>
-                      </div>
-                    </Reveal>
+                <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-xs font-semibold text-forest-700 shadow-soft">
+                  {t('preview.badge')}
+                </span>
+              </div>
+              <div className="flex flex-col p-6 md:p-10">
+                <p className="eyebrow eyebrow-light self-start">{t('preview.tag')}</p>
+                <h2 id="preview-title" className="mt-3 text-display-lg text-white">{pick(featured.title, locale)}</h2>
+                <p className="mt-3 leading-relaxed text-white/80">{pick(featured.summary, locale)}</p>
+                <ul className="mt-5 space-y-2.5">
+                  {(['cook', 'story', 'share'] as const).map((k) => (
+                    <li key={k} className="flex items-start gap-2.5 text-[0.98rem] text-white/90">
+                      <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-400 text-forest-900">
+                        <Check className="h-3 w-3" aria-hidden="true" />
+                      </span>
+                      {t(`preview.points.${k}`)}
+                    </li>
                   ))}
-                </ol>
-              </div>
-            </div>
-
-            <div className="mt-10 flex flex-col gap-8 border-t border-white/15 pt-8 md:mt-14 lg:flex-row lg:items-center lg:justify-between">
-              <dl className="grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4 lg:flex lg:gap-12">
-                {[
-                  { k: te('duration'), v: pick(featured.duration, locale) },
-                  { k: te('languages'), v: featured.languages.map((l) => languageNames[l] ?? l).join(' · ') },
-                  { k: te('location'), v: site.address.street ?? site.address.city },
-                  { k: te('price'), v: featured.price_xof != null ? formatPrice(featured.price_xof, locale) : null }
-                ].map(({ k, v }) => (
-                  <div key={k}>
-                    <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-gold-300">{k}</dt>
-                    <dd className="mt-1 text-[0.95rem] text-white">
-                      {v ?? <span className="italic text-white/60">{tp('priceTbc')}</span>}
-                    </dd>
+                </ul>
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-5 md:mt-auto">
+                  <p className="text-sm text-white/70">
+                    {price ? (
+                      <><span className="font-display text-2xl font-semibold text-white">{price}</span> {te('perPerson')}</>
+                    ) : (
+                      <span className="italic">{tp('priceTbc')}</span>
+                    )}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Link href={featuredHref} className="text-sm font-semibold text-white underline decoration-gold-400 decoration-2 underline-offset-4">
+                      {t('preview.details')}
+                    </Link>
+                    <Link href={bookHref} className="btn-gold">
+                      {t('preview.cta')}
+                    </Link>
                   </div>
-                ))}
-              </dl>
-              <div className="flex flex-wrap items-center gap-4">
-                <Link href={{ pathname: '/reservation', query: { experience: featured.slug } }} className="btn-gold btn-lg">
-                  {t('workshop.cta')}
-                </Link>
-                <Link href={featuredHref} className="btn-ghost-light btn-lg">
-                  {t('workshop.details')}
-                </Link>
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
       )}
 
-      {/* ───────────────────────── 7 · FOUNDER ───────────────────────── */}
-      <section className="section bg-white" aria-labelledby="founder-title">
-        <div className="container grid items-center gap-10 md:grid-cols-12 lg:gap-16">
-          <Reveal className="md:col-span-5 lg:col-span-4 lg:col-start-2">
+      {/* ───────────── MOMENTS AT THE TABLE ───────────── */}
+      <section className="bg-white pb-14 md:pb-20" aria-labelledby="moments-title">
+        <div className="container">
+          <Reveal className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow">{t('moments.tag')}</p>
+              <h2 id="moments-title" className="mt-3 text-display-lg">{t('moments.title')}</h2>
+            </div>
+            <p className="max-w-md text-ink-soft">{t('moments.text')}</p>
+          </Reveal>
+        </div>
+        <ol className="no-scrollbar mt-7 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 md:container md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-8 lg:px-10">
+          {moments.map(({ key, p }, i) => (
+            <li key={key} className={`w-[72%] shrink-0 snap-start sm:w-[45%] md:w-auto ${i % 2 === 1 ? 'md:mt-10' : ''}`}>
+              <figure>
+                <div className="relative">
+                  <Photo {...P(p)} className={`aspect-[3/2] w-full rounded-3xl ${i === 3 ? 'rounded-tr-[4rem]' : ''}`} sizes="(min-width:768px) 25vw, 72vw" />
+                  <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-forest-700 shadow-soft">
+                    {i + 1}
+                  </span>
+                </div>
+                <figcaption className="mt-3">
+                  <span className="block font-display text-lg font-semibold text-forest-700">{t(`moments.steps.${key}.title`)}</span>
+                  <span className="mt-0.5 block text-[0.95rem] leading-relaxed text-ink-soft">{t(`moments.steps.${key}.text`)}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ol>
+        <p className="container mt-5 text-xs text-ink-muted">{tp('illustrationNote')}</p>
+      </section>
+
+      {/* ───────────── TERANGA · organic composition ───────────── */}
+      <section className="bg-white pb-14 md:pb-20">
+        <div className="container grid items-center gap-8 md:grid-cols-2 lg:gap-16">
+          <Reveal className="relative pb-10 pr-10 sm:pb-14 sm:pr-16">
+            <Photo {...P(photos.storyBowl)} className="aspect-[3/2] w-full rounded-[2rem] rounded-tl-[5rem]" sizes="(min-width:768px) 45vw, 90vw" />
+            <div className="absolute bottom-0 right-0 w-[48%] rounded-[1.75rem] border-[5px] border-white bg-white shadow-lift">
+              <Photo {...P(photos.intro)} className="aspect-[3/2] w-full rounded-[1.4rem]" sizes="(min-width:768px) 22vw, 45vw" />
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="eyebrow">{t('teranga.tag')}</p>
+            <h2 className="mt-3 text-display-lg">{t('teranga.title')}</h2>
+            <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">{t('teranga.text')}</p>
+            <p className="mt-4 inline-flex flex-wrap items-baseline gap-x-2 rounded-2xl bg-terracotta-100/60 px-4 py-2.5 text-terracotta-700">
+              <span lang="wo" className="font-display text-lg font-semibold">Dalal ak jàmm</span>
+              <span className="text-sm">{t('teranga.welcome')}</span>
+            </p>
+            <ul className="mt-6 grid grid-cols-3 gap-2">
+              {(['home', 'share', 'learn'] as const).map((k) => (
+                <li key={k} className="rounded-2xl bg-forest-50 px-2 py-3 text-center">
+                  <span className="block font-display text-[1rem] font-semibold text-forest-700">{t(`teranga.values.${k}.title`)}</span>
+                  <span className="mt-0.5 block text-xs leading-snug text-ink-soft">{t(`teranga.values.${k}.text`)}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/a-propos" className="link-arrow mt-6">
+              {t('teranga.cta')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ───────────── HOW IT WORKS · booking preview ───────────── */}
+      <section className="bg-white pb-14 md:pb-20" aria-labelledby="how-title">
+        <div className="container">
+          <div className="rounded-4xl bg-forest-50 px-4 py-10 sm:px-6 md:px-12 md:py-14">
+            <Reveal className="text-center">
+              <p className="eyebrow bg-white">{t('how.tag')}</p>
+              <h2 id="how-title" className="mx-auto mt-3 max-w-xl text-display-lg">{t('how.title')}</h2>
+            </Reveal>
+            <ol className="mt-8 grid gap-3 md:grid-cols-3 md:gap-5">
+              {how.map(({ key, Icon }, i) => (
+                <Reveal as="li" key={key} delay={i * 0.06} className="flex gap-4 rounded-3xl bg-white p-5 md:flex-col md:p-6">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gold-100 text-gold-600">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3 className="text-lg">{t(`how.steps.${key}.title`)}</h3>
+                    <p className="mt-1 text-[0.95rem] leading-relaxed text-ink-soft">{t(`how.steps.${key}.text`)}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+            <div className="mt-8 flex flex-col items-center gap-2 text-center">
+              <Link href={bookHref} className="btn-green btn-lg">
+                {t('how.cta')}
+              </Link>
+              <p className="text-sm text-ink-muted">{t('how.note')}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── YOUR HOST ───────────── */}
+      <section className="bg-white pb-14 md:pb-20" aria-labelledby="host-title">
+        <div className="container">
+          <Reveal className="flex flex-col items-center gap-6 rounded-4xl border border-sand-200 p-6 text-center md:flex-row md:gap-10 md:p-10 md:text-left">
             {/* 👉 Authentic portrait required — never an illustration (src/config/site.ts → photos.founder) */}
             <Photo
               src={photos.founder.src}
               alt={photos.founder.alt[locale]}
               hint={ta('founder.photo')}
               tone="sand"
-              className="mx-auto aspect-[4/5] w-full max-w-sm rounded-sm"
-              sizes="(min-width:768px) 35vw, 90vw"
+              className="aspect-square w-40 shrink-0 rounded-full md:w-48"
+              sizes="192px"
             />
-          </Reveal>
-          <Reveal delay={0.1} className="md:col-span-7 lg:col-span-6">
-            <p className="eyebrow">{t('founder.eyebrow')}</p>
-            <h2 id="founder-title" className="mt-4 text-display-lg">{t('founder.title')}</h2>
-            <p className="mt-5 font-display text-2xl text-forest-700">
-              <Tbc text={site.founderName ?? ta('founder.nameTbc')} />
-            </p>
-            <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-soft">{t('founder.text')}</p>
-            <Link href="/a-propos" className="link-arrow mt-8">
-              {t('founder.cta')} <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ───────────────────────── 8 · JOURNEY GALLERY ───────────────────────── */}
-      <section className="border-t border-sand-200 bg-white py-16 md:py-24 lg:py-28" aria-labelledby="journey-title">
-        <div className="container">
-          <Reveal className="grid gap-4 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-7">
-              <p className="eyebrow">{t('journey.eyebrow')}</p>
-              <h2 id="journey-title" className="mt-4 text-display-lg">{t('journey.title')}</h2>
+            <div>
+              <p className="eyebrow">{t('host.tag')}</p>
+              <h2 id="host-title" className="mt-3 text-display-md">{t('host.title')}</h2>
+              <p className="mt-2 font-semibold text-forest-700">
+                <Tbc text={site.founderName ?? ta('founder.nameTbc')} />
+              </p>
+              <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">{t('host.text')}</p>
+              <Link href="/a-propos" className="link-arrow mt-4">
+                {t('host.cta')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
-            <p className="text-[1.05rem] leading-relaxed text-ink-soft md:col-span-5">{t('journey.text')}</p>
           </Reveal>
         </div>
-
-        {/* mobile: swipeable row · desktop: staggered editorial grid */}
-        <ol className="no-scrollbar mt-10 flex scroll-px-5 snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:container md:mt-14 md:grid md:grid-cols-2 md:gap-x-10 md:gap-y-4 md:overflow-visible md:px-8 lg:px-10">
-          {journey.map(({ key, p }, i) => (
-            <li key={key} className={`w-[78%] shrink-0 snap-start sm:w-[60%] md:w-auto ${i % 2 === 1 ? 'md:mt-24' : ''}`}>
-              <figure>
-                <Photo {...P(p)} className="aspect-[3/2] w-full rounded-sm" sizes="(min-width:768px) 45vw, 80vw" />
-                <figcaption className="mt-4 flex gap-4">
-                  <span className="font-display text-[2rem] leading-none text-gold-400">0{i + 1}</span>
-                  <span>
-                    <span className="block font-display text-[1.45rem] leading-tight text-forest-700">{t(`journey.steps.${key}.title`)}</span>
-                    <span className="mt-1 block text-[0.95rem] leading-relaxed text-ink-soft">{t(`journey.steps.${key}.text`)}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-        </ol>
-        <p className="container mt-8 text-xs italic text-ink-muted">{tp('illustrationNote')}</p>
       </section>
 
-      {/* ───────────────────────── 9 · TESTIMONIALS (verified reviews only) ───────────────────────── */}
+      {/* ───────────── TESTIMONIALS (verified reviews only) ───────────── */}
       {testimonials.length > 0 && (
-        <section className="section border-t border-sand-200 bg-white">
+        <section className="bg-white pb-14 md:pb-20">
           <div className="container">
-            <p className="eyebrow">{t('testimonials.eyebrow')}</p>
-            <ul className="mt-10 grid gap-10 md:grid-cols-3">
+            <p className="eyebrow">{t('testimonials.tag')}</p>
+            <ul className="mt-6 grid gap-4 md:grid-cols-3">
               {testimonials.map((r, i) => (
-                <Reveal as="li" key={r.name + i} delay={i * 0.06} className="border-t border-gold-400 pt-6">
-                  <blockquote className="font-display text-[1.45rem] leading-snug text-forest-700">“{r.quote[locale]}”</blockquote>
-                  <p className="mt-5 text-sm font-semibold">{r.name}</p>
+                <Reveal as="li" key={r.name + i} delay={i * 0.06} className="rounded-3xl bg-sand-100 p-6">
+                  <blockquote className="text-[1.05rem] leading-relaxed text-ink">“{r.quote[locale]}”</blockquote>
+                  <p className="mt-4 text-sm font-semibold text-forest-700">{r.name}</p>
                   <p className="text-sm text-ink-muted">{r.origin[locale]}</p>
                 </Reveal>
               ))}
@@ -267,52 +287,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </section>
       )}
 
-      {/* ───────────────────────── 10 · BOOKING PREVIEW + FINAL CTA ───────────────────────── */}
-      <section className="bg-forest-50/60" aria-labelledby="booking-title">
-        <div className="container grid gap-12 py-16 md:py-24 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-6">
-            <Reveal>
-              <p className="eyebrow">{t('booking.eyebrow')}</p>
-              <h2 id="booking-title" className="mt-4 text-display-lg">{t('booking.title')}</h2>
-            </Reveal>
-            <ol className="mt-8 space-y-0 border-t border-forest-700/10">
-              {bookingSteps.map((k, i) => (
-                <Reveal as="li" key={k} delay={i * 0.05} className="flex gap-5 border-b border-forest-700/10 py-5">
-                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold-400 font-sans text-xs font-semibold text-forest-700">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-[1.4rem] leading-tight">{t(`booking.steps.${k}.title`)}</h3>
-                    <p className="mt-1 text-[0.95rem] leading-relaxed text-ink-soft">{t(`booking.steps.${k}.text`)}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-
-          <Reveal delay={0.1} className="lg:col-span-6">
-            <div className="overflow-hidden rounded-sm bg-white shadow-soft">
-              <Photo {...P(photos.storyGuests)} className="aspect-[3/2] w-full" sizes="(min-width:1024px) 45vw, 100vw" />
-              <div className="p-6 md:p-10">
-                <h3 className="text-display-md">{t('final.title')}</h3>
-                <p className="mt-3 text-[1.05rem] leading-relaxed text-ink-soft">{t('final.text')}</p>
-                <ul className="mt-5 space-y-2 text-sm text-ink-soft">
-                  {(['realtime', 'payment'] as const).map((k) => (
-                    <li key={k} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-500" aria-hidden="true" /> {t(`final.points.${k}`)}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/reservation" className="btn-gold btn-lg mt-7 w-full sm:w-auto">
-                  {t('final.cta')}
-                </Link>
-              </div>
+      {/* ───────────── FINAL CTA · photo banner ───────────── */}
+      <section className="bg-white pb-14 md:pb-20">
+        <div className="container">
+          <Reveal className="relative overflow-hidden rounded-4xl bg-forest-700 md:flex md:min-h-[26rem] md:items-center md:rounded-tr-[5rem]">
+            <Photo {...P(photos.aboutHeritage)} className="aspect-[3/2] w-full md:absolute md:inset-y-0 md:right-0 md:aspect-auto md:h-full md:w-[52%]" sizes="(min-width:768px) 52vw, 100vw" />
+            <div className="relative p-6 md:w-[48%] md:p-12">
+              <h2 className="text-display-lg text-white">{t('final.title')}</h2>
+              <p className="mt-3 text-white/80">{t('final.text')}</p>
+              <Link href={bookHref} className="btn-gold btn-lg mt-6">
+                {t('final.cta')}
+              </Link>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ───────────────────────── 11 · PARTNERSHIPS ───────────────────────── */}
+      {/* ───────────── PARTNERSHIPS ───────────── */}
       <PartnerSection />
     </>
   );

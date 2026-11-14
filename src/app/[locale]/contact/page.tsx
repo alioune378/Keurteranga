@@ -99,7 +99,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               </div>
             )}
 
-            <div className="overflow-hidden rounded-sm border border-sand-200">
+            <div className="overflow-hidden rounded-3xl border border-sand-200">
               <iframe
                 title={t('mapTitle')}
                 src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}

@@ -16,26 +16,26 @@ export function Footer() {
     { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
-  const heading = 'font-sans text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold-300';
+  const heading = 'font-sans text-sm font-semibold text-gold-300';
   const link = 'text-white/75 transition-colors hover:text-white';
 
   return (
-    <footer className="bg-forest-700 text-white">
+    <footer className="rounded-t-4xl bg-forest-700 text-white">
       {/* Closing statement */}
       <div className="border-b border-white/10">
-        <div className="container flex flex-col gap-6 py-12 md:flex-row md:items-end md:justify-between md:py-16">
-          <p className="max-w-xl font-display text-[2rem] leading-[1.08] text-white md:text-[2.75rem]">
+        <div className="container flex flex-col gap-5 py-10 md:flex-row md:items-center md:justify-between md:py-12">
+          <p className="max-w-xl font-display text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem]">
             {t('footer.statement')}
           </p>
-          <Link href="/reservation" className="btn-gold btn-lg shrink-0 self-start md:self-auto">
+          <Link href="/reservation" className="btn-gold shrink-0 self-start md:self-auto">
             {t('nav.book')}
           </Link>
         </div>
       </div>
 
-      <div className="container grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr] lg:gap-12">
+      <div className="container grid gap-8 py-10 sm:grid-cols-2 md:py-12 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr] lg:gap-12">
         <div className="sm:col-span-2 lg:col-span-1">
-          <Logo light className="h-20 md:h-24" />
+          <Logo light className="h-16 md:h-20" />
           <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/70">{t('footer.tagline')}</p>
           {socials.length > 0 && (
             <div className="mt-6 flex gap-2.5">
@@ -57,7 +57,7 @@ export function Footer() {
 
         <nav aria-label={t('footer.quickLinks')}>
           <h2 className={heading}>{t('footer.quickLinks')}</h2>
-          <ul className="mt-5 space-y-3 text-[0.95rem]">
+          <ul className="mt-4 space-y-2.5 text-[0.95rem]">
             <li><Link href="/" className={link}>{t('nav.home')}</Link></li>
             <li><Link href="/experiences" className={link}>{t('nav.experiences')}</Link></li>
             <li><Link href="/a-propos" className={link}>{t('nav.about')}</Link></li>
@@ -68,7 +68,7 @@ export function Footer() {
 
         <div>
           <h2 className={heading}>{t('footer.contact')}</h2>
-          <ul className="mt-5 space-y-3 text-[0.95rem]">
+          <ul className="mt-4 space-y-2.5 text-[0.95rem]">
             {site.email && (
               <li className="flex items-start gap-3">
                 <Mail className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />

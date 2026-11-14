@@ -6,6 +6,8 @@ import type { Locale } from '@/i18n/routing';
 import { BookingWizard } from '@/components/booking/BookingWizard';
 import { PartnerSection } from '@/components/booking/PartnerSection';
 import { Reveal } from '@/components/ui/Reveal';
+import { Photo } from '@/components/ui/Photo';
+import { photos } from '@/config/site';
 import { getExperiences, toSummary } from '@/lib/data';
 import { pageMetadata } from '@/lib/seo';
 import { isBookingConfigured } from '@/lib/supabase/service';
@@ -36,24 +38,33 @@ export default async function ReservationPage({
 
   return (
     <>
-      <section className="border-b border-sand-200 bg-white pb-8 pt-10 md:pb-12 md:pt-16">
+      <section className="bg-white pt-4 md:pt-8">
         <div className="container">
-          <Reveal className="max-w-3xl">
-            <p className="eyebrow">{t('eyebrow')}</p>
-            <h1 className="mt-4 text-display-xl">{t('title')}</h1>
-            <p className="mt-4 max-w-xl text-[1.05rem] leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
-          </Reveal>
-          <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
-            {(['realtime', 'languages', 'payment'] as const).map((k) => (
-              <li key={k} className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-gold-500" aria-hidden="true" /> {t(`assurance.${k}`)}
-              </li>
-            ))}
-          </ul>
+          <div className="grid gap-5 overflow-hidden rounded-4xl bg-forest-50 md:grid-cols-[1fr_auto]">
+            <Reveal className="self-center p-6 md:p-10">
+              <p className="eyebrow bg-white">{t('eyebrow')}</p>
+              <h1 className="mt-3 text-display-xl">{t('title')}</h1>
+              <p className="mt-3 max-w-xl leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {(['realtime', 'languages', 'payment'] as const).map((k) => (
+                  <li key={k} className="chip">
+                    <Check className="h-4 w-4 text-forest-600" aria-hidden="true" /> {t(`assurance.${k}`)}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Photo
+              src={photos.tasting.src}
+              alt={photos.tasting.alt[locale]}
+              illustration={photos.tasting.illustration}
+              className="hidden min-h-[16rem] w-[22rem] md:block md:rounded-l-[3rem] lg:w-[28rem]"
+              sizes="28rem"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="bg-white py-8 md:py-14">
+      <section className="bg-white py-6 md:py-10">
         <div className="container">
           {enabled && experiences.length > 0 ? (
             <BookingWizard experiences={experiences} initialSlug={experience} />

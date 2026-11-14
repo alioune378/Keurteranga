@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Figtree } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -13,16 +13,14 @@ import { organizationJsonLd, pageMetadata } from '@/lib/seo';
 import { siteUrl } from '@/lib/utils';
 import '../globals.css';
 
-// Editorial serif for headlines, clean geometric sans for reading
-const display = Cormorant_Garamond({
+// Warm, characterful grotesque for headings + friendly humanist sans for reading
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap'
 });
 
-const sans = DM_Sans({
+const sans = Figtree({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap'

@@ -22,7 +22,7 @@
     overflow-x: clip;
   }
   h1, h2, h3, h4 {
-    @apply font-display font-medium text-forest-700;
+    @apply font-display font-semibold tracking-tight text-forest-700;
   }
   img {
     -webkit-user-drag: none;
@@ -43,20 +43,20 @@
 }
 
 @layer components {
-  /* Small uppercase label above titles */
+  /* Small rounded tag above titles */
   .eyebrow {
-    @apply inline-flex items-center gap-3 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-terracotta-700;
+    @apply inline-flex items-center gap-2 rounded-full bg-forest-50 px-3 py-1 font-sans text-[0.78rem] font-semibold text-forest-700;
   }
   .eyebrow::before {
     content: '';
-    @apply h-px w-7 bg-gold-400;
+    @apply h-1.5 w-1.5 rounded-full bg-terracotta-500;
   }
   .eyebrow-light {
-    @apply text-gold-300;
+    @apply bg-white/10 text-gold-200;
   }
 
   .btn {
-    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-md px-6 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.14em] transition duration-300 ease-elegant disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[0.95rem] font-semibold transition duration-300 ease-elegant disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-gold {
     @apply btn bg-gold-400 text-forest-900 hover:bg-gold-300;
@@ -65,41 +65,46 @@
     @apply btn bg-forest-700 text-white hover:bg-forest-600;
   }
   .btn-outline {
-    @apply btn border border-forest-700/30 text-forest-700 hover:border-forest-700 hover:bg-forest-700 hover:text-white;
+    @apply btn border border-forest-700/25 bg-white text-forest-700 hover:border-forest-700;
   }
   .btn-ghost-light {
-    @apply btn border border-white/50 text-white hover:border-white hover:bg-white hover:text-forest-800;
+    @apply btn bg-white/15 text-white backdrop-blur hover:bg-white hover:text-forest-800;
   }
   .btn-lg {
-    @apply min-h-[3.25rem] px-8 text-[0.8rem];
+    @apply min-h-[3rem] px-6 text-base;
   }
 
-  /* Text link with an animated hairline */
+  /* Text link with arrow */
   .link-arrow {
-    @apply inline-flex items-center gap-2 border-b border-gold-400 pb-1 text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-forest-700 transition-colors hover:border-forest-700;
+    @apply inline-flex items-center gap-1.5 font-semibold text-forest-700 underline decoration-gold-400 decoration-2 underline-offset-[6px] transition-colors hover:text-forest-500;
+  }
+
+  /* Small info pill */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-sand-200 bg-white px-3 py-1.5 text-sm font-medium text-ink;
   }
 
   .card {
-    @apply rounded-2xl border border-sand-200 bg-white;
+    @apply rounded-3xl border border-sand-200 bg-white;
   }
 
   .field-label {
-    @apply mb-1.5 block text-sm font-medium text-ink;
+    @apply mb-1.5 block text-sm font-semibold text-ink;
   }
   .field-input {
-    @apply block w-full rounded-lg border border-sand-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted transition focus:border-forest-600 focus:outline-none focus:ring-2 focus:ring-forest-600/15 aria-[invalid=true]:border-terracotta-500;
+    @apply block w-full rounded-xl border border-sand-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted transition focus:border-forest-600 focus:outline-none focus:ring-2 focus:ring-forest-600/15 aria-[invalid=true]:border-terracotta-500;
   }
   .field-error {
     @apply mt-1.5 text-sm text-terracotta-700;
   }
 
   .section {
-    @apply py-16 md:py-24 lg:py-28;
+    @apply py-14 md:py-20;
   }
 
-  /* Italic serif accent inside headings */
+  /* Highlighted words inside headings */
   .accent {
-    @apply font-display italic text-terracotta-500;
+    @apply not-italic text-terracotta-500;
   }
 }
 

@@ -121,7 +121,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
 
       {/* ───────── Hero ───────── */}
       <section className="bg-white">
-        <div className="container pb-12 pt-6 md:pb-16 md:pt-10">
+        <div className="container pb-6 pt-4 md:pb-10 md:pt-8">
           <Link href="/experiences" className="inline-flex min-h-[2.75rem] items-center gap-2 text-sm font-medium text-ink-soft hover:text-forest-700">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" /> {t('back')}
           </Link>
@@ -137,7 +137,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                 <span className="text-sm text-ink-muted">{t('noPayment')}</span>
               </div>
             </Reveal>
-            <Reveal delay={0.1} className="lg:col-span-7">
+            <Reveal delay={0.1} className="order-first lg:order-last lg:col-span-7">
               <Photo
                 src={cover?.src}
                 alt={pick(cover?.alt, locale) ?? title}
@@ -145,7 +145,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                 hint={title}
                 priority
                 tone="green"
-                className="aspect-[3/2] w-full rounded-sm"
+                className="aspect-[3/2] w-full rounded-3xl"
                 sizes="(min-width:1024px) 58vw, 100vw"
               />
             </Reveal>
@@ -153,15 +153,17 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
         </div>
 
         {/* Key facts */}
-        <div className="border-y border-sand-200">
-          <dl className="container grid grid-cols-2 gap-px bg-sand-200 px-0 md:grid-cols-3 xl:grid-cols-5">
+        <div className="container pb-10 md:pb-14">
+          <dl className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
             {facts.map(({ Icon, label, value, tbc }) => (
-              <div key={label} className="flex items-start gap-3 bg-white px-5 py-5 md:px-6">
-                <Icon className="mt-0.5 h-[18px] w-[18px] shrink-0 text-terracotta-500" aria-hidden="true" />
-                <div className="min-w-0">
-                  <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">{label}</dt>
-                  <dd className="mt-1 text-[0.95rem] font-medium text-ink">
-                    {value ? <Tbc text={value} /> : <span className="italic text-ink-muted">{tbc}</span>}
+              <div key={label} className="flex items-center gap-2.5 rounded-2xl bg-sand-100 px-3.5 py-2.5 sm:rounded-full sm:pr-5">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-terracotta-500">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <div className="min-w-0 leading-tight">
+                  <dt className="text-xs text-ink-muted">{label}</dt>
+                  <dd className="text-sm font-semibold text-ink">
+                    {value ? <Tbc text={value} /> : <span className="font-medium italic text-ink-muted">{tbc}</span>}
                   </dd>
                 </div>
               </div>
@@ -171,8 +173,8 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       </section>
 
       {/* ───────── What you'll experience ───────── */}
-      <section className="section bg-white">
-        <div className="container grid gap-10 lg:grid-cols-12 lg:gap-16">
+      <section className="bg-white pb-6 md:pb-10">
+        <div className="container grid gap-8 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-7">
             <p className="eyebrow">{t('about')}</p>
             <h2 className="mt-4 text-display-lg">{t('overviewTitle')}</h2>
@@ -182,8 +184,8 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
           </Reveal>
           {included.length > 0 && (
             <Reveal delay={0.1} className="lg:col-span-5">
-              <div className="border-t-2 border-gold-400 bg-forest-50/60 p-6 md:p-8">
-                <h3 className="text-[1.6rem]">{t('included')}</h3>
+              <div className="rounded-3xl bg-forest-50 p-6 md:p-8">
+                <h3 className="text-xl">{t('included')}</h3>
                 <ul className="mt-5 space-y-3.5">
                   {included.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-[0.95rem] leading-relaxed">
@@ -200,23 +202,23 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
 
       {/* ───────── Step-by-step ───────── */}
       {steps.length > 0 && (
-        <section className="border-t border-sand-200 bg-white py-16 md:py-24" aria-labelledby="flow-title">
+        <section className="bg-white py-14 md:py-20" aria-labelledby="flow-title">
           <div className="container">
             <Reveal className="max-w-2xl">
               <p className="eyebrow">{t('flowEyebrow')}</p>
               <h2 id="flow-title" className="mt-4 text-display-lg">{t('flowTitle')}</h2>
             </Reveal>
 
-            <ol className="mt-12 space-y-12 md:mt-16 md:space-y-20">
+            <ol className="mt-8 space-y-6 md:mt-12 md:space-y-10">
               {steps.map((s, i) => {
                 const visual = STEP_VISUALS[i];
                 const num = String(i + 1).padStart(2, '0');
                 if (!visual?.src) {
                   return (
-                    <Reveal as="li" key={s.title} className="grid gap-3 border-t border-sand-200 pt-6 md:grid-cols-12 md:gap-10">
-                      <span className="font-display text-[2.4rem] leading-none text-gold-400 md:col-span-2 lg:col-span-1">{num}</span>
-                      <div className="md:col-span-10 lg:col-span-7">
-                        <h3 className="text-[1.65rem] leading-tight">{s.title}</h3>
+                    <Reveal as="li" key={s.title} className="grid gap-3 rounded-3xl bg-sand-100 p-5 md:grid-cols-12 md:items-center md:gap-6 md:p-6">
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-50 text-sm font-bold text-forest-700 md:col-span-1">{num}</span>
+                      <div className="md:col-span-11">
+                        <h3 className="text-xl">{s.title}</h3>
                         {s.text && <p className="mt-2 text-[1.02rem] leading-relaxed text-ink-soft">{s.text}</p>}
                       </div>
                     </Reveal>
@@ -230,13 +232,13 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                         src={visual.src}
                         alt={visual.alt[locale]}
                         illustration={visual.illustration}
-                        className="aspect-[3/2] w-full rounded-sm"
+                        className="aspect-[3/2] w-full rounded-3xl"
                         sizes="(min-width:768px) 55vw, 100vw"
                       />
                     </div>
                     <div className={cn('md:col-span-5', flip && 'md:order-1')}>
-                      <span className="font-display text-[2.4rem] leading-none text-gold-400">{num}</span>
-                      <h3 className="mt-3 text-[1.85rem] leading-tight">{s.title}</h3>
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold-100 text-sm font-bold text-gold-600">{num}</span>
+                      <h3 className="mt-3 text-2xl">{s.title}</h3>
                       {s.text && <p className="mt-3 text-[1.02rem] leading-relaxed text-ink-soft">{s.text}</p>}
                     </div>
                   </Reveal>
@@ -248,8 +250,9 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       )}
 
       {/* ───────── Cultural background & UNESCO ───────── */}
-      <section className="bg-forest-700 text-white" aria-labelledby="heritage-title">
-        <div className="container grid gap-10 py-16 md:py-24 lg:grid-cols-12 lg:items-center lg:gap-16">
+      <section className="bg-white pb-14 md:pb-20" aria-labelledby="heritage-title">
+        <div className="container">
+        <div className="grid gap-8 overflow-hidden rounded-4xl bg-forest-700 p-6 text-white md:p-10 lg:grid-cols-12 lg:items-center lg:gap-14 lg:p-14">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow eyebrow-light">{t('heritage.eyebrow')}</p>
             <h2 id="heritage-title" className="mt-4 text-display-lg text-white">{t('heritage.title')}</h2>
@@ -261,14 +264,15 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
             <div className="mt-8 flex gap-4 border-t border-white/15 pt-6">
               <MonitorPlay className="mt-1 h-5 w-5 shrink-0 text-gold-300" aria-hidden="true" />
               <div>
-                <h3 className="text-[1.45rem] text-white">{t('presentationTitle')}</h3>
+                <h3 className="text-lg text-white">{t('presentationTitle')}</h3>
                 <p className="mt-1 text-[0.95rem] leading-relaxed text-white/70">{t('presentationText')}</p>
               </div>
             </div>
           </Reveal>
           <Reveal delay={0.1} className="lg:col-span-6">
-            <Photo {...{ src: photos.aboutHeritage.src, alt: photos.aboutHeritage.alt[locale], illustration: photos.aboutHeritage.illustration }} tone="green" className="aspect-[3/2] w-full rounded-sm" sizes="(min-width:1024px) 48vw, 100vw" />
+            <Photo {...{ src: photos.aboutHeritage.src, alt: photos.aboutHeritage.alt[locale], illustration: photos.aboutHeritage.illustration }} tone="green" className="aspect-[3/2] w-full rounded-3xl rounded-tr-[4rem]" sizes="(min-width:1024px) 48vw, 100vw" />
           </Reveal>
+        </div>
         </div>
       </section>
 
@@ -284,7 +288,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                     src={img.src}
                     alt={pick(img.alt, locale) ?? title}
                     illustration={img.illustration}
-                    className="aspect-[3/2] w-full rounded-sm"
+                    className="aspect-[3/2] w-full rounded-3xl"
                     sizes={i === 0 ? '(min-width:768px) 66vw, 100vw' : '(min-width:768px) 33vw, 50vw'}
                   />
                 </Reveal>
@@ -295,15 +299,15 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       )}
 
       {/* ───────── Practical information ───────── */}
-      <section className="border-t border-sand-200 bg-white py-16 md:py-24" aria-labelledby="practical-title">
-        <div className="container grid gap-10 lg:grid-cols-12 lg:gap-16">
+      <section className="bg-white pb-14 md:pb-20" aria-labelledby="practical-title">
+        <div className="container grid gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <p className="eyebrow">{t('practical.eyebrow')}</p>
             <h2 id="practical-title" className="mt-4 text-display-lg">{t('practical.title')}</h2>
           </div>
-          <dl className="grid gap-x-10 border-t border-sand-200 sm:grid-cols-2 lg:col-span-8">
-            <div className="border-b border-sand-200 py-5">
-              <dt className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+          <dl className="grid gap-3 sm:grid-cols-2 lg:col-span-8">
+            <div className="rounded-3xl bg-sand-100 p-5">
+              <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
                 <MapPin className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.meeting')}
               </dt>
               <dd className="mt-2">
@@ -313,27 +317,27 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                 </a>
               </dd>
             </div>
-            <div className="border-b border-sand-200 py-5">
-              <dt className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+            <div className="rounded-3xl bg-sand-100 p-5">
+              <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
                 <Languages className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('languages')}
               </dt>
               <dd className="mt-2">{t('practical.languagesText', { languages })}</dd>
             </div>
-            <div className="border-b border-sand-200 py-5">
-              <dt className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+            <div className="rounded-3xl bg-sand-100 p-5">
+              <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
                 <CalendarCheck className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.booking')}
               </dt>
               <dd className="mt-2">{t('cutoff', { hours: e.booking_cutoff_hours })}</dd>
             </div>
-            <div className="border-b border-sand-200 py-5">
-              <dt className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+            <div className="rounded-3xl bg-sand-100 p-5">
+              <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
                 <Wallet className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.payment')}
               </dt>
               <dd className="mt-2">{t('noPayment')}</dd>
             </div>
             {(site.whatsapp || site.phoneDisplay) && (
-              <div className="border-b border-sand-200 py-5 sm:col-span-2">
-                <dt className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+              <div className="rounded-3xl bg-sand-100 p-5 sm:col-span-2">
+                <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
                   <MessageCircle className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.questions')}
                 </dt>
                 <dd className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
@@ -354,8 +358,9 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       </section>
 
       {/* ───────── Final CTA ───────── */}
-      <section className="bg-forest-50/60">
-        <div className="container flex flex-col items-start gap-6 py-14 md:flex-row md:items-center md:justify-between md:py-20">
+      <section className="bg-white pb-14 md:pb-20">
+        <div className="container">
+        <div className="flex flex-col items-start gap-5 rounded-4xl bg-forest-50 p-6 md:flex-row md:items-center md:justify-between md:p-12">
           <div className="max-w-2xl">
             <h2 className="text-display-lg">{t('finalTitle')}</h2>
             <p className="mt-3 text-[1.05rem] text-ink-soft">{t('finalText')}</p>
@@ -364,13 +369,14 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
             {t('book')}
           </Link>
         </div>
+        </div>
       </section>
 
       {/* ───────── Mobile sticky CTA ───────── */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-sand-200 bg-white/95 backdrop-blur lg:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="container flex items-center justify-between gap-4 py-3">
           <div className="min-w-0 text-sm leading-tight">
-            <span className="block truncate font-display text-lg text-forest-700">{title}</span>
+            <span className="block truncate font-display font-semibold text-forest-700">{title}</span>
             <span className="block truncate text-ink-muted">{price ?? tp('priceTbc')}</span>
           </div>
           <Link href={bookHref} className="btn-gold shrink-0 px-5">

@@ -41,7 +41,7 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
               <ExperienceCard experience={e} locale={locale} />
             </Reveal>
           ))}
-          <Reveal delay={0.12} className="flex flex-col justify-center rounded-sm border border-dashed border-sand-300 p-8 text-center">
+          <Reveal delay={0.12} className="flex flex-col justify-center rounded-3xl border border-dashed border-sand-300 p-8 text-center">
             <p className="font-display text-2xl text-forest-700">{t('comingSoonTitle')}</p>
             <p className="mt-3 text-ink-soft">{t('comingSoonText')}</p>
           </Reveal>

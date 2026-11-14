@@ -46,120 +46,105 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Dakar · Culinary & cultural workshop",
-      "title": "Cook Senegal. <accent>Share</accent> its Teranga.",
-      "subtitle": "A hands-on workshop around thiéboudiène, Senegal's national dish: discover the ingredients, cook together, then gather around the shared bowl — the way families do.",
-      "ctaPrimary": "Book my spot",
-      "ctaSecondary": "Explore the workshop",
-      "caption": "Thiéboudiène Workshop · Dakar"
+      "tag": "The Senegalese Table",
+      "title": "Cook, share and feel at home in Dakar.",
+      "subtitle": "A warm, hands-on workshop around thiéboudiène, Senegal's national dish — discover the country through its food.",
+      "cta": "Book an experience",
+      "secondary": "See the workshop",
+      "chips": {
+        "languages": "In French or English",
+        "place": "Mermoz, Dakar",
+        "unesco": "UNESCO-listed dish"
+      }
     },
-    "intro": {
-      "eyebrow": "Welcome to Kër Téranga",
-      "statement": "In Wolof, “Kër” means <accent>home</accent> and “Téranga” means hospitality. Here you are not a spectator: you are welcomed like family and invited to roll up your sleeves.",
-      "facts": {
-        "handsOn": {
-          "title": "Hands-on workshop",
-          "text": "We cook together, from start to finish"
+    "preview": {
+      "tag": "Things to do in Dakar",
+      "badge": "Signature experience",
+      "points": {
+        "cook": "You cook it yourself, guided step by step",
+        "story": "The story of the dish, told in pictures",
+        "share": "A real meal shared around the communal bowl"
+      },
+      "details": "See the programme",
+      "cta": "See dates"
+    },
+    "moments": {
+      "tag": "Moments at the table",
+      "title": "From the market to the shared bowl",
+      "text": "Each workshop follows thiéboudiène from fresh produce to the moment everyone shares the meal.",
+      "steps": {
+        "market": {
+          "title": "The ingredients",
+          "text": "Fish, vegetables, spices: learn to recognise them."
         },
-        "languages": {
-          "title": "French or English",
-          "text": "Hosted in your language"
+        "prep": {
+          "title": "Hands in",
+          "text": "Peeling, chopping, seasoning — together."
         },
-        "place": {
-          "title": "In the heart of Dakar",
-          "text": "Rond-point Mermoz"
+        "cook": {
+          "title": "The cooking",
+          "text": "The slow simmer that gives the rice its flavour."
+        },
+        "share": {
+          "title": "The sharing",
+          "text": "The dish in the middle — and the conversation begins."
         }
       }
     },
     "teranga": {
-      "eyebrow": "Teranga",
-      "title": "Hospitality as a way of life",
-      "text1": "In Senegal, no one eats alone. The dish is set in the middle of the table, everyone gathers around the bowl, and the guest is always served first. That is Teranga: an everyday generosity that turns a stranger into family.",
-      "text2": "Our workshops carry that tradition forward. You leave with a recipe — and, above all, with the feeling of having been welcomed into someone's home.",
-      "greeting": "“Welcome”, in Wolof"
-    },
-    "workshop": {
-      "eyebrow": "Signature experience",
-      "lead": "Thiéboudiène — “rice and fish” in Wolof — is the dish of celebrations and family lunches alike. Since 2021, the art of preparing it has been inscribed on UNESCO's Intangible Cultural Heritage list. With us, you cook it with your own hands.",
-      "moments": {
-        "ingredients": {
-          "title": "The ingredients",
-          "text": "Fish, rice, vegetables and spices: learn to recognise and choose them."
-        },
-        "gestures": {
-          "title": "The techniques",
-          "text": "Prepare, season, cook: the gestures and secrets handed down by the founder."
-        },
-        "history": {
-          "title": "The story",
-          "text": "A presentation on screen tells where the dish comes from and its place in Senegalese life."
-        },
-        "sharing": {
-          "title": "The sharing",
-          "text": "Everyone gathers around the communal bowl to enjoy what you cooked together."
-        }
-      },
-      "cta": "Book this workshop",
-      "details": "See the programme"
-    },
-    "founder": {
-      "eyebrow": "The founder",
-      "title": "A host and a keeper of culture",
-      "text": "An ambassador of Senegalese cuisine, the founder of Kër Téranga hosts every workshop and shares the recipes, gestures and stories behind thiéboudiène.",
-      "cta": "Our story"
-    },
-    "journey": {
-      "eyebrow": "From market to bowl",
-      "title": "The journey of a dish",
-      "text": "Four moments, one table: each workshop follows thiéboudiène from the stalls of Dakar to the moment everyone shares the meal.",
-      "steps": {
-        "market": {
-          "title": "The market",
-          "text": "The colours and scents of the fresh produce that give the dish its taste."
-        },
-        "prep": {
-          "title": "Preparation",
-          "text": "Peel, chop, season: everyone finds their place in the kitchen."
-        },
-        "cook": {
-          "title": "Cooking",
-          "text": "The slow simmer that gives the rice all its flavour."
+      "tag": "Teranga",
+      "title": "Here, the guest comes first",
+      "text": "In Senegal, no one eats alone. The dish is set in the middle of the table, everyone gathers around the bowl, and the guest is always served first. That welcoming spirit is what we share at every workshop.",
+      "welcome": "“Welcome”, in Wolof",
+      "values": {
+        "home": {
+          "title": "Kër",
+          "text": "home"
         },
         "share": {
-          "title": "Sharing",
-          "text": "The dish set in the middle — and the conversation begins."
+          "title": "Téranga",
+          "text": "hospitality"
+        },
+        "learn": {
+          "title": "Ceebu jën",
+          "text": "the national dish"
         }
-      }
+      },
+      "cta": "Our story"
     },
-    "testimonials": {
-      "eyebrow": "They shared our table"
-    },
-    "booking": {
-      "eyebrow": "Booking",
-      "title": "Book in a few moments",
+    "how": {
+      "tag": "How it works",
+      "title": "Your seat at the table in three steps",
       "steps": {
         "date": {
-          "title": "Pick a date",
-          "text": "The calendar shows open sessions and remaining spots in real time."
+          "title": "Pick your date",
+          "text": "Open sessions and remaining spots are shown in real time."
         },
         "party": {
-          "title": "Tell us about your group",
-          "text": "Number of participants and the workshop language: French or English."
+          "title": "Tell us who's coming",
+          "text": "Number of guests and the workshop language: French or English."
         },
         "confirm": {
-          "title": "Get your confirmation",
-          "text": "A booking reference appears as soon as your spot is secured."
+          "title": "You're booked",
+          "text": "Your reference appears as soon as your spot is secured."
         }
-      }
+      },
+      "cta": "Pick my date",
+      "note": "No online payment — pay on site."
+    },
+    "host": {
+      "tag": "Your host",
+      "title": "Meet your host",
+      "text": "An ambassador of Senegalese cuisine, the founder of Kër Téranga welcomes you and shares the recipes, gestures and stories behind thiéboudiène.",
+      "cta": "Her story"
+    },
+    "testimonials": {
+      "tag": "They shared our table"
     },
     "final": {
-      "title": "Your seat at the bowl is waiting",
+      "title": "A seat is waiting for you",
       "text": "Choose your date — we'll take care of the rest.",
-      "points": {
-        "realtime": "Availability updated in real time",
-        "payment": "No online payment: pay on site"
-      },
-      "cta": "See available dates"
+      "cta": "Book an experience"
     }
   },
   "about": {
@@ -240,7 +225,7 @@
     "noPayment": "Free booking, no online payment — pay on site.",
     "notFound": "This experience doesn't exist or is no longer available.",
     "cutoff": "Online booking until {hours, plural, =0 {the start time} one {# hour before} other {# hours before}} the workshop",
-    "heroEyebrow": "Culinary workshop · Dakar",
+    "heroEyebrow": "The Senegalese Table · Dakar",
     "overviewTitle": "What you'll experience",
     "heritage": {
       "eyebrow": "Heritage",
@@ -296,15 +281,15 @@
     }
   },
   "booking": {
-    "eyebrow": "Booking",
-    "title": "Book my spot",
-    "intro": "Choose your experience, date and time. Your booking is confirmed instantly and requires no online payment.",
+    "eyebrow": "The Senegalese Table",
+    "title": "Book your seat at the table",
+    "intro": "Pick a date, tell us who's coming, and you're booked. No online payment.",
     "steps": {
-      "experience": "Experience",
-      "date": "Date & time",
-      "participants": "Guests",
+      "experience": "Your experience",
+      "date": "Your date",
+      "participants": "Your group",
       "details": "Your details",
-      "review": "Summary"
+      "review": "All set?"
     },
     "stepOf": "Step {current} of {total}",
     "chooseExperience": "Which experience would you like?",
@@ -358,7 +343,7 @@
     "confirm": "Confirm my booking",
     "confirming": "Confirming…",
     "success": {
-      "title": "Your booking is confirmed!",
+      "title": "À table! Your spot is booked.",
       "text": "Dalal ak jàmm — welcome! A confirmation email is on its way to {email}.",
       "reference": "Reference",
       "next": "Keep your reference. The exact address and practical information will be sent to you before the workshop.",

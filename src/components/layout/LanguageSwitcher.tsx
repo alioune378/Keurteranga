@@ -42,8 +42,8 @@ export function LanguageSwitcher({
       role="group"
       aria-label={t('language')}
       className={cn(
-        'inline-flex rounded-md border p-0.5 font-semibold',
-        full ? 'text-sm' : 'text-[0.7rem] tracking-[0.12em]',
+        'inline-flex rounded-full border p-0.5 font-semibold',
+        full ? 'text-sm' : 'text-xs',
         light ? 'border-white/30' : 'border-forest-700/20',
         pending && 'opacity-60',
         className
@@ -58,8 +58,8 @@ export function LanguageSwitcher({
           aria-label={NAMES[l]}
           lang={l}
           className={cn(
-            'rounded-[5px] transition',
-            full ? 'min-h-[2.5rem] px-4' : 'min-h-[2rem] px-2.5 uppercase',
+            'rounded-full transition',
+            full ? 'min-h-[2.25rem] px-4' : 'min-h-[2rem] px-3 uppercase',
             l === locale
               ? light
                 ? 'bg-white text-forest-900'

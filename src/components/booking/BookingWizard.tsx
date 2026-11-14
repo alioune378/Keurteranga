@@ -245,20 +245,22 @@ export function BookingWizard({
       <motion.div
         initial={reduce ? false : { opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="card mx-auto max-w-xl overflow-hidden text-center"
+        className="mx-auto max-w-xl overflow-hidden rounded-4xl border border-sand-200 bg-white text-center shadow-soft"
         role="status"
       >
-        <div className="bg-forest-700 px-6 py-10 text-white">
-          <CheckCircle2 className="mx-auto h-14 w-14 text-gold-300" aria-hidden="true" />
-          <h2 ref={headingRef} tabIndex={-1} className="mt-4 text-display-md text-white outline-none">
+        <div className="bg-forest-50 px-6 py-10">
+          <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-gold-400 text-forest-900">
+            <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
+          </span>
+          <h2 ref={headingRef} tabIndex={-1} className="mt-4 text-display-md outline-none">
             {t('success.title')}
           </h2>
         </div>
         <div className="space-y-5 p-6 md:p-8">
           <p className="text-lg">{t('success.text', { email: details.email })}</p>
-          <div className="rounded-lg border border-gold-300 bg-gold-100/50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">{t('success.reference')}</p>
-            <p className="mt-1 select-all font-display text-4xl tracking-wider text-forest-700">{done.reference}</p>
+          <div className="rounded-3xl border-2 border-dashed border-gold-300 bg-gold-100/40 p-5">
+            <p className="text-sm font-semibold text-ink-muted">{t('success.reference')}</p>
+            <p className="mt-1 select-all font-display text-3xl font-bold tracking-wider text-forest-700">{done.reference}</p>
           </div>
           {slot && experience && (
             <p className="text-ink-soft">
@@ -279,39 +281,27 @@ export function BookingWizard({
   // ------------------------------------------------------------------ wizard
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
-      <div className="card p-5 md:p-8">
+      <div className="rounded-4xl border border-sand-200 bg-white p-5 shadow-soft md:p-8">
         {/* progress */}
-        <nav aria-label={t('stepOf', { current: step + 1, total: STEPS.length })}>
-          <ol className="mb-6 flex items-center gap-2">
+        <nav aria-label={t('stepOf', { current: step + 1, total: STEPS.length })} className="mb-6">
+          <div className="flex items-center justify-between gap-3 text-sm">
+            <span className="font-semibold text-forest-700">{t(`steps.${STEPS[step]}`)}</span>
+            <span className="rounded-full bg-sand-100 px-2.5 py-0.5 text-xs font-semibold tabular-nums text-ink-soft">
+              {step + 1}/{STEPS.length}
+            </span>
+          </div>
+          <ol className="mt-3 grid grid-cols-5 gap-1.5">
             {STEPS.map((s, i) => (
-              <li key={s} className="flex flex-1 items-center gap-2">
-                <span
-                  aria-current={i === step ? 'step' : undefined}
-                  className={cn(
-                    'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition',
-                    i < step && 'bg-forest-700 text-white',
-                    i === step && 'bg-gold-400 text-forest-900 ring-4 ring-gold-100',
-                    i > step && 'border border-sand-300 bg-white text-ink-muted'
-                  )}
-                >
-                  {i < step ? <Check className="h-4 w-4" aria-hidden="true" /> : i + 1}
-                  <span className="sr-only"> {t(`steps.${s}`)}</span>
-                </span>
-                <span className={cn('hidden whitespace-nowrap text-sm font-medium xl:block', i === step ? 'text-forest-700' : 'text-ink-muted')}>
-                  {t(`steps.${s}`)}
-                </span>
-                {i < STEPS.length - 1 && <span className={cn('h-px flex-1', i < step ? 'bg-forest-700' : 'bg-sand-300')} aria-hidden="true" />}
+              <li key={s} aria-current={i === step ? 'step' : undefined}>
+                <span className={cn('block h-1.5 rounded-full transition-colors', i < step ? 'bg-forest-700' : i === step ? 'bg-gold-400' : 'bg-sand-200')} />
+                <span className="sr-only">{t(`steps.${s}`)}</span>
               </li>
             ))}
           </ol>
         </nav>
-        <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-terracotta-700">
-          {t('stepOf', { current: step + 1, total: STEPS.length })}
-          <span className="text-ink-muted xl:hidden"> · {t(`steps.${STEPS[step]}`)}</span>
-        </p>
 
         {error && (
-          <div role="alert" className="mb-6 rounded-lg border border-terracotta-300 bg-terracotta-100 p-4 text-sm text-terracotta-700">
+          <div role="alert" className="mb-6 rounded-2xl border border-terracotta-300 bg-terracotta-100 p-4 text-sm text-terracotta-700">
             {t(`errors.${error}`)}
           </div>
         )}
@@ -335,7 +325,7 @@ export function BookingWizard({
                     <label
                       key={e.id}
                       className={cn(
-                        'flex cursor-pointer items-center gap-4 rounded-lg border p-3 transition focus-within:ring-2 focus-within:ring-gold-400',
+                        'flex cursor-pointer items-center gap-4 rounded-3xl border p-3 transition focus-within:ring-2 focus-within:ring-gold-400',
                         experienceId === e.id ? 'border-forest-700 bg-forest-50 ring-1 ring-forest-700' : 'border-sand-300 hover:border-forest-400'
                       )}
                     >
@@ -350,9 +340,9 @@ export function BookingWizard({
                           setSlotId(null);
                         }}
                       />
-                      <Photo src={e.cover?.src} alt={e.cover?.alt ?? e.title} illustration={e.cover?.illustration} className="aspect-[3/2] w-24 shrink-0 rounded-md sm:w-32" sizes="128px" />
+                      <Photo src={e.cover?.src} alt={e.cover?.alt ?? e.title} illustration={e.cover?.illustration} className="aspect-[3/2] w-24 shrink-0 rounded-2xl sm:w-32" sizes="128px" />
                       <span className="min-w-0">
-                        <span className="block font-display text-[1.4rem] leading-tight text-forest-700">{e.title}</span>
+                        <span className="block font-display text-lg font-semibold leading-tight text-forest-700">{e.title}</span>
                         <span className="mt-1 line-clamp-2 block text-sm text-ink-soft">{e.summary}</span>
                         <span className="mt-1 block text-sm font-medium text-ink">
                           {e.duration} · {e.price_xof != null ? formatPrice(e.price_xof, locale) : tp('priceTbc')}
@@ -397,7 +387,7 @@ export function BookingWizard({
                     }}
                   />
                   <div>
-                    <h3 className="font-sans text-sm font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('chooseSlot')}</h3>
+                    <h3 className="font-sans text-sm font-semibold text-ink-soft">{t('chooseSlot')}</h3>
                     {!date && <p className="mt-3 text-sm text-ink-soft">{t('selectDateFirst')}</p>}
                     {!loading && slots.length === 0 && <p className="mt-3 text-sm text-ink-soft">{t('noSlots')}</p>}
                     {date && (
@@ -412,7 +402,7 @@ export function BookingWizard({
                             disabled={s.remaining <= 0}
                             onClick={() => setSlotId(s.id)}
                             className={cn(
-                              'flex min-h-[3.25rem] w-full items-center justify-between rounded-lg border px-4 py-3 text-left transition',
+                              'flex min-h-[3.25rem] w-full items-center justify-between rounded-2xl border px-4 py-3 text-left transition',
                               slotId === s.id ? 'border-forest-700 bg-forest-50 ring-1 ring-forest-700' : 'border-sand-300 hover:border-forest-400',
                               s.remaining <= 0 && 'cursor-not-allowed border-dashed bg-sand-100 opacity-70'
                             )}
@@ -450,7 +440,7 @@ export function BookingWizard({
                     >
                       <Minus className="h-5 w-5" />
                     </button>
-                    <output aria-live="polite" className="w-14 text-center font-display text-5xl text-forest-700">{participants}</output>
+                    <output aria-live="polite" className="w-14 text-center font-display text-4xl font-bold text-forest-700">{participants}</output>
                     <button
                       type="button"
                       onClick={() => setParticipants((p) => Math.min(maxParticipants, p + 1))}
@@ -471,7 +461,7 @@ export function BookingWizard({
                       <label
                         key={l}
                         className={cn(
-                          'inline-flex min-h-[2.75rem] cursor-pointer items-center rounded-md border px-5 text-sm font-semibold transition focus-within:ring-2 focus-within:ring-gold-400',
+                          'inline-flex min-h-[2.75rem] cursor-pointer items-center rounded-full border px-5 text-sm font-semibold transition focus-within:ring-2 focus-within:ring-gold-400',
                           language === l ? 'border-forest-700 bg-forest-700 text-white' : 'border-sand-300 hover:border-forest-400'
                         )}
                       >
@@ -566,7 +556,7 @@ export function BookingWizard({
             {step === 4 && slot && experience && (
               <div>
                 <h2 ref={headingRef} tabIndex={-1} className="text-display-md outline-none">{t('summary.title')}</h2>
-                <dl className="mt-6 divide-y divide-sand-200 rounded-lg border border-sand-200 px-5">
+                <dl className="mt-6 divide-y divide-sand-200 rounded-3xl bg-sand-100 px-5">
                   {([
                     [t('summary.experience'), experience.title, 0],
                     [t('summary.date'), formatDate(slot.date, locale), 1],
@@ -588,7 +578,7 @@ export function BookingWizard({
                   ))}
                   <div className="flex items-center justify-between py-4">
                     <dt className="font-semibold">{t('summary.total')}</dt>
-                    <dd className="font-display text-3xl text-forest-700">{total ?? <span className="text-base italic text-ink-soft">{t('summary.priceTbc')}</span>}</dd>
+                    <dd className="font-display text-2xl font-bold text-forest-700">{total ?? <span className="text-base italic text-ink-soft">{t('summary.priceTbc')}</span>}</dd>
                   </div>
                 </dl>
                 <p className="mt-3 text-sm text-ink-muted">{t('summary.totalNote')}</p>
@@ -621,12 +611,12 @@ export function BookingWizard({
 
       {/* live summary */}
       <aside className="lg:sticky lg:top-28 lg:self-start">
-        <div className="card overflow-hidden">
+        <div className="overflow-hidden rounded-4xl border border-sand-200 bg-white shadow-soft">
           {experience && (
             <Photo src={experience.cover?.src} alt={experience.cover?.alt ?? experience.title} illustration={experience.cover?.illustration} className="aspect-[3/2]" sizes="340px" />
           )}
           <div className="space-y-3 p-6 text-sm">
-            <p className="font-display text-[1.45rem] leading-tight text-forest-700">{experience?.title ?? '—'}</p>
+            <p className="font-display text-lg font-semibold leading-tight text-forest-700">{experience?.title ?? '—'}</p>
             {experience && <p className="text-ink-soft">{experience.duration} · {experience.location}</p>}
             {slot && (
               <p className="font-medium">

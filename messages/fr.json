@@ -46,120 +46,105 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Dakar · Atelier culinaire & culturel",
-      "title": "Cuisinez le Sénégal, <accent>partagez</accent> la Teranga.",
-      "subtitle": "Un atelier participatif autour du thiéboudiène, le plat national : découvrir les produits, cuisiner ensemble, puis s'asseoir autour du bol commun, comme en famille.",
-      "ctaPrimary": "Réserver ma place",
-      "ctaSecondary": "Découvrir l'atelier",
-      "caption": "Atelier Thiéboudiène · Dakar"
+      "tag": "La Table Sénégalaise",
+      "title": "Cuisinez, partagez et sentez-vous chez vous à Dakar.",
+      "subtitle": "Un atelier chaleureux autour du thiéboudiène, le plat national, pour découvrir le Sénégal par sa cuisine.",
+      "cta": "Réserver une expérience",
+      "secondary": "Voir l'atelier",
+      "chips": {
+        "languages": "En français ou en anglais",
+        "place": "Mermoz, Dakar",
+        "unesco": "Plat inscrit à l'UNESCO"
+      }
     },
-    "intro": {
-      "eyebrow": "Bienvenue chez Kër Téranga",
-      "statement": "En wolof, « Kër » signifie <accent>la maison</accent> et « Téranga », l'hospitalité. Ici, vous n'êtes pas spectateur : vous êtes reçu comme un proche et invité à mettre la main à la pâte.",
-      "facts": {
-        "handsOn": {
-          "title": "Atelier participatif",
-          "text": "On cuisine ensemble, de bout en bout"
+    "preview": {
+      "tag": "À vivre à Dakar",
+      "badge": "Expérience signature",
+      "points": {
+        "cook": "Vous cuisinez vous-même, guidé pas à pas",
+        "story": "L'histoire du plat racontée en images",
+        "share": "Un vrai repas partagé autour du bol commun"
+      },
+      "details": "Voir le programme",
+      "cta": "Voir les dates"
+    },
+    "moments": {
+      "tag": "Moments à table",
+      "title": "Du marché au bol commun",
+      "text": "Chaque atelier suit le chemin du thiéboudiène, des produits frais jusqu'au moment où l'on se sert ensemble.",
+      "steps": {
+        "market": {
+          "title": "Les produits",
+          "text": "Poisson, légumes, épices : on apprend à les reconnaître."
         },
-        "languages": {
-          "title": "Français ou anglais",
-          "text": "Un atelier animé dans votre langue"
+        "prep": {
+          "title": "Les mains à la pâte",
+          "text": "Éplucher, découper, assaisonner, ensemble."
         },
-        "place": {
-          "title": "Au cœur de Dakar",
-          "text": "Rond-point Mermoz"
+        "cook": {
+          "title": "La cuisson",
+          "text": "Le mijotage qui donne au riz toute sa saveur."
+        },
+        "share": {
+          "title": "Le partage",
+          "text": "Le plat au centre, et la conversation commence."
         }
       }
     },
     "teranga": {
-      "eyebrow": "La Teranga",
-      "title": "L'hospitalité comme art de vivre",
-      "text1": "Au Sénégal, on ne mange jamais seul. Le plat arrive au centre de la table, chacun prend place autour du bol, et l'on veille toujours à ce que l'invité soit le premier servi. C'est cela, la Teranga : une générosité de tous les jours, qui fait de l'étranger un membre de la famille.",
-      "text2": "Nos ateliers prolongent cette tradition. Vous repartez avec une recette, mais surtout avec le sentiment d'avoir été reçu chez quelqu'un.",
-      "greeting": "« Soyez le bienvenu », en wolof"
-    },
-    "workshop": {
-      "eyebrow": "L'expérience signature",
-      "lead": "Le thiéboudiène — « riz au poisson » en wolof — est le plat des jours de fête comme des déjeuners de famille. Depuis 2021, l'art de le préparer est inscrit au patrimoine culturel immatériel de l'UNESCO. Avec nous, vous le cuisinez de vos propres mains.",
-      "moments": {
-        "ingredients": {
-          "title": "Les produits",
-          "text": "Poisson, riz, légumes et épices : apprendre à les reconnaître et à les choisir."
-        },
-        "gestures": {
-          "title": "Les gestes",
-          "text": "Préparer, assaisonner, cuire : les techniques et les secrets transmis par la fondatrice."
-        },
-        "history": {
-          "title": "L'histoire",
-          "text": "Une présentation projetée sur écran raconte l'origine du plat et sa place dans la vie sénégalaise."
-        },
-        "sharing": {
-          "title": "Le partage",
-          "text": "On se retrouve autour du bol commun pour déguster ensemble ce que l'on a préparé."
-        }
-      },
-      "cta": "Réserver cet atelier",
-      "details": "Voir le programme"
-    },
-    "founder": {
-      "eyebrow": "La fondatrice",
-      "title": "Une hôte, une passeuse de culture",
-      "text": "Ambassadrice de la gastronomie sénégalaise, la fondatrice de Kër Téranga accueille chaque atelier et partage les recettes, les gestes et les histoires qui accompagnent le thiéboudiène.",
-      "cta": "Notre histoire"
-    },
-    "journey": {
-      "eyebrow": "Du marché au bol",
-      "title": "Le voyage d'un plat",
-      "text": "Quatre temps, une même table : chaque atelier suit le chemin du thiéboudiène, des étals de Dakar jusqu'au moment où l'on se sert ensemble.",
-      "steps": {
-        "market": {
-          "title": "Le marché",
-          "text": "Les couleurs et les parfums des produits frais qui font le goût du plat."
-        },
-        "prep": {
-          "title": "La préparation",
-          "text": "Éplucher, découper, assaisonner : chacun trouve sa place en cuisine."
-        },
-        "cook": {
-          "title": "La cuisson",
-          "text": "Le temps long du mijotage, qui donne au riz toute sa saveur."
+      "tag": "La Teranga",
+      "title": "Ici, l'invité passe en premier",
+      "text": "Au Sénégal, on ne mange jamais seul. Le plat arrive au centre de la table, chacun prend place autour du bol et l'on veille à ce que l'invité soit servi en premier. C'est cet esprit d'accueil que nous partageons à chaque atelier.",
+      "welcome": "« Bienvenue », en wolof",
+      "values": {
+        "home": {
+          "title": "Kër",
+          "text": "la maison"
         },
         "share": {
-          "title": "Le partage",
-          "text": "Le plat posé au centre, et la conversation qui commence."
+          "title": "Téranga",
+          "text": "l'hospitalité"
+        },
+        "learn": {
+          "title": "Ceebu jën",
+          "text": "le plat national"
         }
-      }
+      },
+      "cta": "Notre histoire"
     },
-    "testimonials": {
-      "eyebrow": "Ils ont partagé notre table"
-    },
-    "booking": {
-      "eyebrow": "Réservation",
-      "title": "Réserver en quelques instants",
+    "how": {
+      "tag": "Comment ça marche",
+      "title": "Votre place à table en trois étapes",
       "steps": {
         "date": {
-          "title": "Choisissez une date",
-          "text": "Le calendrier affiche en temps réel les sessions ouvertes et les places restantes."
+          "title": "Choisissez votre date",
+          "text": "Les sessions ouvertes et les places restantes s'affichent en temps réel."
         },
         "party": {
-          "title": "Indiquez votre groupe",
+          "title": "Dites-nous qui vient",
           "text": "Le nombre de participants et la langue de l'atelier : français ou anglais."
         },
         "confirm": {
-          "title": "Recevez votre confirmation",
-          "text": "Une référence de réservation s'affiche dès que votre place est enregistrée."
+          "title": "C'est réservé",
+          "text": "Votre référence s'affiche dès que votre place est enregistrée."
         }
-      }
+      },
+      "cta": "Choisir ma date",
+      "note": "Aucun paiement en ligne — règlement sur place."
+    },
+    "host": {
+      "tag": "Votre hôte",
+      "title": "Rencontrez votre hôte",
+      "text": "Ambassadrice de la gastronomie sénégalaise, la fondatrice de Kër Téranga vous accueille et partage les recettes, les gestes et les histoires qui accompagnent le thiéboudiène.",
+      "cta": "Son histoire"
+    },
+    "testimonials": {
+      "tag": "Ils ont partagé notre table"
     },
     "final": {
-      "title": "Votre place vous attend autour du bol",
-      "text": "Choisissez votre date, nous nous occupons du reste.",
-      "points": {
-        "realtime": "Disponibilités mises à jour en temps réel",
-        "payment": "Aucun paiement en ligne : règlement sur place"
-      },
-      "cta": "Voir les dates disponibles"
+      "title": "Une place vous attend à table",
+      "text": "Choisissez votre date : nous nous occupons du reste.",
+      "cta": "Réserver une expérience"
     }
   },
   "about": {
@@ -240,7 +225,7 @@
     "noPayment": "Réservation gratuite et sans paiement en ligne — règlement sur place.",
     "notFound": "Cette expérience n'existe pas ou n'est plus disponible.",
     "cutoff": "Réservation en ligne jusqu'à {hours, plural, =0 {l'heure du début} one {# heure avant} other {# heures avant}} l'atelier",
-    "heroEyebrow": "Atelier culinaire · Dakar",
+    "heroEyebrow": "La Table Sénégalaise · Dakar",
     "overviewTitle": "Ce que vous allez vivre",
     "heritage": {
       "eyebrow": "Patrimoine",
@@ -296,15 +281,15 @@
     }
   },
   "booking": {
-    "eyebrow": "Réservation",
-    "title": "Réserver ma place",
-    "intro": "Choisissez votre expérience, votre date et votre horaire. La réservation est confirmée immédiatement et ne demande aucun paiement en ligne.",
+    "eyebrow": "La Table Sénégalaise",
+    "title": "Réservez votre place à table",
+    "intro": "Choisissez une date, dites-nous qui vient, et c'est réservé. Aucun paiement en ligne.",
     "steps": {
-      "experience": "Expérience",
-      "date": "Date & horaire",
-      "participants": "Participants",
-      "details": "Coordonnées",
-      "review": "Récapitulatif"
+      "experience": "Votre expérience",
+      "date": "Votre date",
+      "participants": "Votre groupe",
+      "details": "Vos coordonnées",
+      "review": "Tout est prêt ?"
     },
     "stepOf": "Étape {current} sur {total}",
     "chooseExperience": "Quelle expérience souhaitez-vous vivre ?",
@@ -358,7 +343,7 @@
     "confirm": "Confirmer ma réservation",
     "confirming": "Confirmation…",
     "success": {
-      "title": "Votre réservation est confirmée !",
+      "title": "À table ! Votre place est réservée.",
       "text": "Dalal ak jàmm — bienvenue ! Un e-mail de confirmation est envoyé à {email}.",
       "reference": "Référence",
       "next": "Conservez votre référence. L'adresse exacte et les informations pratiques vous seront communiquées avant l'atelier.",

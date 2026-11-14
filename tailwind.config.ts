@@ -73,15 +73,17 @@ const config: Config = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif']
       },
       fontSize: {
-        'display-2xl': ['clamp(2.6rem, 7.6vw, 5.25rem)', { lineHeight: '0.98', letterSpacing: '-0.02em' }],
-        'display-xl': ['clamp(2.35rem, 6.4vw, 4.6rem)', { lineHeight: '1.02', letterSpacing: '-0.015em' }],
-        'display-lg': ['clamp(2rem, 4.6vw, 3.5rem)', { lineHeight: '1.06', letterSpacing: '-0.012em' }],
-        'display-md': ['clamp(1.65rem, 3vw, 2.35rem)', { lineHeight: '1.12', letterSpacing: '-0.008em' }]
+        // Warm grotesque headings — confident but never oversized
+        'display-2xl': ['clamp(2.1rem, 5.4vw, 3.9rem)', { lineHeight: '1.04', letterSpacing: '-0.03em' }],
+        'display-xl': ['clamp(1.9rem, 4.2vw, 3.1rem)', { lineHeight: '1.08', letterSpacing: '-0.025em' }],
+        'display-lg': ['clamp(1.65rem, 3.3vw, 2.5rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(1.35rem, 2.3vw, 1.8rem)', { lineHeight: '1.2', letterSpacing: '-0.015em' }]
       },
       borderRadius: {
-        xl: '0.75rem',
-        '2xl': '1rem',
-        '3xl': '1.25rem'
+        xl: '0.875rem',
+        '2xl': '1.25rem',
+        '3xl': '1.75rem',
+        '4xl': '2.25rem'
       },
       boxShadow: {
         soft: '0 1px 2px rgba(10,38,29,.04), 0 8px 24px -8px rgba(10,38,29,.10)',

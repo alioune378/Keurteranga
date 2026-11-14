@@ -40,7 +40,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             alt={photos.aboutHeritage.alt[locale]}
             illustration={photos.aboutHeritage.illustration}
             priority
-            className="aspect-[3/2] w-full rounded-sm md:aspect-[16/9]"
+            className="aspect-[3/2] w-full rounded-3xl md:aspect-[16/9]"
             sizes="(min-width:1280px) 1200px, 100vw"
           />
         </Reveal>
@@ -56,13 +56,13 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="mt-10 grid border-t border-sand-200 md:grid-cols-2">
             {(['ker', 'teranga'] as const).map((k, i) => (
               <Reveal key={k} delay={i * 0.08} className={i === 0 ? 'border-b border-sand-200 py-8 md:border-b-0 md:border-r md:pr-12' : 'py-8 md:pl-12'}>
-                <p className="font-display text-[3.2rem] italic leading-none text-terracotta-500 md:text-[4rem]">{t(`name.${k}`)}</p>
+                <p className="font-display text-5xl font-semibold leading-none text-terracotta-500">{t(`name.${k}`)}</p>
                 <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft md:text-lg">{t(`name.${k}Text`)}</p>
               </Reveal>
             ))}
           </div>
           <Reveal delay={0.15}>
-            <p className="mt-6 max-w-3xl border-t border-sand-200 pt-8 font-display text-[1.6rem] leading-snug text-forest-700 md:text-[2rem]">
+            <p className="mt-6 max-w-3xl border-t border-sand-200 pt-8 font-display text-xl font-semibold leading-snug text-forest-700 md:text-2xl">
               {t('name.together')}
             </p>
           </Reveal>
@@ -73,8 +73,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <section className="border-t border-sand-200 bg-white py-16 md:py-24">
         <div className="container grid gap-10 md:grid-cols-3 md:gap-12">
           {(['history', 'mission', 'vision'] as const).map((k, i) => (
-            <Reveal key={k} delay={i * 0.06} className="border-t-2 border-gold-400 pt-6">
-              <h2 className="text-[1.85rem] leading-tight">{t(`${k}.title`)}</h2>
+            <Reveal key={k} delay={i * 0.06} className="rounded-3xl bg-sand-100 p-6">
+              <h2 className="text-2xl">{t(`${k}.title`)}</h2>
               <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">
                 <Tbc text={t(`${k}.text`)} />
               </p>
@@ -102,7 +102,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               src={photos.aboutMarket.src}
               alt={photos.aboutMarket.alt[locale]}
               illustration={photos.aboutMarket.illustration}
-              className="aspect-[3/2] w-full rounded-sm"
+              className="aspect-[3/2] w-full rounded-3xl"
               sizes="(min-width:1024px) 58vw, 100vw"
             />
           </Reveal>
@@ -114,7 +114,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="container grid items-center gap-10 md:grid-cols-12 lg:gap-16">
           <Reveal className="md:col-span-5 lg:col-span-4 lg:col-start-2">
             {/* 👉 PHOTO: authentic portrait of the founder → photos.founder.src (never an illustration) */}
-            <Photo src={photos.founder.src} alt={photos.founder.alt[locale]} hint={t('founder.photo')} tone="sand" className="mx-auto aspect-[4/5] w-full max-w-sm rounded-sm" sizes="(min-width:768px) 35vw, 90vw" />
+            <Photo src={photos.founder.src} alt={photos.founder.alt[locale]} hint={t('founder.photo')} tone="sand" className="mx-auto aspect-[4/5] w-full max-w-sm rounded-3xl" sizes="(min-width:768px) 35vw, 90vw" />
           </Reveal>
           <div className="md:col-span-7 lg:col-span-6">
             <SectionHeading eyebrow={t('founder.eyebrow')} title={t('founder.title')} />

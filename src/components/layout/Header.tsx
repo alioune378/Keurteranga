@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ChevronRight, Compass, Home, Info, Mail, Menu, MessageCircle, X, type LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -13,11 +13,11 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 type NavHref = '/' | '/a-propos' | '/experiences' | '/contact';
 
-const NAV: Array<{ href: NavHref; key: 'home' | 'about' | 'experiences' | 'contact' }> = [
-  { href: '/', key: 'home' },
-  { href: '/experiences', key: 'experiences' },
-  { href: '/a-propos', key: 'about' },
-  { href: '/contact', key: 'contact' }
+const NAV: Array<{ href: NavHref; key: 'home' | 'about' | 'experiences' | 'contact'; Icon: LucideIcon }> = [
+  { href: '/', key: 'home', Icon: Home },
+  { href: '/experiences', key: 'experiences', Icon: Compass },
+  { href: '/a-propos', key: 'about', Icon: Info },
+  { href: '/contact', key: 'contact', Icon: Mail }
 ];
 
 /**
@@ -87,48 +87,45 @@ export function Header() {
     <>
       <header
         className={cn(
-          'pt-safe sticky top-0 z-40 bg-white transition-shadow duration-300',
+          'pt-safe sticky top-0 z-40 bg-white/95 backdrop-blur-sm transition-shadow duration-300 supports-[backdrop-filter]:bg-white/85',
           scrolled ? 'shadow-[0_1px_0_0_#E8E8E3]' : 'shadow-none'
         )}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-forest-700 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest-700 focus:px-4 focus:py-2 focus:text-white"
         >
           {t('skip')}
         </a>
-        <div className="container flex h-16 items-center justify-between gap-4 md:h-20">
+        <div className="container flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
           <Link href="/" aria-label={`Kër Téranga — ${t('home')}`} className="shrink-0">
-            <Logo priority className="h-11 w-auto md:h-14" />
+            <Logo priority className="h-10 w-auto md:h-12" />
           </Link>
 
           <nav aria-label={t('mainNav')} className="hidden lg:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-1 rounded-full bg-sand-100 p-1">
               {NAV.map((item) => (
                 <li key={item.key}>
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? 'page' : undefined}
                     className={cn(
-                      'relative py-2 text-[0.95rem] font-medium transition-colors',
-                      isActive(item.href) ? 'text-forest-700' : 'text-ink-soft hover:text-forest-700'
+                      'block rounded-full px-4 py-2 text-[0.92rem] font-semibold transition',
+                      isActive(item.href) ? 'bg-white text-forest-700 shadow-soft' : 'text-ink-soft hover:text-forest-700'
                     )}
                   >
                     {t(item.key)}
-                    {isActive(item.href) && (
-                      <motion.span layoutId="nav-underline" className="absolute inset-x-0 -bottom-0.5 h-px bg-gold-400" />
-                    )}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2">
             <div className="hidden lg:block">
               <LanguageSwitcher />
             </div>
-            <Link href="/reservation" className="btn-gold min-h-[2.5rem] px-4 py-2 text-[0.7rem] sm:px-5 lg:min-h-[2.75rem] lg:text-[0.75rem]">
+            <Link href="/reservation" className="btn-gold min-h-[2.5rem] px-4 py-2 text-sm">
               <span className="sm:hidden">{t('bookShort')}</span>
               <span className="hidden sm:inline">{t('book')}</span>
             </Link>
@@ -136,12 +133,12 @@ export function Header() {
               ref={menuButtonRef}
               type="button"
               onClick={() => setOpen(true)}
-              className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-md text-forest-700 hover:bg-forest-50 lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sand-300 text-forest-700 transition hover:border-forest-700 lg:hidden"
               aria-label={t('menu')}
               aria-expanded={open}
               aria-controls="mobile-menu"
             >
-              <Menu className="h-6 w-6" aria-hidden="true" />
+              <Menu className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -205,87 +202,90 @@ function MobileMenu({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          ref={panelRef}
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label={t('menuTitle')}
-          className="fixed inset-0 z-[70] flex h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-white text-forest-700 lg:hidden"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={reduce ? undefined : { opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="pt-safe sticky top-0 z-10 shrink-0 border-b border-sand-200 bg-white">
+        <div className="fixed inset-0 z-[70] lg:hidden">
+          {/* dimmed page — tap to close; the panel itself is fully opaque */}
+          <motion.div
+            data-menu-backdrop
+            className="absolute inset-0 bg-forest-900/45"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            onClick={onClose}
+            aria-hidden="true"
+          />
+          <motion.div
+            ref={panelRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('menuTitle')}
+            className="pt-safe absolute inset-x-0 top-0 max-h-[100dvh] overflow-y-auto overscroll-contain rounded-b-3xl bg-white shadow-lift"
+            initial={reduce ? false : { y: -16, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={reduce ? undefined : { y: -16, opacity: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 0.61, 0.36, 1] }}
+          >
             <div className="container flex h-16 items-center justify-between">
               <Link href="/" onClick={onClose} aria-label={`Kër Téranga — ${t('home')}`} className="shrink-0">
-                <Logo className="h-11 w-auto" />
+                <Logo className="h-10 w-auto" />
               </Link>
               <button
                 type="button"
                 onClick={onClose}
                 data-autofocus
-                className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-md text-forest-700 hover:bg-forest-50"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sand-100 text-forest-700 hover:bg-sand-200"
                 aria-label={t('close')}
               >
-                <X className="h-6 w-6" aria-hidden="true" />
+                <X className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
-          </div>
 
-          <nav aria-label={t('mainNav')} className="container flex-1 py-6">
-            <ul className="divide-y divide-sand-200 border-b border-sand-200">
-              {NAV.map((item, i) => (
-                <motion.li
-                  key={item.key}
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.04 + i * 0.04, duration: 0.25 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={onClose}
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className="group flex items-baseline gap-4 py-4"
-                  >
-                    <span className="w-5 font-sans text-[0.7rem] font-semibold tabular-nums text-gold-500">0{i + 1}</span>
-                    <span
+            <nav aria-label={t('mainNav')} className="container pb-2">
+              <ul className="overflow-hidden rounded-2xl border border-sand-200">
+                {NAV.map(({ href, key, Icon }) => (
+                  <li key={key} className="border-b border-sand-200 last:border-b-0">
+                    <Link
+                      href={href}
+                      onClick={onClose}
+                      aria-current={isActive(href) ? 'page' : undefined}
                       className={cn(
-                        'font-display text-[1.85rem] leading-none',
-                        isActive(item.href) ? 'italic text-terracotta-500' : 'text-forest-700 group-hover:text-forest-500'
+                        'flex min-h-[3.25rem] items-center gap-3 px-4 py-2.5 transition',
+                        isActive(href) ? 'bg-forest-50' : 'hover:bg-sand-100'
                       )}
                     >
-                      {t(item.key)}
-                    </span>
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
+                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-forest-50 text-forest-700">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      <span className="flex-1 text-[1.02rem] font-semibold text-forest-700">{t(key)}</span>
+                      <ChevronRight className="h-4 w-4 text-ink-muted" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-            <div className="mt-6 flex items-center justify-between gap-4">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">{t('language')}</span>
-              <LanguageSwitcher full />
+            <div className="pb-safe container space-y-3 pt-3">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-sm font-semibold text-ink-soft">{t('language')}</span>
+                <LanguageSwitcher full />
+              </div>
+              <Link href="/reservation" onClick={onClose} className="btn-gold w-full">
+                {t('book')}
+              </Link>
+              {site.whatsapp && (
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-[2.75rem] items-center justify-center gap-2 text-sm text-ink-soft hover:text-forest-700"
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                  {t('questions')} <span className="font-semibold text-forest-700">WhatsApp</span>
+                </a>
+              )}
             </div>
-          </nav>
-
-          <div className="pb-safe container shrink-0 space-y-4 border-t border-sand-200 bg-white pt-5">
-            <Link href="/reservation" onClick={onClose} className="btn-gold btn-lg w-full">
-              {t('book')}
-            </Link>
-            {site.whatsapp && (
-              <a
-                href={`https://wa.me/${site.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 text-sm text-ink-soft hover:text-forest-700"
-              >
-                {t('questions')} <span className="font-semibold text-forest-700">WhatsApp</span>
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            )}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
