@@ -5,12 +5,13 @@ import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
-import type { AppPathname } from '@/i18n/routing';
 import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/utils';
 import { LanguageSwitcher } from './LanguageSwitcher';
 
-const NAV: Array<{ href: AppPathname; key: 'home' | 'about' | 'experiences' | 'contact' }> = [
+type NavHref = '/' | '/a-propos' | '/experiences' | '/contact';
+
+const NAV: Array<{ href: NavHref; key: 'home' | 'about' | 'experiences' | 'contact' }> = [
   { href: '/', key: 'home' },
   { href: '/a-propos', key: 'about' },
   { href: '/experiences', key: 'experiences' },
