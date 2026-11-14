@@ -9,15 +9,15 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/compo
 import { Tbc } from '@/components/ui/Tbc';
 import { pageMetadata } from '@/lib/seo';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
   const t = await getTranslations({ locale, namespace: 'contact' });
   const m = await getTranslations({ locale, namespace: 'meta' });
   return pageMetadata({ locale, pathname: '/contact', title: m('contactTitle'), description: t('intro') });
 }
 
-export default async function ContactPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('contact');
   const tp = await getTranslations('placeholder');

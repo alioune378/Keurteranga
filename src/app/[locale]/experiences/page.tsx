@@ -8,15 +8,15 @@ import { pageMetadata } from '@/lib/seo';
 
 export const revalidate = 300;
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
   const t = await getTranslations({ locale, namespace: 'experiences' });
   const m = await getTranslations({ locale, namespace: 'meta' });
   return pageMetadata({ locale, pathname: '/experiences', title: m('experiencesTitle'), description: t('intro') });
 }
 
-export default async function ExperiencesPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+export default async function ExperiencesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('experiences');
   const experiences = await getExperiences();

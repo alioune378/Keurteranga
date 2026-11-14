@@ -12,8 +12,8 @@ import { isBookingConfigured } from '@/lib/supabase/service';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
   const t = await getTranslations({ locale, namespace: 'booking' });
   const m = await getTranslations({ locale, namespace: 'meta' });
   return pageMetadata({ locale, pathname: '/reservation', title: m('bookingTitle'), description: t('intro') });
@@ -23,10 +23,10 @@ export default async function ReservationPage({
   params,
   searchParams
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ experience?: string }>;
 }) {
-  const { locale } = await params;
+  const locale = (await params).locale as Locale;
   const { experience } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations('booking');

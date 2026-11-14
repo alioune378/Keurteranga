@@ -12,8 +12,8 @@ import { formatPrice, pick } from '@/lib/utils';
 
 export const revalidate = 300;
 
-export default async function HomePage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('home');
   const te = await getTranslations('experiences');

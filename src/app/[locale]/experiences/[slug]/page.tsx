@@ -22,9 +22,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params
 }: {
-  params: Promise<{ locale: Locale; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = rawLocale as Locale;
   const e = await getExperience(slug);
   if (!e) return {};
   const cover = coverOf(e);
@@ -38,8 +39,9 @@ export async function generateMetadata({
   });
 }
 
-export default async function ExperiencePage({ params }: { params: Promise<{ locale: Locale; slug: string }> }) {
-  const { locale, slug } = await params;
+export default async function ExperiencePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale: rawLocale, slug } = await params;
+  const locale = rawLocale as Locale;
   setRequestLocale(locale);
   const e = await getExperience(slug);
   if (!e) notFound();

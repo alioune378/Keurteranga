@@ -10,15 +10,15 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Tbc } from '@/components/ui/Tbc';
 import { pageMetadata } from '@/lib/seo';
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const locale = (await params).locale as Locale;
   const t = await getTranslations({ locale, namespace: 'about' });
   const m = await getTranslations({ locale, namespace: 'meta' });
   return pageMetadata({ locale, pathname: '/a-propos', title: m('aboutTitle'), description: t('intro') });
 }
 
-export default async function AboutPage({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale as Locale;
   setRequestLocale(locale);
   const t = await getTranslations('about');
   const points = t.raw('heritage.points') as string[];
