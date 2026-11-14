@@ -5,7 +5,7 @@ import type { Locale } from '@/i18n/routing';
 import { site } from '@/config/site';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Reveal } from '@/components/ui/Reveal';
-import { FacebookIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
+import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
 import { Tbc } from '@/components/ui/Tbc';
 import { pageMetadata } from '@/lib/seo';
 
@@ -26,7 +26,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const socials = [
     { href: site.social.instagram, label: 'Instagram', Icon: InstagramIcon },
     { href: site.social.facebook, label: 'Facebook', Icon: FacebookIcon },
-    { href: site.social.linkedin, label: 'LinkedIn', Icon: LinkedinIcon }
+    { href: site.social.linkedin, label: 'LinkedIn', Icon: LinkedinIcon },
+    { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
   return (

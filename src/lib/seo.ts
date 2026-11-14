@@ -69,6 +69,6 @@ export function organizationJsonLd(locale: Locale) {
     },
     areaServed: 'Dakar',
     knowsLanguage: ['fr', 'en'],
-    sameAs: Object.values(site.social)
+    sameAs: Object.values(site.social).filter(Boolean)
   };
 }

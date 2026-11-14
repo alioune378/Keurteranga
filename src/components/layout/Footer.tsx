@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { site } from '@/config/site';
 import { Logo } from '@/components/ui/Logo';
-import { FacebookIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
+import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
 
 export function Footer() {
   const t = useTranslations();
@@ -11,7 +11,8 @@ export function Footer() {
   const socials = [
     { href: site.social.instagram, label: 'Instagram', Icon: InstagramIcon },
     { href: site.social.facebook, label: 'Facebook', Icon: FacebookIcon },
-    { href: site.social.linkedin, label: 'LinkedIn', Icon: LinkedinIcon }
+    { href: site.social.linkedin, label: 'LinkedIn', Icon: LinkedinIcon },
+    { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
   return (

@@ -9,10 +9,10 @@
 export const site = {
   name: 'Kër Téranga',
   founderName: null as string | null, // [À compléter] — founder's full name
-  email: null as string | null, // [À compléter] — e.g. contact@kerteranga.com
-  phoneDisplay: null as string | null, // [À compléter] — e.g. "+221 77 123 45 67"
-  phoneHref: null as string | null, // [À compléter] — e.g. "+221771234567"
-  whatsapp: null as string | null, // [À compléter] — digits only, e.g. "221771234567"
+  email: 'kerterangasenegal@gmail.com' as string | null,
+  phoneDisplay: '+221 77 146 27 18' as string | null,
+  phoneHref: '+221771462718' as string | null,
+  whatsapp: '221771462718' as string | null, // digits only
   address: {
     street: null as string | null, // [À compléter]
     city: 'Dakar',
@@ -22,9 +22,10 @@ export const site = {
   /** Google Maps embed query: an exact address once known */
   mapQuery: 'Dakar, Sénégal',
   social: {
-    instagram: null as string | null, // [À compléter] full URL
+    instagram: 'https://www.instagram.com/ker.teranga.sn' as string | null,
     facebook: null as string | null, // [À compléter] full URL
-    linkedin: null as string | null // [À compléter] full URL
+    linkedin: null as string | null, // [À compléter] full URL
+    tiktok: null as string | null // [À compléter] — the link received was an Instagram URL; add the real TikTok URL
   }
 };
 
