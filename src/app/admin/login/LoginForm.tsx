@@ -2,7 +2,7 @@
 
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { getBrowserClient } from '@/lib/supabase/browser';
 
 export function LoginForm({ forbidden }: { forbidden?: boolean }) {
@@ -14,7 +14,7 @@ export function LoginForm({ forbidden }: { forbidden?: boolean }) {
     forbidden ? { kind: 'err', text: "Ce compte n'a pas les droits administrateur." } : null
   );
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const supabase = getBrowserClient();
     if (!supabase) return;

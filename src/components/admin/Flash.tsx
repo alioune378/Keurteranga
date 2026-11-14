@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { AlertCircle, CheckCircle2 } from 'lucide-react';
 
 /** Success / error banner driven by ?ok= / ?err= query parameters. */
@@ -18,7 +19,7 @@ export function Flash({ ok, err }: { ok?: string; err?: string }) {
   );
 }
 
-export function PageTitle({ title, children }: { title: string; children?: React.ReactNode }) {
+export function PageTitle({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <h1 className="text-display-md">{title}</h1>
