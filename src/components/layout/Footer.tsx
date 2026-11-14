@@ -98,7 +98,15 @@ export function Footer() {
       <div className="relative border-t border-cream/10">
         <div className="container flex flex-col gap-2 py-6 text-sm text-cream/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Kër Téranga. {t('footer.rights')}</p>
-          <a href="/admin" className="hover:text-cream/80">{t('footer.admin')}</a>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>
+              {t('footer.credit')}{' '}
+              <a href="https://dalaltechnologies.com" target="_blank" rel="noopener" className="font-semibold text-gold-300 hover:text-gold-200">
+                Dalal Technologies
+              </a>
+            </span>
+            <a href="/admin" className="hover:text-cream/80">{t('footer.admin')}</a>
+          </p>
         </div>
       </div>
     </footer>

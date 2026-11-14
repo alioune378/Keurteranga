@@ -223,7 +223,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       </div>
 
       {/* Mobile sticky CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-sand-200 bg-cream/95 p-3 pr-24 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-sand-200 bg-cream/95 p-3 pl-24 backdrop-blur lg:hidden">
         <Link href={bookHref} className="btn-gold w-full py-3.5">
           {t('book')}
         </Link>
