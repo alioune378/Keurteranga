@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { site } from '@/config/site';
@@ -8,6 +8,7 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } f
 export function Footer() {
   const t = useTranslations();
   const year = new Date().getFullYear();
+  // Only verified links are shown (null = hidden)
   const socials = [
     { href: site.social.instagram, label: 'Instagram', Icon: InstagramIcon },
     { href: site.social.facebook, label: 'Facebook', Icon: FacebookIcon },
@@ -15,88 +16,108 @@ export function Footer() {
     { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
+  const heading = 'font-sans text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-gold-300';
+  const link = 'text-white/75 transition-colors hover:text-white';
+
   return (
-    <footer className="relative overflow-hidden bg-forest-900 text-cream">
-      <div className="pattern-weave absolute inset-0 opacity-40" aria-hidden="true" />
-      <div className="container relative grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
-        <div className="lg:col-span-2">
-          <Logo light className="h-24 md:h-28" />
-          <p className="mt-5 max-w-sm leading-relaxed text-cream/70">{t('footer.tagline')}</p>
-          <Link href="/reservation" className="btn-gold mt-7">
+    <footer className="bg-forest-700 text-white">
+      {/* Closing statement */}
+      <div className="border-b border-white/10">
+        <div className="container flex flex-col gap-6 py-12 md:flex-row md:items-end md:justify-between md:py-16">
+          <p className="max-w-xl font-display text-[2rem] leading-[1.08] text-white md:text-[2.75rem]">
+            {t('footer.statement')}
+          </p>
+          <Link href="/reservation" className="btn-gold btn-lg shrink-0 self-start md:self-auto">
             {t('nav.book')}
           </Link>
         </div>
+      </div>
 
-        <div>
-          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">
-            {t('footer.quickLinks')}
-          </h2>
-          <ul className="mt-5 space-y-3 text-cream/80">
-            <li><Link href="/" className="hover:text-gold-200">{t('nav.home')}</Link></li>
-            <li><Link href="/a-propos" className="hover:text-gold-200">{t('nav.about')}</Link></li>
-            <li><Link href="/experiences" className="hover:text-gold-200">{t('nav.experiences')}</Link></li>
-            <li><Link href="/contact" className="hover:text-gold-200">{t('nav.contact')}</Link></li>
-            <li><Link href="/reservation" className="hover:text-gold-200">{t('nav.book')}</Link></li>
-          </ul>
+      <div className="container grid gap-10 py-12 sm:grid-cols-2 md:py-16 lg:grid-cols-[1.4fr_1fr_1.2fr_1fr] lg:gap-12">
+        <div className="sm:col-span-2 lg:col-span-1">
+          <Logo light className="h-20 md:h-24" />
+          <p className="mt-5 max-w-xs text-[0.95rem] leading-relaxed text-white/70">{t('footer.tagline')}</p>
+          {socials.length > 0 && (
+            <div className="mt-6 flex gap-2.5">
+              {socials.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition hover:border-gold-300 hover:text-gold-300"
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
+        <nav aria-label={t('footer.quickLinks')}>
+          <h2 className={heading}>{t('footer.quickLinks')}</h2>
+          <ul className="mt-5 space-y-3 text-[0.95rem]">
+            <li><Link href="/" className={link}>{t('nav.home')}</Link></li>
+            <li><Link href="/experiences" className={link}>{t('nav.experiences')}</Link></li>
+            <li><Link href="/a-propos" className={link}>{t('nav.about')}</Link></li>
+            <li><Link href="/contact" className={link}>{t('nav.contact')}</Link></li>
+            <li><Link href="/reservation" className={link}>{t('nav.book')}</Link></li>
+          </ul>
+        </nav>
+
         <div>
-          <h2 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">
-            {t('footer.contact')}
-          </h2>
-          <ul className="mt-5 space-y-3 text-cream/80">
+          <h2 className={heading}>{t('footer.contact')}</h2>
+          <ul className="mt-5 space-y-3 text-[0.95rem]">
             {site.email && (
               <li className="flex items-start gap-3">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
-                <a href={`mailto:${site.email}`} className="hover:text-gold-200">{site.email}</a>
+                <Mail className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                <a href={`mailto:${site.email}`} className={`${link} break-all`}>{site.email}</a>
               </li>
             )}
             {site.phoneDisplay && site.phoneHref && (
               <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
-                <a href={`tel:${site.phoneHref}`} className="hover:text-gold-200">{site.phoneDisplay}</a>
+                <Phone className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                <a href={`tel:${site.phoneHref}`} className={link}>{site.phoneDisplay}</a>
               </li>
             )}
             {site.whatsapp && (
               <li className="flex items-start gap-3">
-                <WhatsappIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
-                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:text-gold-200">WhatsApp</a>
+                <WhatsappIcon className="mt-1 h-4 w-4 shrink-0 text-gold-300" />
+                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className={link}>WhatsApp</a>
               </li>
             )}
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
-              <span>{site.address.city}, {site.address.country}</span>
-            </li>
-            <li>
-              <Link href="/contact" className="text-gold-300 underline-offset-4 hover:underline">{t('nav.contact')} →</Link>
+            <li className="flex items-start gap-3 text-white/75">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+              <span>
+                {site.address.street && <>{site.address.street}<br /></>}
+                {site.address.city}, {site.address.country}
+              </span>
             </li>
           </ul>
+        </div>
 
-          {socials.length > 0 && (
-          <h2 className="mt-8 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">
-            {t('footer.follow')}
-          </h2>
-          )}
-          <div className="mt-4 flex gap-3">
-            {socials.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href!}
-              
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 text-cream/80 transition hover:border-gold-300 hover:text-gold-300"
-              >
-                <Icon className="h-[18px] w-[18px]" />
-              </a>
-            ))}
-          </div>
+        <div>
+          <h2 className={heading}>{t('footer.professionals')}</h2>
+          <p className="mt-5 text-[0.95rem] leading-relaxed text-white/70">{t('footer.partnersText')}</p>
+          <Link href={{ pathname: '/', hash: 'partenaires' }} className="mt-4 inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-gold-300 hover:text-gold-200">
+            {t('footer.partnersLink')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
 
-      <div className="relative border-t border-cream/10">
-        <div className="container flex flex-col gap-2 py-6 text-sm text-cream/50 sm:flex-row sm:items-center sm:justify-between">
+      {/* Privacy */}
+      <div className="container">
+        <p className="flex items-start gap-3 border-t border-white/10 py-6 text-sm leading-relaxed text-white/60">
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+          <span>
+            <strong className="font-semibold text-white/80">{t('footer.privacyTitle')}</strong> {t('footer.privacyText')}
+          </span>
+        </p>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container flex flex-col gap-2 pb-20 pt-6 text-[0.8rem] text-white/50 sm:flex-row sm:items-center sm:justify-between md:pb-6">
           <p>© {year} Kër Téranga. {t('footer.rights')}</p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>
@@ -105,7 +126,7 @@ export function Footer() {
                 Dalal Technologies
               </a>
             </span>
-            <a href="/admin" className="hover:text-cream/80">{t('footer.admin')}</a>
+            <a href="/admin" className="hover:text-white/80">{t('footer.admin')}</a>
           </p>
         </div>
       </div>

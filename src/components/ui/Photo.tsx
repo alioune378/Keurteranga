@@ -17,11 +17,12 @@ interface PhotoProps {
   tone?: 'green' | 'sand' | 'terracotta' | 'gold';
 }
 
+// Placeholder surfaces (no patterns) — clearly read as "photo to come"
 const tones = {
-  green: 'from-forest-700 via-forest-600 to-forest-800 text-cream/80',
-  sand: 'from-sand-200 via-sand-100 to-sand-300 text-wood-700',
-  terracotta: 'from-terracotta-300 via-terracotta-500 to-terracotta-700 text-cream/85',
-  gold: 'from-gold-200 via-gold-300 to-gold-500 text-forest-900/70'
+  green: 'bg-forest-800 text-white/75 border-white/25',
+  sand: 'bg-sand-100 text-ink-muted border-sand-300',
+  terracotta: 'bg-terracotta-100 text-terracotta-700 border-terracotta-300',
+  gold: 'bg-gold-100 text-gold-600 border-gold-300'
 };
 
 /**
@@ -54,7 +55,7 @@ export function Photo({
           className={cn('object-cover', imgClassName)}
         />
         {illustration && (
-          <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/90 backdrop-blur-sm">
+          <span className="pointer-events-none absolute bottom-2.5 left-2.5 rounded-sm bg-black/50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/90">
             {t('illustration')}
           </span>
         )}
@@ -63,9 +64,9 @@ export function Photo({
   }
 
   return (
-    <div className={cn('relative overflow-hidden bg-gradient-to-br', tones[tone], className)} role="img" aria-label={alt}>
-      <div className="pattern-weave absolute inset-0 opacity-60" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
+    <div className={cn('relative overflow-hidden', tones[tone], className)} role="img" aria-label={alt}>
+      <div className="absolute inset-3 border border-dashed border-inherit" aria-hidden="true" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center">
         <ImageIcon className="h-7 w-7 opacity-70" aria-hidden="true" />
         <span className="max-w-[18rem] text-xs font-medium uppercase tracking-[0.18em] opacity-80">{hint ?? alt}</span>
       </div>

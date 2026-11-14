@@ -24,7 +24,7 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
           hint={title}
           tone="terracotta"
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="aspect-[4/3]"
+          className="aspect-[3/2]"
           imgClassName="transition duration-700 ease-elegant group-hover:scale-[1.04]"
         />
       </div>
@@ -58,7 +58,7 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
             {experience.price_xof != null ? (
               <>
                 {t('from')}
-                <span className="block font-display text-2xl text-forest-800">
+                <span className="block font-display text-2xl text-forest-700">
                   {formatPrice(experience.price_xof, locale)}
                 </span>
                 {t('perPerson')}
@@ -68,10 +68,10 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
             )}
           </p>
           <div className="flex flex-col items-end gap-2">
-            <Link href={{ pathname: '/reservation', query: { experience: experience.slug } }} className="btn-gold px-5 py-2.5">
+            <Link href={{ pathname: '/reservation', query: { experience: experience.slug } }} className="btn-gold px-5">
               {t('book')}
             </Link>
-            <Link href={href} className="inline-flex items-center gap-1 text-sm font-medium text-forest-700 hover:gap-2 hover:text-forest-900">
+            <Link href={href} className="inline-flex items-center gap-1 text-sm font-medium text-forest-700 hover:gap-2 hover:text-forest-600">
               {t('discover')} <ArrowRight className="h-4 w-4 transition-all" aria-hidden="true" />
             </Link>
           </div>

@@ -248,17 +248,17 @@ export function BookingWizard({
         className="card mx-auto max-w-xl overflow-hidden text-center"
         role="status"
       >
-        <div className="bg-forest-700 px-6 py-10 text-cream">
+        <div className="bg-forest-700 px-6 py-10 text-white">
           <CheckCircle2 className="mx-auto h-14 w-14 text-gold-300" aria-hidden="true" />
-          <h2 ref={headingRef} tabIndex={-1} className="mt-4 text-display-md text-cream outline-none">
+          <h2 ref={headingRef} tabIndex={-1} className="mt-4 text-display-md text-white outline-none">
             {t('success.title')}
           </h2>
         </div>
         <div className="space-y-5 p-6 md:p-8">
           <p className="text-lg">{t('success.text', { email: details.email })}</p>
-          <div className="rounded-2xl bg-sand-100 p-5">
+          <div className="rounded-lg border border-gold-300 bg-gold-100/50 p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">{t('success.reference')}</p>
-            <p className="mt-1 select-all font-display text-3xl tracking-wider text-forest-800">{done.reference}</p>
+            <p className="mt-1 select-all font-display text-4xl tracking-wider text-forest-700">{done.reference}</p>
           </div>
           {slot && experience && (
             <p className="text-ink-soft">
@@ -282,35 +282,36 @@ export function BookingWizard({
       <div className="card p-5 md:p-8">
         {/* progress */}
         <nav aria-label={t('stepOf', { current: step + 1, total: STEPS.length })}>
-          <ol className="mb-8 flex items-center gap-2">
+          <ol className="mb-6 flex items-center gap-2">
             {STEPS.map((s, i) => (
               <li key={s} className="flex flex-1 items-center gap-2">
                 <span
                   aria-current={i === step ? 'step' : undefined}
                   className={cn(
                     'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition',
-                    i < step && 'bg-forest-700 text-cream',
+                    i < step && 'bg-forest-700 text-white',
                     i === step && 'bg-gold-400 text-forest-900 ring-4 ring-gold-100',
-                    i > step && 'bg-sand-200 text-ink-muted'
+                    i > step && 'border border-sand-300 bg-white text-ink-muted'
                   )}
                 >
                   {i < step ? <Check className="h-4 w-4" aria-hidden="true" /> : i + 1}
                   <span className="sr-only"> {t(`steps.${s}`)}</span>
                 </span>
-                <span className={cn('hidden text-sm font-medium md:block', i === step ? 'text-forest-800' : 'text-ink-muted')}>
+                <span className={cn('hidden whitespace-nowrap text-sm font-medium xl:block', i === step ? 'text-forest-700' : 'text-ink-muted')}>
                   {t(`steps.${s}`)}
                 </span>
-                {i < STEPS.length - 1 && <span className="h-px flex-1 bg-sand-300" aria-hidden="true" />}
+                {i < STEPS.length - 1 && <span className={cn('h-px flex-1', i < step ? 'bg-forest-700' : 'bg-sand-300')} aria-hidden="true" />}
               </li>
             ))}
           </ol>
         </nav>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-terracotta-500">
+        <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-terracotta-700">
           {t('stepOf', { current: step + 1, total: STEPS.length })}
+          <span className="text-ink-muted xl:hidden"> · {t(`steps.${STEPS[step]}`)}</span>
         </p>
 
         {error && (
-          <div role="alert" className="mb-6 rounded-xl border border-terracotta-300 bg-terracotta-100 p-4 text-sm text-terracotta-700">
+          <div role="alert" className="mb-6 rounded-lg border border-terracotta-300 bg-terracotta-100 p-4 text-sm text-terracotta-700">
             {t(`errors.${error}`)}
           </div>
         )}
@@ -334,8 +335,8 @@ export function BookingWizard({
                     <label
                       key={e.id}
                       className={cn(
-                        'flex cursor-pointer items-center gap-4 rounded-2xl border-2 p-3 transition',
-                        experienceId === e.id ? 'border-forest-600 bg-forest-50' : 'border-sand-200 hover:border-forest-300'
+                        'flex cursor-pointer items-center gap-4 rounded-lg border p-3 transition focus-within:ring-2 focus-within:ring-gold-400',
+                        experienceId === e.id ? 'border-forest-700 bg-forest-50 ring-1 ring-forest-700' : 'border-sand-300 hover:border-forest-400'
                       )}
                     >
                       <input
@@ -349,9 +350,9 @@ export function BookingWizard({
                           setSlotId(null);
                         }}
                       />
-                      <Photo src={e.cover?.src} alt={e.cover?.alt ?? e.title} illustration={e.cover?.illustration} className="h-20 w-24 shrink-0 rounded-xl" sizes="96px" />
+                      <Photo src={e.cover?.src} alt={e.cover?.alt ?? e.title} illustration={e.cover?.illustration} className="aspect-[3/2] w-24 shrink-0 rounded-md sm:w-32" sizes="128px" />
                       <span className="min-w-0">
-                        <span className="block font-display text-xl text-forest-800">{e.title}</span>
+                        <span className="block font-display text-[1.4rem] leading-tight text-forest-700">{e.title}</span>
                         <span className="mt-1 line-clamp-2 block text-sm text-ink-soft">{e.summary}</span>
                         <span className="mt-1 block text-sm font-medium text-ink">
                           {e.duration} · {e.price_xof != null ? formatPrice(e.price_xof, locale) : tp('priceTbc')}
@@ -391,7 +392,8 @@ export function BookingWizard({
                       next: t('nextMonth'),
                       available: t('legendAvailable'),
                       full: t('legendFull'),
-                      unavailable: t('legendUnavailable')
+                      unavailable: t('legendUnavailable'),
+                      selected: t('legendSelected')
                     }}
                   />
                   <div>
@@ -410,18 +412,18 @@ export function BookingWizard({
                             disabled={s.remaining <= 0}
                             onClick={() => setSlotId(s.id)}
                             className={cn(
-                              'flex w-full items-center justify-between rounded-xl border-2 px-4 py-3 text-left transition',
-                              slotId === s.id ? 'border-forest-600 bg-forest-50' : 'border-sand-200 hover:border-forest-300',
-                              s.remaining <= 0 && 'cursor-not-allowed opacity-50'
+                              'flex min-h-[3.25rem] w-full items-center justify-between rounded-lg border px-4 py-3 text-left transition',
+                              slotId === s.id ? 'border-forest-700 bg-forest-50 ring-1 ring-forest-700' : 'border-sand-300 hover:border-forest-400',
+                              s.remaining <= 0 && 'cursor-not-allowed border-dashed bg-sand-100 opacity-70'
                             )}
                           >
                             <span className="flex items-center gap-2 font-semibold">
-                              <Clock className="h-4 w-4 text-terracotta-500" aria-hidden="true" />
+                              <Clock className="h-4 w-4 text-gold-500" aria-hidden="true" />
                               {formatTime(s.start_time)}
                               {s.end_time && <span className="font-normal text-ink-muted">– {formatTime(s.end_time)}</span>}
                             </span>
                             <span className={cn('text-xs', s.remaining <= 2 ? 'font-semibold text-terracotta-700' : 'text-ink-muted')}>
-                              {t('spotsLeft', { count: s.remaining })}
+                              {s.remaining <= 0 ? t('full') : t('spotsLeft', { count: s.remaining })}
                             </span>
                           </button>
                         ))}
@@ -448,7 +450,7 @@ export function BookingWizard({
                     >
                       <Minus className="h-5 w-5" />
                     </button>
-                    <output aria-live="polite" className="w-12 text-center font-display text-4xl text-forest-800">{participants}</output>
+                    <output aria-live="polite" className="w-14 text-center font-display text-5xl text-forest-700">{participants}</output>
                     <button
                       type="button"
                       onClick={() => setParticipants((p) => Math.min(maxParticipants, p + 1))}
@@ -469,8 +471,8 @@ export function BookingWizard({
                       <label
                         key={l}
                         className={cn(
-                          'cursor-pointer rounded-full border-2 px-5 py-2.5 text-sm font-semibold transition focus-within:ring-2 focus-within:ring-gold-400',
-                          language === l ? 'border-forest-600 bg-forest-700 text-cream' : 'border-sand-300 hover:border-forest-300'
+                          'inline-flex min-h-[2.75rem] cursor-pointer items-center rounded-md border px-5 text-sm font-semibold transition focus-within:ring-2 focus-within:ring-gold-400',
+                          language === l ? 'border-forest-700 bg-forest-700 text-white' : 'border-sand-300 hover:border-forest-400'
                         )}
                       >
                         <input type="radio" name="language" value={l} className="sr-only" checked={language === l} onChange={() => setLanguage(l as 'fr' | 'en')} />
@@ -564,7 +566,7 @@ export function BookingWizard({
             {step === 4 && slot && experience && (
               <div>
                 <h2 ref={headingRef} tabIndex={-1} className="text-display-md outline-none">{t('summary.title')}</h2>
-                <dl className="mt-6 divide-y divide-sand-200 rounded-2xl bg-sand-100 px-5">
+                <dl className="mt-6 divide-y divide-sand-200 rounded-lg border border-sand-200 px-5">
                   {([
                     [t('summary.experience'), experience.title, 0],
                     [t('summary.date'), formatDate(slot.date, locale), 1],
@@ -586,7 +588,7 @@ export function BookingWizard({
                   ))}
                   <div className="flex items-center justify-between py-4">
                     <dt className="font-semibold">{t('summary.total')}</dt>
-                    <dd className="font-display text-2xl text-forest-800">{total ?? <span className="text-base italic text-ink-soft">{t('summary.priceTbc')}</span>}</dd>
+                    <dd className="font-display text-3xl text-forest-700">{total ?? <span className="text-base italic text-ink-soft">{t('summary.priceTbc')}</span>}</dd>
                   </div>
                 </dl>
                 <p className="mt-3 text-sm text-ink-muted">{t('summary.totalNote')}</p>
@@ -598,18 +600,18 @@ export function BookingWizard({
         {/* actions */}
         <div className="mt-8 flex flex-col-reverse gap-3 border-t border-sand-200 pt-6 sm:flex-row sm:justify-between">
           {step > 0 && !(step === 1 && initial && experiences.length === 1) ? (
-            <button type="button" onClick={goBack} className="btn-outline" disabled={submitting}>
+            <button type="button" onClick={goBack} className="btn-outline btn-lg" disabled={submitting}>
               {t('back')}
             </button>
           ) : (
             <span />
           )}
           {step < 4 ? (
-            <button type="button" onClick={goNext} disabled={!canContinue} className="btn-green px-8">
+            <button type="button" onClick={goNext} disabled={!canContinue} className="btn-green btn-lg">
               {t('next')}
             </button>
           ) : (
-            <button type="button" onClick={confirm} disabled={submitting} className="btn-gold px-8 py-4 text-base">
+            <button type="button" onClick={confirm} disabled={submitting} className="btn-gold btn-lg">
               {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
               {submitting ? t('confirming') : t('confirm')}
             </button>
@@ -621,10 +623,10 @@ export function BookingWizard({
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <div className="card overflow-hidden">
           {experience && (
-            <Photo src={experience.cover?.src} alt={experience.cover?.alt ?? experience.title} illustration={experience.cover?.illustration} className="aspect-[16/9]" sizes="340px" />
+            <Photo src={experience.cover?.src} alt={experience.cover?.alt ?? experience.title} illustration={experience.cover?.illustration} className="aspect-[3/2]" sizes="340px" />
           )}
           <div className="space-y-3 p-6 text-sm">
-            <p className="font-display text-xl text-forest-800">{experience?.title ?? '—'}</p>
+            <p className="font-display text-[1.45rem] leading-tight text-forest-700">{experience?.title ?? '—'}</p>
             {experience && <p className="text-ink-soft">{experience.duration} · {experience.location}</p>}
             {slot && (
               <p className="font-medium">

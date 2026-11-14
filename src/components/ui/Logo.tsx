@@ -23,7 +23,7 @@ export function Logo({
       height={571}
       priority={priority}
       sizes="160px"
-      className={cn('h-14 w-auto md:h-16', className)}
+      className={cn('w-auto', className ?? 'h-14 md:h-16')}
     />
   );
 }

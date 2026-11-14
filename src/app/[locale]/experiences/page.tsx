@@ -23,12 +23,12 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
 
   return (
     <>
-      <section className="border-b border-sand-200 bg-sand-100 pb-16 pt-20 md:pb-20 md:pt-24">
-        <div className="container max-w-3xl text-center">
-          <Reveal>
-            <p className="eyebrow justify-center">{t('eyebrow')}</p>
-            <h1 className="mt-5 text-display-xl">{t('title')}</h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft">{t('intro')}</p>
+      <section className="border-b border-sand-200 bg-white pb-10 pt-10 md:pb-16 md:pt-16">
+        <div className="container">
+          <Reveal className="max-w-3xl">
+            <p className="eyebrow">{t('eyebrow')}</p>
+            <h1 className="mt-5 text-display-2xl">{t('title')}</h1>
+            <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
           </Reveal>
         </div>
       </section>
@@ -41,8 +41,8 @@ export default async function ExperiencesPage({ params }: { params: Promise<{ lo
               <ExperienceCard experience={e} locale={locale} />
             </Reveal>
           ))}
-          <Reveal delay={0.12} className="flex flex-col justify-center rounded-2xl border-2 border-dashed border-sand-300 p-8 text-center">
-            <p className="font-display text-2xl text-forest-800">{t('comingSoonTitle')}</p>
+          <Reveal delay={0.12} className="flex flex-col justify-center rounded-sm border border-dashed border-sand-300 p-8 text-center">
+            <p className="font-display text-2xl text-forest-700">{t('comingSoonTitle')}</p>
             <p className="mt-3 text-ink-soft">{t('comingSoonText')}</p>
           </Reveal>
         </div>

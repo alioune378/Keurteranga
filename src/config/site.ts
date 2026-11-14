@@ -54,6 +54,8 @@ export const photos = {
   storyDetail: { src: `${IMG}/04_Ingredients/produits-locaux.webp`, illustration: true, alt: { fr: 'Illustration : produits locaux', en: 'Illustration: local produce' } },
   storyBowl: { src: `${IMG}/05_Culture/convivialite-autour-du-plat.webp`, illustration: true, alt: { fr: 'Illustration : convivialité autour du plat', en: 'Illustration: gathering around the dish' } },
   storyGuests: { src: `${IMG}/05_Culture/experience-repas-collectif.webp`, illustration: true, alt: { fr: 'Illustration : repas collectif', en: 'Illustration: shared meal' } },
+  tasting: { src: `${IMG}/05_Culture/moment-degustation.webp`, illustration: true, alt: { fr: 'Illustration : moment de dégustation', en: 'Illustration: tasting together' } },
+  marinade: { src: `${IMG}/03_Atelier/marinade-poisson.webp`, illustration: true, alt: { fr: 'Illustration : préparation du poisson', en: 'Illustration: preparing the fish' } },
   aboutHeritage: { src: `${IMG}/05_Culture/repas-partage-teranga.webp`, illustration: true, alt: { fr: 'Illustration : repas partagé', en: 'Illustration: shared meal' } },
   aboutMarket: { src: `${IMG}/04_Ingredients/marche-produits-frais.webp`, illustration: true, alt: { fr: 'Illustration : marché de produits frais', en: 'Illustration: fresh produce market' } },
   contact: { src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, illustration: true, alt: { fr: 'Illustration : poissons et légumes', en: 'Illustration: fish and vegetables' } },

@@ -17,7 +17,7 @@ interface CalendarProps {
   loading: boolean;
   onSelect: (date: string) => void;
   onMonthChange: (month: string) => void;
-  labels: { prev: string; next: string; available: string; full: string; unavailable: string };
+  labels: { prev: string; next: string; available: string; full: string; unavailable: string; selected: string };
 }
 
 function addMonths(month: string, delta: number) {
@@ -78,11 +78,11 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
           onClick={() => onMonthChange(addMonths(month, -1))}
           disabled={!canPrev}
           aria-label={labels.prev}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sand-300 text-forest-800 transition hover:bg-forest-50 disabled:opacity-30"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-sand-300 text-forest-700 transition hover:bg-forest-50 disabled:opacity-30"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
-        <h3 className="flex items-center gap-2 font-display text-xl capitalize" aria-live="polite">
+        <h3 className="flex items-center gap-2 font-display text-[1.6rem] capitalize" aria-live="polite">
           {monthLabel}
           {loading && <Loader2 className="h-4 w-4 animate-spin text-ink-muted" aria-hidden="true" />}
         </h3>
@@ -96,9 +96,9 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
         </button>
       </div>
 
-      <div ref={gridRef} role="grid" aria-label={monthLabel} onKeyDown={onKeyDown} className="grid grid-cols-7 gap-1.5">
+      <div ref={gridRef} role="grid" aria-label={monthLabel} onKeyDown={onKeyDown} className="grid grid-cols-7 gap-1 sm:gap-1.5">
         {weekdays.map((w) => (
-          <div key={w} role="columnheader" className="pb-1 text-center text-xs font-semibold uppercase tracking-wide text-ink-muted">
+          <div key={w} role="columnheader" className="pb-1 text-center text-[0.65rem] font-semibold uppercase tracking-wide text-ink-muted sm:text-xs">
             {w.replace('.', '')}
           </div>
         ))}
@@ -122,16 +122,16 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
                 aria-label={`${longFmt.format(new Date(`${iso}T00:00:00Z`))} — ${stateLabel}`}
                 onClick={() => onSelect(iso)}
                 className={cn(
-                  'relative flex aspect-square w-full flex-col items-center justify-center rounded-xl text-sm font-medium transition duration-200',
-                  selected && 'bg-forest-700 text-cream shadow-soft',
-                  !selected && state === 'available' && 'bg-forest-50 text-forest-800 hover:bg-forest-100 hover:ring-1 hover:ring-forest-300',
-                  state === 'full' && 'cursor-not-allowed bg-terracotta-100/60 text-terracotta-700/60 line-through',
-                  state === 'unavailable' && 'cursor-not-allowed text-ink-muted/40'
+                  'relative flex aspect-square w-full min-w-0 flex-col items-center justify-center rounded-md text-sm font-semibold tabular-nums transition duration-200',
+                  selected && 'bg-forest-700 text-white shadow-soft',
+                  !selected && state === 'available' && 'bg-white text-forest-700 ring-1 ring-inset ring-forest-700/30 hover:bg-forest-50 hover:ring-forest-700',
+                  state === 'full' && 'cursor-not-allowed bg-terracotta-100 font-medium text-terracotta-700/70 line-through',
+                  state === 'unavailable' && 'cursor-not-allowed bg-sand-100 font-normal text-ink-muted/50'
                 )}
               >
                 {day}
                 {state === 'available' && !selected && (
-                  <span className="absolute bottom-1.5 h-1 w-1 rounded-full bg-gold-500" aria-hidden="true" />
+                  <span className="absolute bottom-1 h-1 w-1 rounded-full bg-gold-400 sm:bottom-1.5" aria-hidden="true" />
                 )}
               </button>
             </div>
@@ -140,9 +140,10 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
       </div>
 
       <ul className="mt-4 flex flex-wrap gap-4 text-xs text-ink-soft" aria-hidden="true">
-        <li className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-forest-100" /> {labels.available}</li>
-        <li className="flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-terracotta-100" /> {labels.full}</li>
-        <li className="flex items-center gap-1.5"><span className="h-3 w-3 rounded border border-sand-300" /> {labels.unavailable}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-sm bg-white ring-1 ring-inset ring-forest-700/40" /> {labels.available}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-sm bg-forest-700" /> {labels.selected}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-sm bg-terracotta-100" /> {labels.full}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-sm bg-sand-100" /> {labels.unavailable}</li>
       </ul>
     </div>
   );

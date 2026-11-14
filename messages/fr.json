@@ -16,16 +16,26 @@
     "menu": "Ouvrir le menu",
     "close": "Fermer le menu",
     "language": "Langue",
-    "skip": "Aller au contenu"
+    "skip": "Aller au contenu",
+    "bookShort": "Réserver",
+    "menuTitle": "Menu",
+    "questions": "Une question ?",
+    "mainNav": "Navigation principale"
   },
   "footer": {
-    "tagline": "La maison de la Teranga — cuisine, culture et partage au cœur de Dakar.",
-    "quickLinks": "Navigation",
+    "tagline": "Ateliers culinaires et culturels à Dakar : cuisiner le thiéboudiène, comprendre son histoire et le partager dans l'esprit de la Teranga.",
+    "quickLinks": "Explorer",
     "follow": "Suivez-nous",
     "contact": "Contact",
     "rights": "Tous droits réservés.",
     "admin": "Espace administrateur",
-    "credit": "Site réalisé par"
+    "credit": "Site réalisé par",
+    "statement": "Venez comme un invité, repartez comme un proche.",
+    "professionals": "Professionnels",
+    "partnersText": "Hôtels, agences, entreprises et institutions : ateliers privatisés et expériences sur mesure.",
+    "partnersLink": "Devenir partenaire",
+    "privacyTitle": "Confidentialité.",
+    "privacyText": "Les informations transmises via nos formulaires servent uniquement à gérer votre réservation ou à répondre à votre demande. Elles ne sont jamais utilisées à des fins commerciales ni revendues."
   },
   "whatsapp": {
     "label": "Nous écrire sur WhatsApp",
@@ -36,70 +46,120 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Dakar · Sénégal",
-      "title": "Découvrez le Sénégal à travers ses saveurs, ses traditions et sa Teranga.",
-      "subtitle": "Des ateliers culinaires et culturels authentiques, en petit groupe, pour cuisiner, comprendre et partager.",
+      "eyebrow": "Dakar · Atelier culinaire & culturel",
+      "title": "Cuisinez le Sénégal, <accent>partagez</accent> la Teranga.",
+      "subtitle": "Un atelier participatif autour du thiéboudiène, le plat national : découvrir les produits, cuisiner ensemble, puis s'asseoir autour du bol commun, comme en famille.",
       "ctaPrimary": "Réserver ma place",
-      "ctaSecondary": "Découvrir l'atelier"
+      "ctaSecondary": "Découvrir l'atelier",
+      "caption": "Atelier Thiéboudiène · Dakar"
     },
     "intro": {
-      "eyebrow": "Le concept",
-      "title": "Une maison ouverte, une table partagée",
-      "text1": "Kër Téranga vous ouvre les portes de la culture sénégalaise par ce qu'elle a de plus généreux : sa cuisine. Ici, on ne regarde pas, on participe : on découvre les ingrédients, on prépare, on goûte et on écoute les histoires qui accompagnent chaque geste.",
-      "text2": "Chaque atelier est un moment de transmission, guidé par la fondatrice, ambassadrice de la gastronomie sénégalaise, pour repartir avec un savoir-faire, des souvenirs et un peu de Sénégal dans le cœur.",
-      "cta": "Notre histoire"
-    },
-    "featured": {
-      "eyebrow": "Expérience phare",
-      "title": "Atelier Thiéboudiène",
-      "text": "Préparez ensemble le plat national du Sénégal, inscrit au patrimoine culturel immatériel de l'UNESCO, du marché jusqu'au bol partagé.",
-      "cta": "Réserver cet atelier",
-      "details": "Voir le détail"
-    },
-    "highlights": {
-      "eyebrow": "Ce qui vous attend",
-      "title": "Bien plus qu'un cours de cuisine",
-      "gastronomy": {
-        "title": "Gastronomie",
-        "text": "Les produits du marché, les épices et les gestes qui font la richesse de la cuisine sénégalaise."
-      },
-      "traditions": {
-        "title": "Traditions",
-        "text": "Histoire, symboles et rituels : comprendre ce que le repas raconte de la société sénégalaise."
-      },
-      "teranga": {
-        "title": "Teranga",
-        "text": "L'hospitalité sénégalaise, vécue de l'accueil jusqu'au bol partagé."
-      },
-      "transmission": {
-        "title": "Transmission",
-        "text": "Un savoir-faire familial, partagé avec générosité pour que vous puissiez le refaire chez vous."
+      "eyebrow": "Bienvenue chez Kër Téranga",
+      "statement": "En wolof, « Kër » signifie <accent>la maison</accent> et « Téranga », l'hospitalité. Ici, vous n'êtes pas spectateur : vous êtes reçu comme un proche et invité à mettre la main à la pâte.",
+      "facts": {
+        "handsOn": {
+          "title": "Atelier participatif",
+          "text": "On cuisine ensemble, de bout en bout"
+        },
+        "languages": {
+          "title": "Français ou anglais",
+          "text": "Un atelier animé dans votre langue"
+        },
+        "place": {
+          "title": "Au cœur de Dakar",
+          "text": "Rond-point Mermoz"
+        }
       }
     },
-    "story": {
-      "eyebrow": "En images",
-      "title": "Du marché au bol commun",
-      "text": "Les couleurs, les parfums et les sourires d'un atelier Kër Téranga."
+    "teranga": {
+      "eyebrow": "La Teranga",
+      "title": "L'hospitalité comme art de vivre",
+      "text1": "Au Sénégal, on ne mange jamais seul. Le plat arrive au centre de la table, chacun prend place autour du bol, et l'on veille toujours à ce que l'invité soit le premier servi. C'est cela, la Teranga : une générosité de tous les jours, qui fait de l'étranger un membre de la famille.",
+      "text2": "Nos ateliers prolongent cette tradition. Vous repartez avec une recette, mais surtout avec le sentiment d'avoir été reçu chez quelqu'un.",
+      "greeting": "« Soyez le bienvenu », en wolof"
+    },
+    "workshop": {
+      "eyebrow": "L'expérience signature",
+      "lead": "Le thiéboudiène — « riz au poisson » en wolof — est le plat des jours de fête comme des déjeuners de famille. Depuis 2021, l'art de le préparer est inscrit au patrimoine culturel immatériel de l'UNESCO. Avec nous, vous le cuisinez de vos propres mains.",
+      "moments": {
+        "ingredients": {
+          "title": "Les produits",
+          "text": "Poisson, riz, légumes et épices : apprendre à les reconnaître et à les choisir."
+        },
+        "gestures": {
+          "title": "Les gestes",
+          "text": "Préparer, assaisonner, cuire : les techniques et les secrets transmis par la fondatrice."
+        },
+        "history": {
+          "title": "L'histoire",
+          "text": "Une présentation projetée sur écran raconte l'origine du plat et sa place dans la vie sénégalaise."
+        },
+        "sharing": {
+          "title": "Le partage",
+          "text": "On se retrouve autour du bol commun pour déguster ensemble ce que l'on a préparé."
+        }
+      },
+      "cta": "Réserver cet atelier",
+      "details": "Voir le programme"
+    },
+    "founder": {
+      "eyebrow": "La fondatrice",
+      "title": "Une hôte, une passeuse de culture",
+      "text": "Ambassadrice de la gastronomie sénégalaise, la fondatrice de Kër Téranga accueille chaque atelier et partage les recettes, les gestes et les histoires qui accompagnent le thiéboudiène.",
+      "cta": "Notre histoire"
+    },
+    "journey": {
+      "eyebrow": "Du marché au bol",
+      "title": "Le voyage d'un plat",
+      "text": "Quatre temps, une même table : chaque atelier suit le chemin du thiéboudiène, des étals de Dakar jusqu'au moment où l'on se sert ensemble.",
+      "steps": {
+        "market": {
+          "title": "Le marché",
+          "text": "Les couleurs et les parfums des produits frais qui font le goût du plat."
+        },
+        "prep": {
+          "title": "La préparation",
+          "text": "Éplucher, découper, assaisonner : chacun trouve sa place en cuisine."
+        },
+        "cook": {
+          "title": "La cuisson",
+          "text": "Le temps long du mijotage, qui donne au riz toute sa saveur."
+        },
+        "share": {
+          "title": "Le partage",
+          "text": "Le plat posé au centre, et la conversation qui commence."
+        }
+      }
     },
     "testimonials": {
-      "eyebrow": "Ils ont partagé notre table",
-      "title": "Témoignages",
-      "placeholder": "Les avis de vos premiers participants apparaîtront ici (src/config/testimonials.ts)."
+      "eyebrow": "Ils ont partagé notre table"
     },
-    "trust": {
-      "smallGroups": "Expérience participative",
-      "smallGroupsText": "On cuisine ensemble, on ne fait pas que regarder",
-      "languages": "Français & anglais",
-      "languagesText": "Ateliers animés dans votre langue",
-      "market": "Ingrédients locaux",
-      "marketText": "Découverte des produits du thiéboudiène",
-      "ambassador": "Culture & histoire",
-      "ambassadorText": "Présentation culturelle projetée sur écran"
+    "booking": {
+      "eyebrow": "Réservation",
+      "title": "Réserver en quelques instants",
+      "steps": {
+        "date": {
+          "title": "Choisissez une date",
+          "text": "Le calendrier affiche en temps réel les sessions ouvertes et les places restantes."
+        },
+        "party": {
+          "title": "Indiquez votre groupe",
+          "text": "Le nombre de participants et la langue de l'atelier : français ou anglais."
+        },
+        "confirm": {
+          "title": "Recevez votre confirmation",
+          "text": "Une référence de réservation s'affiche dès que votre place est enregistrée."
+        }
+      }
     },
     "final": {
       "title": "Votre place vous attend autour du bol",
-      "text": "Choisissez votre date et réservez en quelques clics. Aucun paiement en ligne n'est demandé.",
-      "cta": "Réserver ma place"
+      "text": "Choisissez votre date, nous nous occupons du reste.",
+      "points": {
+        "realtime": "Disponibilités mises à jour en temps réel",
+        "payment": "Aucun paiement en ligne : règlement sur place"
+      },
+      "cta": "Voir les dates disponibles"
     }
   },
   "about": {
@@ -162,7 +222,7 @@
     "price": "Prix",
     "participants": "{min} à {max} personnes",
     "included": "Ce qui est inclus",
-    "flowEyebrow": "Déroulé",
+    "flowEyebrow": "Pas à pas",
     "flowTitle": "Le déroulé de l'atelier",
     "presentationTitle": "Présentation culturelle",
     "presentationText": "Chaque atelier s'accompagne d'une présentation projetée sur écran : histoire du plat, cartes, photographies et repères culturels pour comprendre ce que l'on cuisine.",
@@ -179,7 +239,29 @@
     },
     "noPayment": "Réservation gratuite et sans paiement en ligne — règlement sur place.",
     "notFound": "Cette expérience n'existe pas ou n'est plus disponible.",
-    "cutoff": "Réservation en ligne jusqu'à {hours, plural, =0 {l'heure du début} one {# heure avant} other {# heures avant}} l'atelier"
+    "cutoff": "Réservation en ligne jusqu'à {hours, plural, =0 {l'heure du début} one {# heure avant} other {# heures avant}} l'atelier",
+    "heroEyebrow": "Atelier culinaire · Dakar",
+    "overviewTitle": "Ce que vous allez vivre",
+    "heritage": {
+      "eyebrow": "Patrimoine",
+      "title": "Un plat inscrit à l'UNESCO",
+      "text1": "Né dans les communautés de pêcheurs de Saint-Louis, le ceebu jën — que l'on écrit souvent thiéboudiène — est devenu le plat national du Sénégal. Sa recette et ses gestes se transmettent traditionnellement de mère en fille, et on le partage autour d'un grand bol commun, souvent à la main.",
+      "text2": "En décembre 2021, l'UNESCO a inscrit « Le ceebu jën, art culinaire du Sénégal » sur la Liste représentative du patrimoine culturel immatériel de l'humanité, reconnaissant un plat qui est aussi une affirmation de l'identité sénégalaise.",
+      "link": "Lire la fiche UNESCO"
+    },
+    "practical": {
+      "eyebrow": "Infos pratiques",
+      "title": "Bon à savoir",
+      "meeting": "Lieu",
+      "map": "Voir sur la carte",
+      "languagesText": "Atelier animé en {languages} — à choisir lors de la réservation.",
+      "booking": "Réservation",
+      "payment": "Paiement",
+      "questions": "Une question ?"
+    },
+    "finalTitle": "Prêt à passer en cuisine ?",
+    "finalText": "Choisissez votre date et réservez votre place en quelques instants.",
+    "bookShort": "Réserver"
   },
   "contact": {
     "eyebrow": "Contact",
@@ -327,7 +409,27 @@
       "close": "Fermer",
       "groupSize": "Taille de groupe estimée",
       "consent": "J'accepte que Kër Téranga utilise ces informations pour répondre à ma demande.",
-      "typePlaceholder": "Sélectionnez"
+      "typePlaceholder": "Sélectionnez",
+      "eyebrow": "Professionnels",
+      "heading": "Partenariats & expériences sur mesure",
+      "audiences": {
+        "hotels": {
+          "title": "Hôtels & conciergeries",
+          "text": "Une expérience culturelle à proposer à vos clients pendant leur séjour."
+        },
+        "agencies": {
+          "title": "Agences & tour-opérateurs",
+          "text": "Un atelier à intégrer à vos circuits et séjours au Sénégal."
+        },
+        "companies": {
+          "title": "Entreprises & séminaires",
+          "text": "Ateliers privatisés pour vos équipes, clients ou délégations."
+        },
+        "institutions": {
+          "title": "Associations & institutions",
+          "text": "Partenariats culturels et événements autour du patrimoine sénégalais."
+        }
+      }
     },
     "notConfigured": {
       "title": "Réservation en ligne bientôt disponible",
@@ -335,7 +437,13 @@
       "cta": "Nous contacter"
     },
     "timeZoneNote": "Horaires à l'heure de Dakar (GMT)",
-    "realtime": "Disponibilités mises à jour en temps réel"
+    "realtime": "Disponibilités mises à jour en temps réel",
+    "assurance": {
+      "realtime": "Disponibilités en temps réel",
+      "languages": "Atelier en français ou en anglais",
+      "payment": "Aucun paiement en ligne"
+    },
+    "legendSelected": "Sélectionné"
   },
   "notFound": {
     "title": "Page introuvable",

@@ -2,8 +2,8 @@ import type { Config } from 'tailwindcss';
 
 /**
  * Kër Téranga — design tokens
- * Deep green (Senegalese flag, deepened), off-white, soft gold, and warm
- * natural tones (terracotta, sand, wood).
+ * Pure white background, deep forest green (#123D2D), muted gold (#C9A35D)
+ * for CTAs and details, terracotta (#C16B45) as a secondary accent only.
  */
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
@@ -15,52 +15,57 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // Deep forest green — brand, typography, selective sections, footer
         forest: {
-          50: '#EEF6F1',
-          100: '#D4E9DC',
-          200: '#A8D2B9',
-          300: '#6FB18C',
-          400: '#3A8E61',
-          500: '#00853F', // flag green
-          600: '#0B6B3A',
-          700: '#0A5532', // primary
-          800: '#08412A',
-          900: '#062F1F'
+          50: '#EFF4F1',
+          100: '#DCE7E0',
+          200: '#B5CBBF',
+          300: '#82A694',
+          400: '#4E7D66',
+          500: '#2B5E47',
+          600: '#1C4D39',
+          700: '#123D2D', // primary
+          800: '#0E3226',
+          900: '#0A261D'
         },
+        // Primary background is pure white (legacy "cream" name kept for compatibility)
         cream: {
-          DEFAULT: '#FBF8F2',
-          50: '#FFFEFB',
-          100: '#FBF8F2',
-          200: '#F4EEE2'
+          DEFAULT: '#FFFFFF',
+          50: '#FFFFFF',
+          100: '#FFFFFF',
+          200: '#F7F7F4'
         },
+        // Muted gold — primary CTAs and fine details, used sparingly
         gold: {
-          100: '#FBF0D6',
-          200: '#F3DDA6',
-          300: '#E9C676',
-          400: '#DDAE4E', // accent
-          500: '#C9962F',
-          600: '#A67821'
+          100: '#F8F2E4',
+          200: '#EDDFC0',
+          300: '#DDC48F',
+          400: '#C9A35D', // accent
+          500: '#B08A45',
+          600: '#8C6C33'
         },
+        // Terracotta — secondary accent only
         terracotta: {
-          100: '#F6E1D6',
-          300: '#E0A07E',
-          500: '#C0643B',
-          700: '#8E4425'
+          100: '#F8E8E0',
+          300: '#DD9E80',
+          500: '#C16B45',
+          700: '#8E4A2C'
         },
+        // Neutral hairlines & quiet surfaces (no beige backgrounds)
         sand: {
-          100: '#F6EFE2',
-          200: '#EADCC3',
-          300: '#DCC6A0'
+          100: '#F6F6F3',
+          200: '#E8E8E3',
+          300: '#D5D5CE'
         },
         wood: {
-          400: '#B08A66',
-          500: '#9A7352',
-          700: '#6B4E36'
+          400: '#8A8F8B',
+          500: '#6E746F',
+          700: '#4B514D'
         },
         ink: {
-          DEFAULT: '#1D2621',
-          soft: '#4A564F',
-          muted: '#7A857F'
+          DEFAULT: '#14211B',
+          soft: '#4A5750',
+          muted: '#6B7770'
         }
       },
       fontFamily: {
@@ -68,18 +73,19 @@ const config: Config = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif']
       },
       fontSize: {
-        'display-xl': ['clamp(2.6rem, 6vw, 4.75rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
-        'display-lg': ['clamp(2.1rem, 4.2vw, 3.4rem)', { lineHeight: '1.08', letterSpacing: '-0.015em' }],
-        'display-md': ['clamp(1.6rem, 2.8vw, 2.25rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }]
+        'display-2xl': ['clamp(2.6rem, 7.6vw, 5.25rem)', { lineHeight: '0.98', letterSpacing: '-0.02em' }],
+        'display-xl': ['clamp(2.35rem, 6.4vw, 4.6rem)', { lineHeight: '1.02', letterSpacing: '-0.015em' }],
+        'display-lg': ['clamp(2rem, 4.6vw, 3.5rem)', { lineHeight: '1.06', letterSpacing: '-0.012em' }],
+        'display-md': ['clamp(1.65rem, 3vw, 2.35rem)', { lineHeight: '1.12', letterSpacing: '-0.008em' }]
       },
       borderRadius: {
-        xl: '1rem',
-        '2xl': '1.5rem',
-        '3xl': '2rem'
+        xl: '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.25rem'
       },
       boxShadow: {
-        soft: '0 1px 2px rgba(29,38,33,.04), 0 8px 24px -8px rgba(29,38,33,.10)',
-        lift: '0 2px 4px rgba(29,38,33,.05), 0 24px 48px -16px rgba(29,38,33,.22)'
+        soft: '0 1px 2px rgba(10,38,29,.04), 0 8px 24px -8px rgba(10,38,29,.10)',
+        lift: '0 2px 4px rgba(10,38,29,.05), 0 24px 48px -16px rgba(10,38,29,.22)'
       },
       transitionTimingFunction: {
         elegant: 'cubic-bezier(.22,.61,.36,1)'

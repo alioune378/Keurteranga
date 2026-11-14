@@ -32,12 +32,12 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <section className="border-b border-sand-200 bg-sand-100 pb-16 pt-20 md:pb-20 md:pt-24">
-        <div className="container max-w-3xl text-center">
-          <Reveal>
-            <p className="eyebrow justify-center">{t('eyebrow')}</p>
-            <h1 className="mt-5 text-display-xl">{t('title')}</h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-ink-soft">{t('intro')}</p>
+      <section className="border-b border-sand-200 bg-white pb-10 pt-10 md:pb-16 md:pt-16">
+        <div className="container">
+          <Reveal className="max-w-3xl">
+            <p className="eyebrow">{t('eyebrow')}</p>
+            <h1 className="mt-5 text-display-2xl">{t('title')}</h1>
+            <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
           </Reveal>
         </div>
       </section>
@@ -45,27 +45,27 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <section className="section">
         <div className="container grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
           <div className="space-y-6">
-            <ul className="space-y-4">
-              <li className="card flex items-start gap-4 p-5">
+            <ul className="border-t border-sand-200">
+              <li className="flex items-start gap-4 border-b border-sand-200 py-5">
                 <Mail className="mt-0.5 h-5 w-5 text-terracotta-500" aria-hidden="true" />
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('email')}</p>
                   {site.email ? <a href={`mailto:${site.email}`} className="font-medium hover:text-forest-600">{site.email}</a> : <Tbc text={tbc} />}
                 </div>
               </li>
-              <li className="card flex items-start gap-4 p-5">
+              <li className="flex items-start gap-4 border-b border-sand-200 py-5">
                 <Phone className="mt-0.5 h-5 w-5 text-terracotta-500" aria-hidden="true" />
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('phone')}</p>
                   {site.phoneDisplay && site.phoneHref ? <a href={`tel:${site.phoneHref}`} className="font-medium hover:text-forest-600">{site.phoneDisplay}</a> : <Tbc text={tbc} />}
                 </div>
               </li>
-              <li className="card flex items-start gap-4 p-5">
+              <li className="flex items-start gap-4 border-b border-sand-200 py-5">
                 <WhatsappIcon className="mt-0.5 h-5 w-5 text-terracotta-500" />
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('whatsapp')}</p>
                   {site.whatsapp ? (
-                    <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn mt-2 bg-[#25D366] px-5 py-2.5 text-white hover:brightness-95">
+                    <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn mt-2 bg-[#25D366] px-5 text-white hover:brightness-95">
                       {t('whatsappCta')}
                     </a>
                   ) : (
@@ -73,7 +73,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   )}
                 </div>
               </li>
-              <li className="card flex items-start gap-4 p-5">
+              <li className="flex items-start gap-4 border-b border-sand-200 py-5">
                 <MapPin className="mt-0.5 h-5 w-5 text-terracotta-500" aria-hidden="true" />
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('address')}</p>
@@ -91,7 +91,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('follow')}</p>
                 <div className="mt-3 flex gap-3">
                   {socials.map(({ href, label, Icon }) => (
-                    <a key={label} href={href!} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest-700/20 text-forest-700 transition hover:bg-forest-700 hover:text-cream">
+                    <a key={label} href={href!} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest-700/20 text-forest-700 transition hover:bg-forest-700 hover:text-white">
                       <Icon className="h-5 w-5" />
                     </a>
                   ))}
@@ -99,7 +99,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               </div>
             )}
 
-            <div className="overflow-hidden rounded-2xl border border-sand-200 shadow-soft">
+            <div className="overflow-hidden rounded-sm border border-sand-200">
               <iframe
                 title={t('mapTitle')}
                 src={`https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}

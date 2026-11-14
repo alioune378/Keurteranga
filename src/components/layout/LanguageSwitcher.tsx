@@ -7,7 +7,18 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-export function LanguageSwitcher({ light = false, className }: { light?: boolean; className?: string }) {
+const NAMES: Record<Locale, string> = { fr: 'Français', en: 'English' };
+
+export function LanguageSwitcher({
+  light = false,
+  full = false,
+  className
+}: {
+  light?: boolean;
+  /** Show full language names (mobile menu) */
+  full?: boolean;
+  className?: string;
+}) {
   const t = useTranslations('nav');
   const locale = useLocale() as Locale;
   const router = useRouter();
@@ -31,8 +42,9 @@ export function LanguageSwitcher({ light = false, className }: { light?: boolean
       role="group"
       aria-label={t('language')}
       className={cn(
-        'inline-flex rounded-full border p-0.5 text-xs font-semibold',
-        light ? 'border-cream/30' : 'border-forest-700/20',
+        'inline-flex rounded-md border p-0.5 font-semibold',
+        full ? 'text-sm' : 'text-[0.7rem] tracking-[0.12em]',
+        light ? 'border-white/30' : 'border-forest-700/20',
         pending && 'opacity-60',
         className
       )}
@@ -43,19 +55,21 @@ export function LanguageSwitcher({ light = false, className }: { light?: boolean
           type="button"
           onClick={() => switchTo(l)}
           aria-pressed={l === locale}
+          aria-label={NAMES[l]}
           lang={l}
           className={cn(
-            'rounded-full px-2.5 py-1 uppercase transition',
+            'rounded-[5px] transition',
+            full ? 'min-h-[2.5rem] px-4' : 'min-h-[2rem] px-2.5 uppercase',
             l === locale
               ? light
-                ? 'bg-cream text-forest-900'
-                : 'bg-forest-700 text-cream'
+                ? 'bg-white text-forest-900'
+                : 'bg-forest-700 text-white'
               : light
-                ? 'text-cream/80 hover:text-cream'
-                : 'text-forest-800/70 hover:text-forest-800'
+                ? 'text-white/80 hover:text-white'
+                : 'text-forest-700/70 hover:text-forest-700'
           )}
         >
-          {l}
+          {full ? NAMES[l] : l}
         </button>
       ))}
     </div>

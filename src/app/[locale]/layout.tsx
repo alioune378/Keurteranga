@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Manrope } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -13,14 +13,16 @@ import { organizationJsonLd, pageMetadata } from '@/lib/seo';
 import { siteUrl } from '@/lib/utils';
 import '../globals.css';
 
-const display = Fraunces({
+// Editorial serif for headlines, clean geometric sans for reading
+const display = Cormorant_Garamond({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
-  display: 'swap',
-  axes: ['opsz', 'SOFT']
+  display: 'swap'
 });
 
-const sans = Manrope({
+const sans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap'
@@ -31,9 +33,10 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0A5532',
+  themeColor: '#FFFFFF',
   width: 'device-width',
-  initialScale: 1
+  initialScale: 1,
+  viewportFit: 'cover'
 };
 
 export async function generateMetadata({
