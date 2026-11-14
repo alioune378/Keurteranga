@@ -14,13 +14,13 @@ export const site = {
   phoneHref: '+221771462718' as string | null,
   whatsapp: '221771462718' as string | null, // digits only
   address: {
-    street: null as string | null, // [À compléter]
+    street: 'Rond-point Mermoz' as string | null,
     city: 'Dakar',
     country: 'Sénégal',
     countryCode: 'SN'
   },
   /** Google Maps embed query: an exact address once known */
-  mapQuery: 'Dakar, Sénégal',
+  mapQuery: 'Rond-point Mermoz, Dakar, Sénégal',
   social: {
     instagram: 'https://www.instagram.com/ker.teranga.sn' as string | null,
     facebook: null as string | null, // [À compléter] full URL

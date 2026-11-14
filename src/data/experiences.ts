@@ -22,8 +22,8 @@ export const fallbackExperiences: Experience[] = [
       en: 'Thiéboudiène — "rice and fish" in Wolof — is far more than a dish: it is a moment of sharing and a know-how handed down through generations, inscribed on UNESCO\'s Intangible Cultural Heritage list in 2021. In this workshop you discover local ingredients, cook the dish together, learn the founder\'s techniques and secrets, then share the meal in the spirit of Teranga.'
     },
     location: {
-      fr: 'Dakar — [À compléter : adresse ou quartier]',
-      en: 'Dakar — [To be completed: address or neighbourhood]'
+      fr: 'Rond-point Mermoz, Dakar',
+      en: 'Rond-point Mermoz, Dakar'
     },
     duration: { fr: '2h30 – 4h', en: '2.5 – 4 hours' },
     included: {

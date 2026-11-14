@@ -18,7 +18,7 @@ insert into public.experiences (
     "en": "Cook Senegal''s national dish together and discover the history, the techniques and the art of hospitality behind it."}',
   '{"fr": "Le thiéboudiène — « riz au poisson » en wolof — est bien plus qu''un plat : c''est un moment de partage et un savoir transmis de génération en génération, inscrit en 2021 au patrimoine culturel immatériel de l''UNESCO. Pendant cet atelier, vous découvrez les ingrédients locaux, préparez le plat ensemble, apprenez les techniques et les secrets de la fondatrice, puis partagez le repas dans l''esprit de la Teranga.",
     "en": "Thiéboudiène — \"rice and fish\" in Wolof — is far more than a dish: it is a moment of sharing and a know-how handed down through generations, inscribed on UNESCO''s Intangible Cultural Heritage list in 2021. In this workshop you discover local ingredients, cook the dish together, learn the founder''s techniques and secrets, then share the meal in the spirit of Teranga."}',
-  '{"fr": "Dakar — [À compléter : adresse ou quartier]", "en": "Dakar — [To be completed: address or neighbourhood]"}',
+  '{"fr": "Rond-point Mermoz, Dakar", "en": "Rond-point Mermoz, Dakar"}',
   '{"fr": "2h30 – 4h", "en": "2.5 – 4 hours"}',
   '{"fr": ["Présentation culturelle avec projection sur écran", "Préparation collective du plat", "Dégustation et moment de partage", "[À compléter : ingrédients, matériel, boissons…]"],
     "en": ["Cultural presentation with screen projection", "Cooking the dish together", "Tasting and sharing", "[To be completed: ingredients, equipment, drinks…]"]}',
