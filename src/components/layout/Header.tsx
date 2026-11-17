@@ -144,7 +144,7 @@ export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: stri
         </div>
       </header>
 
-      {mounted && createPortal(<MobileMenu open={open} onClose={close} isActive={isActive} />, document.body)}
+      {mounted && createPortal(<MobileMenu open={open} onClose={close} isActive={isActive} whatsapp={whatsapp} />, document.body)}
     </>
   );
 }
@@ -152,11 +152,13 @@ export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: stri
 function MobileMenu({
   open,
   onClose,
-  isActive
+  isActive,
+  whatsapp
 }: {
   open: boolean;
   onClose: () => void;
   isActive: (href: string) => boolean;
+  whatsapp: string | null;
 }) {
   const t = useTranslations('nav');
   const reduce = useReducedMotion();
