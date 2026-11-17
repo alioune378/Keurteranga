@@ -56,12 +56,12 @@ select e.id, v.src, v.alt::jsonb, v.is_cover, false, v.ord
   from public.experiences e,
   (values
     ('/images/ker-teranga/02_Experiences/fiche-atelier-thieboudiene.webp', '{"fr":"Un poste de cuisine prêt pour l''atelier thiéboudiène","en":"A cooking station ready for the thiéboudiène workshop"}', true, 0),
-    ('/images/ker-teranga/03_Atelier/decoupe-ingredients.webp', '{"fr":"Une participante émince un oignon sur la terrasse","en":"A participant chops an onion on the terrace"}', false, 1),
-    ('/images/ker-teranga/03_Atelier/marinade-poisson.webp', '{"fr":"Une participante ajoute un ingrédient dans le mortier","en":"A participant adds an ingredient to the mortar"}', false, 2),
+    ('/images/ker-teranga/03_Atelier/decoupe-ingredients.webp', '{"fr":"Une participante souriante prépare les légumes","en":"A smiling participant prepares the vegetables"}', false, 1),
+    ('/images/ker-teranga/03_Atelier/marinade-poisson.webp', '{"fr":"Échange entre l''animatrice et une participante à son poste","en":"The host chatting with a participant at her station"}', false, 2),
     ('/images/ker-teranga/04_Ingredients/poissons-et-legumes.webp', '{"fr":"Poisson frais, tomates et légumes du thiéboudiène","en":"Fresh fish, tomatoes and vegetables for thiéboudiène"}', false, 3),
     ('/images/ker-teranga/03_Atelier/cuisson-poisson.webp', '{"fr":"Le plat mijote sur le feu pendant l''atelier","en":"The dish simmering on the stove during the workshop"}', false, 4),
-    ('/images/ker-teranga/05_Culture/moment-degustation.webp', '{"fr":"L''animatrice échange avec une participante","en":"The host talking with a participant"}', false, 5),
-    ('/images/ker-teranga/02_Experiences/detail-plat-thieboudiene.webp', '{"fr":"Le poste de travail vu de haut : poisson, légumes et ustensiles","en":"The workstation from above: fish, vegetables and utensils"}', false, 6)
+    ('/images/ker-teranga/05_Culture/moment-degustation.webp', '{"fr":"Les participantes se rassemblent autour de la cuisson","en":"Participants gather around the stove"}', false, 5),
+    ('/images/ker-teranga/02_Experiences/detail-plat-thieboudiene.webp', '{"fr":"Une participante épluche une carotte à son poste","en":"A participant peels a carrot at her station"}', false, 6)
   ) as v(src, alt, is_cover, ord)
  where e.slug = 'atelier-thieboudiene'
    and not exists (select 1 from public.experience_images i where i.experience_id = e.id);
