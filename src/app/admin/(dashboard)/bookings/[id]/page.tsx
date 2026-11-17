@@ -5,7 +5,7 @@ import { Flash, PageTitle, StatusBadge } from '@/components/admin/Flash';
 import { requireAdmin } from '@/lib/admin';
 import type { Localized } from '@/lib/types';
 import { formatDate, formatTime, pick } from '@/lib/utils';
-import { cancelBooking, updateBooking } from '../../../actions';
+import { cancelBooking, confirmBooking, updateBooking } from '../../../actions';
 
 export default async function BookingDetail({
   params,
@@ -45,9 +45,35 @@ export default async function BookingDetail({
     <>
       <Link href="/admin/bookings" className="text-sm font-medium text-forest-700 hover:underline">← Toutes les réservations</Link>
       <PageTitle title={`Réservation ${booking.reference}`}>
-        <StatusBadge status={booking.status} />
+        <StatusBadge status={booking.status === 'pending' ? 'request' : booking.status} />
       </PageTitle>
       <Flash ok={sp.ok} err={sp.err} />
+
+      {booking.status === 'pending' && (
+        <section className="card mb-6 border-2 border-gold-300 bg-gold-100/40 p-5">
+          <h2 className="text-xl">Demande à confirmer</h2>
+          <p className="mt-1 text-sm text-ink-soft">
+            {booking.first_name} {booking.last_name} · {booking.participants} pers. · <span className="capitalize">{formatDate(booking.sessions.date, 'fr')}</span> à {formatTime(booking.sessions.start_time)}.
+            Les places sont mises de côté. En confirmant, le client reçoit son e-mail de confirmation et le créneau apparaît « Réservé » sur le site.
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <form action={confirmBooking}>
+              <input type="hidden" name="id" value={id} />
+              <input type="hidden" name="redirectTo" value={here} />
+              <SubmitButton className="btn-lg w-full" pendingLabel="Confirmation…">✓ Confirmer la réservation</SubmitButton>
+            </form>
+            <form action={cancelBooking}>
+              <input type="hidden" name="id" value={id} />
+              <input type="hidden" name="redirectTo" value={here} />
+              <input type="hidden" name="notify" value="1" />
+              <input type="hidden" name="wasPending" value="1" />
+              <SubmitButton className="btn-lg w-full bg-terracotta-500 hover:bg-terracotta-700" pendingLabel="Envoi…" confirm="Refuser cette demande ? Les places seront libérées et le client prévenu par e-mail.">
+                Refuser la demande
+              </SubmitButton>
+            </form>
+          </div>
+        </section>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <form action={updateBooking} className="card space-y-5 p-5 md:p-6">
@@ -102,7 +128,8 @@ export default async function BookingDetail({
             <dl className="mt-3 space-y-2">
               <div><dt className="text-ink-muted">Expérience</dt><dd className="font-medium">{pick(booking.experiences.title, 'fr')}</dd></div>
               <div><dt className="text-ink-muted">Séance</dt><dd className="font-medium capitalize">{formatDate(booking.sessions.date, 'fr')} · {formatTime(booking.sessions.start_time)}</dd></div>
-              <div><dt className="text-ink-muted">Réservée le</dt><dd>{new Date(booking.created_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>
+              {booking.confirmed_at && <div><dt className="text-ink-muted">Confirmée le</dt><dd>{new Date(booking.confirmed_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>}
+              <div><dt className="text-ink-muted">Demandée le</dt><dd>{new Date(booking.created_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>
               <div><dt className="text-ink-muted">Langue du site</dt><dd className="uppercase">{booking.locale}</dd></div>
               {booking.cancelled_at && <div><dt className="text-ink-muted">Annulée le</dt><dd>{new Date(booking.cancelled_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>}
             </dl>
@@ -118,7 +145,7 @@ export default async function BookingDetail({
               {(emails ?? []).map((e) => (
                 <li key={e.kind} className="flex flex-wrap items-center gap-2">
                   <StatusBadge status={e.status} />
-                  <span>{{ booking_client: 'Confirmation client', booking_admin: 'Notification admin', booking_cancelled: 'Annulation client' }[e.kind as string] ?? e.kind}</span>
+                  <span>{{ booking_received: 'Accusé de réception client', booking_client: 'Confirmation client', booking_admin: 'Notification admin', booking_cancelled: 'Annulation / refus client' }[e.kind as string] ?? e.kind}</span>
                   {e.last_error && e.status !== 'sent' && <span className="w-full text-xs text-terracotta-700">{e.last_error}</span>}
                 </li>
               ))}

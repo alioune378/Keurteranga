@@ -25,6 +25,7 @@ export interface AdminBookingRow {
   locale: string;
   created_at: string;
   cancelled_at: string | null;
+  confirmed_at?: string | null;
   session_id: string;
   sessions: { date: string; start_time: string; end_time: string | null } | null;
   experiences: { title: { fr?: string; en?: string } } | null;
@@ -45,7 +46,7 @@ export async function queryBookings(supabase: SupabaseClient, f: BookingFilters,
   // only letters, digits and a few safe characters — prevents filter injection
   const q = (f.q ?? '').replace(/[^\p{L}\p{N}@.\- ]/gu, '').trim().slice(0, 80);
   if (q) query = query.or(`reference.ilike.%${q}%,email.ilike.%${q}%,last_name.ilike.%${q}%,first_name.ilike.%${q}%,phone.ilike.%${q}%`);
-  if (f.status === 'confirmed' || f.status === 'cancelled') query = query.eq('status', f.status);
+  if (f.status === 'pending' || f.status === 'confirmed' || f.status === 'cancelled') query = query.eq('status', f.status);
   if (f.session && /^[0-9a-f-]{36}$/i.test(f.session)) query = query.eq('session_id', f.session);
   if (f.from && /^\d{4}-\d{2}-\d{2}$/.test(f.from)) query = query.gte('sessions.date', f.from);
   if (f.to && /^\d{4}-\d{2}-\d{2}$/.test(f.to)) query = query.lte('sessions.date', f.to);

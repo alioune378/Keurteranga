@@ -125,8 +125,8 @@
           "text": "Number of guests and the workshop language: French or English."
         },
         "confirm": {
-          "title": "You're booked",
-          "text": "Your reference appears as soon as your spot is secured."
+          "title": "Kër Téranga confirms",
+          "text": "Your places are held with a reference, then confirmed by email."
         }
       },
       "cta": "Pick my date",
@@ -283,7 +283,7 @@
   "booking": {
     "eyebrow": "The Senegalese Table",
     "title": "Book your seat at the table",
-    "intro": "Pick a date, tell us who's coming, and you're booked. No online payment.",
+    "intro": "Pick a date and tell us who's coming: your places are held and Kër Téranga confirms your booking shortly. No online payment.",
     "steps": {
       "experience": "Your experience",
       "date": "Your date",
@@ -298,9 +298,9 @@
     "loading": "Loading availability…",
     "noSlots": "No availability this month. Try next month or contact us.",
     "legendAvailable": "Available",
-    "legendFull": "Full",
+    "legendFull": "Awaiting confirmation",
     "legendUnavailable": "Unavailable",
-    "full": "Full",
+    "full": "On hold",
     "spotsLeft": "{count, plural, =0 {Full} =1 {# spot left} other {# spots left}}",
     "selectDateFirst": "Select a date in the calendar first.",
     "prevMonth": "Previous month",
@@ -340,13 +340,13 @@
     "consent": "I agree that Kër Téranga may use this information to manage my booking and contact me about it (no marketing use).",
     "next": "Continue",
     "back": "Back",
-    "confirm": "Confirm my booking",
-    "confirming": "Confirming…",
+    "confirm": "Send my booking request",
+    "confirming": "Sending…",
     "success": {
-      "title": "À table! Your spot is booked.",
-      "text": "Dalal ak jàmm — welcome! A confirmation email is on its way to {email}.",
+      "title": "Thank you! Your request has been received.",
+      "text": "Dalal ak jàmm — welcome! Your places are being held. Kër Téranga will confirm your booking shortly — a confirmation email will be sent to {email}.",
       "reference": "Reference",
-      "next": "Keep your reference. The exact address and practical information will be sent to you before the workshop.",
+      "next": "Keep your reference. Once your booking is confirmed, the exact address and practical information will be sent to you.",
       "another": "Make another booking",
       "home": "Back to home",
       "emailDelay": "No email within a few minutes? Please check your spam folder."
@@ -428,7 +428,9 @@
       "languages": "Hosted in French or English",
       "payment": "No online payment"
     },
-    "legendSelected": "Selected"
+    "legendSelected": "Selected",
+    "legendBooked": "Booked",
+    "booked": "Booked"
   },
   "notFound": {
     "title": "Page not found",

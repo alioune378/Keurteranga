@@ -12,11 +12,17 @@ const C = {
   soft: '#4A564F'
 };
 
+/** Contact details shown in emails — overridden by the owner's dashboard settings. */
+let contact = { email: site.email, whatsapp: site.whatsapp, phoneDisplay: site.phoneDisplay };
+export function setEmailContact(c: { email: string | null; whatsapp: string | null; phoneDisplay: string | null }) {
+  contact = c;
+}
+
 function contactLine(locale: Locale) {
   const parts: string[] = [];
-  if (site.email) parts.push(`<a href="mailto:${escapeHtml(site.email)}" style="color:${C.gold};text-decoration:none;">${escapeHtml(site.email)}</a>`);
-  if (site.whatsapp)
-    parts.push(`<a href="https://wa.me/${escapeHtml(site.whatsapp)}" style="color:${C.gold};text-decoration:none;">WhatsApp${site.phoneDisplay ? ' ' + escapeHtml(site.phoneDisplay) : ''}</a>`);
+  if (contact.email) parts.push(`<a href="mailto:${escapeHtml(contact.email)}" style="color:${C.gold};text-decoration:none;">${escapeHtml(contact.email)}</a>`);
+  if (contact.whatsapp)
+    parts.push(`<a href="https://wa.me/${escapeHtml(contact.whatsapp)}" style="color:${C.gold};text-decoration:none;">WhatsApp${contact.phoneDisplay ? ' ' + escapeHtml(contact.phoneDisplay) : ''}</a>`);
   parts.push(`<a href="${siteUrl(`/${locale}`)}" style="color:${C.gold};text-decoration:none;">${escapeHtml(siteUrl().replace(/^https?:\/\//, ''))}</a>`);
   return parts.join(' · ');
 }
@@ -60,6 +66,9 @@ function button(href: string, label: string, dark = false) {
 }
 
 export interface BookingEmailData {
+  bookingId: string;
+  /** true once the owner has confirmed the request */
+  confirmed: boolean;
   reference: string;
   experienceTitle: string;
   date: string;
@@ -134,13 +143,40 @@ ${bookingRows(d, d.locale)}
     ? 'Pour modifier ou annuler, répondez simplement à cet e-mail en indiquant votre référence.'
     : 'To change or cancel, simply reply to this email quoting your reference.'}
 </p>
-${site.whatsapp ? button(`https://wa.me/${site.whatsapp}`, fr ? 'Nous écrire sur WhatsApp' : 'Message us on WhatsApp') : ''}
+${contact.whatsapp ? button(`https://wa.me/${contact.whatsapp}`, fr ? 'Nous écrire sur WhatsApp' : 'Message us on WhatsApp') : ''}
+<p style="font-size:15px;margin:28px 0 0;">${fr ? 'À très bientôt,' : 'See you soon,'}<br><strong>Kër Téranga</strong></p>`;
+
+  return { subject, html: layout(d.locale, subject, body, `${d.reference} · ${formatDate(d.date, d.locale)}`) };
+}
+
+/** Sent immediately: the request is saved and awaits the owner's confirmation. */
+export function bookingReceivedEmail(d: BookingEmailData) {
+  const fr = d.locale === 'fr';
+  const subject = fr
+    ? `Demande de réservation reçue — ${d.experienceTitle} · ${d.reference}`
+    : `Booking request received — ${d.experienceTitle} · ${d.reference}`;
+
+  const body = `
+<h1 style="font-family:Georgia,serif;font-weight:normal;font-size:26px;margin:0 0 6px;color:${C.green};">${fr ? 'Merci' : 'Thank you'}, ${escapeHtml(d.firstName)}${fr ? ' !' : '!'}</h1>
+<p style="font-size:16px;line-height:1.6;margin:18px 0 0;">
+  ${fr
+    ? 'Nous avons bien reçu votre demande de réservation et vos places sont mises de côté. Kër Téranga la confirme très rapidement : vous recevrez un second e-mail de confirmation.'
+    : 'We have received your booking request and your places are being held. Kër Téranga will confirm it shortly — you will receive a second confirmation email.'}
+</p>
+${bookingRows(d, d.locale)}
+<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">
+  ${fr
+    ? 'Une question ? Répondez simplement à cet e-mail en indiquant votre référence.'
+    : 'Any question? Simply reply to this email quoting your reference.'}
+</p>
+${contact.whatsapp ? button(`https://wa.me/${contact.whatsapp}`, fr ? 'Nous écrire sur WhatsApp' : 'Message us on WhatsApp') : ''}
 <p style="font-size:15px;margin:28px 0 0;">${fr ? 'À très bientôt,' : 'See you soon,'}<br><strong>Kër Téranga</strong></p>`;
 
   return { subject, html: layout(d.locale, subject, body, `${d.reference} · ${formatDate(d.date, d.locale)}`) };
 }
 
 export function bookingCancelledEmail(d: BookingEmailData) {
+  if (!d.confirmed) return bookingDeclinedEmail(d);
   const fr = d.locale === 'fr';
   const subject = fr
     ? `Réservation annulée — ${d.experienceTitle} · ${d.reference}`
@@ -167,10 +203,41 @@ ${button(siteUrl(fr ? '/fr/reservation' : '/en/booking'), fr ? 'Choisir une nouv
   return { subject, html: layout(d.locale, subject, body) };
 }
 
-export function bookingAdminEmail(d: BookingEmailData) {
-  const subject = `Nouvelle réservation ${d.reference} — ${formatDate(d.date, 'fr', { weekday: 'short', year: undefined })} ${d.startTime} — ${d.participants} pers.`;
+/** A request the owner could not accept (it was never confirmed). */
+function bookingDeclinedEmail(d: BookingEmailData) {
+  const fr = d.locale === 'fr';
+  const subject = fr
+    ? `Votre demande de réservation — ${d.experienceTitle} · ${d.reference}`
+    : `Your booking request — ${d.experienceTitle} · ${d.reference}`;
   const body = `
-<h1 style="font-family:Georgia,serif;font-weight:normal;font-size:24px;margin:0 0 12px;color:${C.green};">Nouvelle réservation</h1>
+<h1 style="font-family:Georgia,serif;font-weight:normal;font-size:24px;margin:0 0 12px;color:${C.green};">
+  ${fr ? `Bonjour ${escapeHtml(d.firstName)},` : `Hello ${escapeHtml(d.firstName)},`}
+</h1>
+<p style="font-size:16px;line-height:1.6;margin:0;">
+  ${fr
+    ? "Merci pour votre demande. Nous ne pouvons malheureusement pas l'accepter pour ce créneau :"
+    : 'Thank you for your request. Unfortunately we are unable to accept it for this time slot:'}
+</p>
+${rows([
+  [T[d.locale].reference, d.reference],
+  [T[d.locale].experience, d.experienceTitle],
+  [T[d.locale].date, formatDate(d.date, d.locale)],
+  [T[d.locale].time, d.startTime]
+])}
+<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">
+  ${fr
+    ? "Choisissez une autre date ou répondez à cet e-mail : nous serons ravis de trouver une solution avec vous."
+    : 'Choose another date or reply to this email — we will be happy to find another option with you.'}
+</p>
+${button(siteUrl(fr ? '/fr/reservation' : '/en/booking'), fr ? 'Choisir une autre date' : 'Choose another date')}`;
+  return { subject, html: layout(d.locale, subject, body) };
+}
+
+export function bookingAdminEmail(d: BookingEmailData) {
+  const subject = `Demande à confirmer ${d.reference} — ${formatDate(d.date, 'fr', { weekday: 'short', year: undefined })} ${d.startTime} — ${d.participants} pers.`;
+  const body = `
+<h1 style="font-family:Georgia,serif;font-weight:normal;font-size:24px;margin:0 0 12px;color:${C.green};">Nouvelle demande de réservation</h1>
+<p style="font-size:15px;line-height:1.6;margin:0;">Les places sont mises de côté. Confirmez (ou refusez) la demande dans votre tableau de bord : le client reçoit alors un e-mail et le créneau apparaît comme réservé sur le site.</p>
 ${rows([
   ['Référence', d.reference],
   ['Expérience', d.experienceTitle],
@@ -185,7 +252,7 @@ ${rows([
   ['Demandes particulières', d.specialRequests || '—'],
   ['Langue du site', d.locale.toUpperCase()]
 ])}
-${button(siteUrl('/admin/bookings'), 'Ouvrir le tableau de bord', true)}`;
+${button(siteUrl(`/admin/bookings/${d.bookingId}`), 'Confirmer ou refuser', true)}`;
   return { subject, html: layout('fr', subject, body) };
 }
 

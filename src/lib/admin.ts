@@ -45,6 +45,7 @@ export const ADMIN_ERRORS: Record<string, string> = {
   INVALID_PARTICIPANTS: 'Nombre de participants invalide.',
   SESSION_NOT_FOUND: 'Séance introuvable.',
   BOOKING_NOT_FOUND: 'Réservation introuvable.',
+  BOOKING_NOT_PENDING: 'Cette demande a déjà été traitée (confirmée ou annulée).',
   FORBIDDEN: 'Action non autorisée.'
 };
 

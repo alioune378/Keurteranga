@@ -25,6 +25,7 @@ export PGOPTIONS="-c client_min_messages=warning"
 echo "▶ Applying local Supabase stub, migration and sample seed"
 "${PSQL[@]}" -f supabase/tests/00_local_supabase_stub.sql
 "${PSQL[@]}" -f supabase/migrations/001_schema.sql
+"${PSQL[@]}" -f supabase/migrations/003_studio.sql
 "${PSQL[@]}" -c "grant all on all tables in schema public to service_role; grant all on all sequences in schema public to service_role;"
 "${PSQL[@]}" -f supabase/seed.sql
 "${PSQL[@]}" -tA -c "select 'seed: ' || count(*) || ' sample sessions' from public.sessions;"
@@ -86,8 +87,12 @@ echo "▶ TESTS A, 2, 3, 4, cutoff, 7, outbox"
 PGOPTIONS="-c client_min_messages=notice" "${PSQL[@]}" -f supabase/tests/acceptance.sql 2>&1 | sed 's/^psql:[^:]*:[0-9]*: //'
 
 echo
+echo "▶ STUDIO — booking requests (pending → confirmed), public 'booked' state, content modules"
+PGOPTIONS="-c client_min_messages=notice" "${PSQL[@]}" -f supabase/tests/studio.sql 2>&1 | sed 's/^psql:[^:]*:[0-9]*: //'
+
+echo
 echo "▶ TEST 8 — persistence: a NEW connection (like a page refresh) reads the data back"
-"${PSQL[@]}" -tA -c "select 'bookings stored: ' || count(*) || ', confirmed: ' || count(*) filter (where status='confirmed') || ', cancelled: ' || count(*) filter (where status='cancelled') from public.bookings"
+"${PSQL[@]}" -tA -c "select 'bookings stored: ' || count(*) || ', pending: ' || count(*) filter (where status='pending') || ', confirmed: ' || count(*) filter (where status='confirmed') || ', cancelled: ' || count(*) filter (where status='cancelled') from public.bookings"
 echo "PASS 8: data read back from PostgreSQL in a separate session"
 echo
 echo "✅ All database acceptance tests passed."

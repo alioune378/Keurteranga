@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
-import { photos, site, type SitePhoto } from '@/config/site';
+import { photos, type SitePhoto } from '@/config/site';
+import { getSiteSettings } from '@/lib/studio';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
@@ -63,6 +64,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale as Locale;
   setRequestLocale(locale);
+  const { contact: site } = await getSiteSettings();
   const e = await getExperience(slug);
   if (!e) notFound();
 

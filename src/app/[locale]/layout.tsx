@@ -7,9 +7,11 @@ import type { ReactNode } from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { WhatsAppButton } from '@/components/layout/WhatsAppButton';
+import { AnnouncementBanner } from '@/components/studio/StudioCards';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { isLocale, routing } from '@/i18n/routing';
 import { organizationJsonLd, pageMetadata } from '@/lib/seo';
+import { getAnnouncements, getSiteSettings } from '@/lib/studio';
 import { siteUrl } from '@/lib/utils';
 import '../globals.css';
 
@@ -25,6 +27,10 @@ const sans = Figtree({
   variable: '--font-sans',
   display: 'swap'
 });
+
+// owner-managed content (banner, contact details) refreshes at least every 5 minutes,
+// and immediately whenever the owner saves something in the dashboard
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -64,16 +70,19 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
   setRequestLocale(locale);
 
-  const messages = await getMessages();
+  const [messages, { contact }, announcements] = await Promise.all([getMessages(), getSiteSettings(), getAnnouncements()]);
+  // owner-managed top banner (Studio → Communications, placement "banner")
+  const banner = announcements.find((a) => a.placement === 'banner');
 
   return (
     <html lang={locale} className={`${display.variable} ${sans.variable}`}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
+          {banner && <AnnouncementBanner a={banner} locale={locale} />}
+          <Header whatsapp={contact.whatsapp} />
           <main id="main">{children}</main>
-          <Footer />
-          <WhatsAppButton />
+          <Footer contact={contact} />
+          <WhatsAppButton whatsapp={contact.whatsapp} />
         </NextIntlClientProvider>
         <JsonLd data={organizationJsonLd(locale)} />
       </body>

@@ -2,7 +2,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Locale } from '@/i18n/routing';
-import { site } from '@/config/site';
+import { getSiteSettings } from '@/lib/studio';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { Reveal } from '@/components/ui/Reveal';
 import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
+  const { contact: site } = await getSiteSettings();
   const t = await getTranslations('contact');
   const tp = await getTranslations('placeholder');
   const tbc = tp('tbc');
@@ -78,10 +79,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('address')}</p>
                   <p className="font-medium">
-                    {site.address.street ? `${site.address.street}, ` : ''}
-                    {site.address.city}, {site.address.country}
+                    {site.street ? `${site.street}, ` : ''}
+                    {site.city}, {site.country}
                   </p>
-                  {!site.address.street && <Tbc text={tbc} className="mt-1 inline-block text-sm" />}
+                  {!site.street && <Tbc text={tbc} className="mt-1 inline-block text-sm" />}
                 </div>
               </li>
             </ul>

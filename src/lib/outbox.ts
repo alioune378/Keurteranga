@@ -5,10 +5,13 @@ import {
   bookingAdminEmail,
   bookingCancelledEmail,
   bookingClientEmail,
+  bookingReceivedEmail,
+  setEmailContact,
   contactAdminEmail,
   partnerAdminEmail,
   type BookingEmailData
 } from './email-templates';
+import { resolveContact, type SiteSettingsRow } from './site-settings';
 import { getServiceClient } from './supabase/service';
 import type { Localized } from './types';
 import { formatTime, pick } from './utils';
@@ -17,7 +20,7 @@ const MAX_ATTEMPTS = 8;
 
 interface OutboxRow {
   id: string;
-  kind: 'booking_client' | 'booking_admin' | 'booking_cancelled' | 'partner_admin' | 'contact_admin';
+  kind: 'booking_received' | 'booking_client' | 'booking_admin' | 'booking_cancelled' | 'partner_admin' | 'contact_admin';
   ref_id: string;
   attempts: number;
 }
@@ -27,8 +30,8 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
   const { data } = await supabase
     .from('bookings')
     .select(
-      `reference, participants, language, first_name, last_name, email, phone, country, special_requests, locale,
-       sessions ( date, start_time, end_time ),
+      `id, status, confirmed_at, reference, participants, language, first_name, last_name, email, phone, country, special_requests, locale,
+       sessions ( date, start_time, end_time, price_xof ),
        experiences ( title, location, price_xof )`
     )
     .eq('id', id)
@@ -36,13 +39,16 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
   if (!data) return null;
 
   const row = data as unknown as {
+    id: string; status: string; confirmed_at: string | null;
     reference: string; participants: number; language: 'fr' | 'en'; first_name: string; last_name: string;
     email: string; phone: string; country: string | null; special_requests: string | null; locale: Locale;
-    sessions: { date: string; start_time: string; end_time: string | null };
+    sessions: { date: string; start_time: string; end_time: string | null; price_xof: number | null };
     experiences: { title: Localized; location: Localized; price_xof: number | null };
   };
   const locale: Locale = row.locale === 'en' ? 'en' : 'fr';
   return {
+    bookingId: row.id,
+    confirmed: row.status === 'confirmed' || !!row.confirmed_at,
     reference: row.reference,
     experienceTitle: pick(row.experiences.title, locale) ?? '',
     date: row.sessions.date,
@@ -57,7 +63,8 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
     country: row.country ?? '',
     specialRequests: row.special_requests ?? '',
     location: pick(row.experiences.location, locale) ?? '',
-    priceXof: row.experiences.price_xof,
+    // a special price set on the session wins over the experience price
+    priceXof: row.sessions.price_xof ?? row.experiences.price_xof,
     locale
   };
 }
@@ -65,10 +72,13 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
 async function deliver(row: OutboxRow) {
   const supabase = getServiceClient()!;
 
-  if (row.kind === 'booking_client' || row.kind === 'booking_admin' || row.kind === 'booking_cancelled') {
+  if (row.kind === 'booking_received' || row.kind === 'booking_client' || row.kind === 'booking_admin' || row.kind === 'booking_cancelled') {
     const b = await loadBooking(row.ref_id);
     if (!b) throw new Error('BOOKING_NOT_FOUND');
-    if (row.kind === 'booking_client') {
+    if (row.kind === 'booking_received') {
+      const m = bookingReceivedEmail(b);
+      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: notifyAddress() || undefined });
+    } else if (row.kind === 'booking_client') {
       const m = bookingClientEmail(b);
       await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: notifyAddress() || undefined });
     } else if (row.kind === 'booking_cancelled') {
@@ -116,6 +126,10 @@ export async function processOutbox(opts: { refIds?: string[]; limit?: number } 
     if (found.length === 0) return { sent: 0, failed: 0 };
     ids = found;
   }
+
+  // contact details edited by the owner in the dashboard appear in every email
+  const { data: settings } = await supabase.from('site_settings').select('contact, content').eq('id', 1).maybeSingle();
+  setEmailContact(resolveContact(settings as SiteSettingsRow | null));
 
   const { data: rows, error } = await supabase.rpc('claim_outbox', { p_limit: opts.limit ?? 20, p_ids: ids });
   if (error) {

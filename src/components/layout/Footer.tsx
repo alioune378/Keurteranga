@@ -1,11 +1,11 @@
 import { ArrowUpRight, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { site } from '@/config/site';
+import { defaultContact, type ResolvedContact } from '@/lib/site-settings';
 import { Logo } from '@/components/ui/Logo';
 import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } from '@/components/ui/SocialIcons';
 
-export function Footer() {
+export function Footer({ contact: site = defaultContact }: { contact?: ResolvedContact }) {
   const t = useTranslations();
   const year = new Date().getFullYear();
   // Only verified links are shown (null = hidden)
@@ -90,8 +90,8 @@ export function Footer() {
             <li className="flex items-start gap-3 text-white/75">
               <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
               <span>
-                {site.address.street && <>{site.address.street}<br /></>}
-                {site.address.city}, {site.address.country}
+                {site.street && <>{site.street}<br /></>}
+                {site.city}, {site.country}
               </span>
             </li>
           </ul>

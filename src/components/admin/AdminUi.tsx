@@ -8,10 +8,14 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 const NAV = [
-  { href: '/admin', label: 'Tableau de bord' },
-  { href: '/admin/sessions', label: 'Séances' },
+  { href: '/admin', label: 'Accueil Studio' },
   { href: '/admin/bookings', label: 'Réservations' },
+  { href: '/admin/sessions', label: 'Calendrier' },
   { href: '/admin/experiences', label: 'Expériences' },
+  { href: '/admin/communications', label: 'Annonces' },
+  { href: '/admin/offers', label: 'Offres spéciales' },
+  { href: '/admin/media', label: 'Affiches & photos' },
+  { href: '/admin/settings', label: 'Site & coordonnées' },
   { href: '/admin/partners', label: 'Partenaires & messages' }
 ];
 
@@ -46,18 +50,25 @@ export function SubmitButton({
   children,
   className,
   pendingLabel,
-  confirm
+  confirm,
+  name,
+  value
 }: {
   children: ReactNode;
   className?: string;
   pendingLabel?: string;
   /** native confirmation dialog before submitting (destructive actions) */
   confirm?: string;
+  /** optional name/value sent with the form (several submit buttons in one form) */
+  name?: string;
+  value?: string;
 }) {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
+      name={name}
+      value={value}
       disabled={pending}
       className={cn('btn-green', className)}
       onClick={(e) => {

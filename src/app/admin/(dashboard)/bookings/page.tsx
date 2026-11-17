@@ -16,6 +16,7 @@ export default async function BookingsPage({
     Object.entries({ q: sp.q, status: sp.status, from: sp.from, to: sp.to, session: sp.session }).filter(([, v]) => v) as [string, string][]
   ).toString();
   const guests = rows.filter((r) => r.status === 'confirmed').reduce((a, r) => a + r.participants, 0);
+  const pendingCount = rows.filter((r) => r.status === 'pending').length;
 
   return (
     <>
@@ -31,6 +32,7 @@ export default async function BookingsPage({
         <label className="text-sm">Statut
           <select name="status" defaultValue={sp.status ?? ''} className="field-input mt-1 py-2">
             <option value="">Tous</option>
+            <option value="pending">À confirmer</option>
             <option value="confirmed">Confirmées</option>
             <option value="cancelled">Annulées</option>
           </select>
@@ -43,6 +45,7 @@ export default async function BookingsPage({
 
       <p className="mb-3 text-sm text-ink-soft">
         {rows.length} réservation(s) · {guests} participant(s) confirmé(s)
+        {pendingCount > 0 && <> · <Link href="/admin/bookings?status=pending" className="font-semibold text-gold-600 underline">{pendingCount} demande(s) à confirmer</Link></>}
         {sp.session && <> · <Link href="/admin/bookings" className="font-semibold underline">voir toutes les séances</Link></>}
       </p>
 
@@ -74,7 +77,7 @@ export default async function BookingsPage({
                 </td>
                 <td className="md:p-3">{r.participants} pers.</td>
                 <td className="text-right uppercase md:p-3 md:text-left">{r.language}</td>
-                <td className="md:p-3"><StatusBadge status={r.status} /></td>
+                <td className="md:p-3"><StatusBadge status={r.status === 'pending' ? 'request' : r.status} /></td>
                 <td className="text-right md:p-3">
                   <Link href={`/admin/bookings/${r.id}`} className="font-semibold text-forest-700 hover:underline">Ouvrir →</Link>
                 </td>

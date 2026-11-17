@@ -8,7 +8,9 @@ import { PartnerSection } from '@/components/booking/PartnerSection';
 import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { Tbc } from '@/components/ui/Tbc';
+import { AnnouncementCard, FlyerCard, OfferCard } from '@/components/studio/StudioCards';
 import { coverOf, getExperiences } from '@/lib/data';
+import { getAnnouncements, getHomeMedia, getOffers, getSiteSettings } from '@/lib/studio';
 import { formatPrice, pick } from '@/lib/utils';
 
 export const revalidate = 300;
@@ -21,7 +23,23 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const ta = await getTranslations('about');
   const tp = await getTranslations('placeholder');
 
-  const experiences = await getExperiences();
+  const [experiences, { content }, announcements, offers, flyers] = await Promise.all([
+    getExperiences(),
+    getSiteSettings(),
+    getAnnouncements(),
+    getOffers(),
+    getHomeMedia()
+  ]);
+  // Owner-managed content (Studio): hero texts, news, special offers, flyers
+  const heroTitle = pick(content.hero_title, locale)?.trim() || t('hero.title');
+  const heroSubtitle = pick(content.hero_subtitle, locale)?.trim() || t('hero.subtitle');
+  const founderName = content.founder_name?.trim() || site.founderName;
+  const news = announcements.filter((a) => a.placement === 'home');
+  const homeOffers = offers.filter((o) => o.show_on_home);
+  const hasNews = news.length + homeOffers.length + flyers.length > 0;
+  const newsTitle = locale === 'fr' ? 'Actualités & offres spéciales' : 'News & special offers';
+  const newsTag = locale === 'fr' ? 'À la une' : 'Highlights';
+  const flyersTitle = locale === 'fr' ? 'Nos affiches' : 'Our flyers';
   const featured = experiences.find((e) => e.featured) ?? experiences[0];
   const featuredCover = featured ? coverOf(featured) : null;
 
@@ -60,8 +78,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-forest-900/85 via-forest-900/30 to-transparent lg:block" aria-hidden="true" />
               <Reveal className="relative -mt-10 mx-2 rounded-3xl bg-white p-5 shadow-lift sm:mx-4 sm:p-7 lg:absolute lg:inset-x-0 lg:bottom-0 lg:mx-0 lg:mt-0 lg:max-w-2xl lg:rounded-none lg:bg-transparent lg:p-10 lg:shadow-none">
                 <p className="eyebrow lg:bg-white/15 lg:text-gold-200">{t('hero.tag')}</p>
-                <h1 className="mt-3 text-display-2xl lg:text-white">{t('hero.title')}</h1>
-                <p className="mt-3 max-w-xl text-[1.02rem] leading-relaxed text-ink-soft lg:text-lg lg:text-white/85">{t('hero.subtitle')}</p>
+                <h1 className="mt-3 text-display-2xl lg:text-white">{heroTitle}</h1>
+                <p className="mt-3 max-w-xl text-[1.02rem] leading-relaxed text-ink-soft lg:text-lg lg:text-white/85">{heroSubtitle}</p>
                 <div className="mt-5 flex flex-wrap items-center gap-3">
                   <Link href={bookHref} className="btn-gold btn-lg">
                     {t('hero.cta')}
@@ -90,6 +108,36 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ul>
         </div>
       </section>
+
+      {/* ───────────── NEWS · owner-managed (Studio → Communications, Offres, Affiches) ───────────── */}
+      {hasNews && (
+        <section className="bg-white pb-14 md:pb-20" aria-labelledby="news-title">
+          <div className="container">
+            <p className="eyebrow">{newsTag}</p>
+            <h2 id="news-title" className="mt-3 text-display-md">{newsTitle}</h2>
+            {(homeOffers.length > 0 || news.length > 0) && (
+              <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {homeOffers.map((o) => (
+                  <li key={o.id}><OfferCard o={o} locale={locale} /></li>
+                ))}
+                {news.map((a) => (
+                  <li key={a.id}><AnnouncementCard a={a} locale={locale} /></li>
+                ))}
+              </ul>
+            )}
+            {flyers.length > 0 && (
+              <>
+                <h3 className="mt-10 font-display text-xl text-forest-800">{flyersTitle}</h3>
+                <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                  {flyers.map((m) => (
+                    <li key={m.id}><FlyerCard m={m} locale={locale} /></li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* ───────────── EXPERIENCE PREVIEW · listing card ───────────── */}
       {featured && (
@@ -271,7 +319,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p className="eyebrow">{t('host.tag')}</p>
               <h2 id="host-title" className="mt-3 text-display-md">{t('host.title')}</h2>
               <p className="mt-2 font-semibold text-forest-700">
-                <Tbc text={site.founderName ?? ta('founder.nameTbc')} />
+                <Tbc text={founderName ?? ta('founder.nameTbc')} />
               </p>
               <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft">{t('host.text')}</p>
               <Link href="/a-propos" className="link-arrow mt-4">
