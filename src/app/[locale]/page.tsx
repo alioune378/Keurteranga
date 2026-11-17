@@ -162,7 +162,21 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <li key={key} className={`w-[72%] shrink-0 snap-start sm:w-[45%] md:w-auto ${i % 2 === 1 ? 'md:mt-10' : ''}`}>
               <figure>
                 <div className="relative">
-                  <Photo {...P(p)} className={`aspect-[3/2] w-full rounded-3xl ${i === 3 ? 'rounded-tr-[4rem]' : ''}`} sizes="(min-width:768px) 25vw, 72vw" />
+                  {'video' in p && p.video ? (
+                    <video
+                      src={p.video}
+                      poster={p.src ?? undefined}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      aria-label={p.alt[locale]}
+                      className={`aspect-[3/2] w-full rounded-3xl object-cover ${i === 3 ? 'rounded-tr-[4rem]' : ''}`}
+                    />
+                  ) : (
+                    <Photo {...P(p)} className={`aspect-[3/2] w-full rounded-3xl ${i === 3 ? 'rounded-tr-[4rem]' : ''}`} sizes="(min-width:768px) 25vw, 72vw" />
+                  )}
                   <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold text-forest-700 shadow-soft">
                     {i + 1}
                   </span>
