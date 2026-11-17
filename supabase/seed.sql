@@ -50,19 +50,18 @@ insert into public.experiences (
 )
 on conflict (slug) do nothing;
 
--- Temporary AI-generated illustrations (labelled "Illustration" on the site).
--- Replace with authentic photos in the admin dashboard.
+-- Real workshop photos (14 November 2026).
 insert into public.experience_images (experience_id, src, alt, is_cover, illustration, sort_order)
-select e.id, v.src, v.alt::jsonb, v.is_cover, true, v.ord
+select e.id, v.src, v.alt::jsonb, v.is_cover, false, v.ord
   from public.experiences e,
   (values
-    ('/images/ker-teranga/02_Experiences/fiche-atelier-thieboudiene.webp', '{"fr":"Illustration d''un plat de thiéboudiène","en":"Illustration of a thiéboudiène dish"}', true, 0),
-    ('/images/ker-teranga/03_Atelier/decoupe-ingredients.webp', '{"fr":"Illustration : découpe des ingrédients","en":"Illustration: cutting the ingredients"}', false, 1),
-    ('/images/ker-teranga/03_Atelier/marinade-poisson.webp', '{"fr":"Illustration : préparation du poisson","en":"Illustration: preparing the fish"}', false, 2),
-    ('/images/ker-teranga/04_Ingredients/poissons-et-legumes.webp', '{"fr":"Illustration : poissons et légumes","en":"Illustration: fish and vegetables"}', false, 3),
-    ('/images/ker-teranga/03_Atelier/cuisson-poisson.webp', '{"fr":"Illustration : cuisson","en":"Illustration: cooking"}', false, 4),
-    ('/images/ker-teranga/05_Culture/moment-degustation.webp', '{"fr":"Illustration : moment de dégustation","en":"Illustration: tasting moment"}', false, 5),
-    ('/images/ker-teranga/02_Experiences/detail-plat-thieboudiene.webp', '{"fr":"Illustration : détail du plat","en":"Illustration: close-up of the dish"}', false, 6)
+    ('/images/ker-teranga/02_Experiences/fiche-atelier-thieboudiene.webp', '{"fr":"Un poste de cuisine prêt pour l''atelier thiéboudiène","en":"A cooking station ready for the thiéboudiène workshop"}', true, 0),
+    ('/images/ker-teranga/03_Atelier/decoupe-ingredients.webp', '{"fr":"Une participante émince un oignon sur la terrasse","en":"A participant chops an onion on the terrace"}', false, 1),
+    ('/images/ker-teranga/03_Atelier/marinade-poisson.webp', '{"fr":"Une participante ajoute un ingrédient dans le mortier","en":"A participant adds an ingredient to the mortar"}', false, 2),
+    ('/images/ker-teranga/04_Ingredients/poissons-et-legumes.webp', '{"fr":"Poisson frais, tomates et légumes du thiéboudiène","en":"Fresh fish, tomatoes and vegetables for thiéboudiène"}', false, 3),
+    ('/images/ker-teranga/03_Atelier/cuisson-poisson.webp', '{"fr":"Le plat mijote sur le feu pendant l''atelier","en":"The dish simmering on the stove during the workshop"}', false, 4),
+    ('/images/ker-teranga/05_Culture/moment-degustation.webp', '{"fr":"L''animatrice échange avec une participante","en":"The host talking with a participant"}', false, 5),
+    ('/images/ker-teranga/02_Experiences/detail-plat-thieboudiene.webp', '{"fr":"Le poste de travail vu de haut : poisson, légumes et ustensiles","en":"The workstation from above: fish, vegetables and utensils"}', false, 6)
   ) as v(src, alt, is_cover, ord)
  where e.slug = 'atelier-thieboudiene'
    and not exists (select 1 from public.experience_images i where i.experience_id = e.id);

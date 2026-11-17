@@ -39,26 +39,24 @@ export type SitePhoto = {
 const IMG = '/images/ker-teranga';
 
 /**
- * Page photos. The current files are TEMPORARY AI-generated illustrations
- * (Ker_Teranga_Images_Temporaires). Replace each `src` with an authentic
- * Kër Téranga photo, then set `illustration: false`.
+ * Page photos — real photos from a Kër Téranga workshop (14 November 2026).
  * `src: null` shows a placeholder describing the photo needed.
  */
 export const photos = {
-  hero: { src: `${IMG}/01_Accueil/hero-thieboudiene.webp`, illustration: true, alt: { fr: 'Illustration : plat de thiéboudiène', en: 'Illustration: a thiéboudiène dish' } },
-  intro: { src: `${IMG}/03_Atelier/preparation-herbes.webp`, illustration: true, alt: { fr: 'Illustration : préparation des herbes', en: 'Illustration: preparing herbs' } },
-  featured: { src: `${IMG}/01_Accueil/plat-senegalais-photographie.webp`, illustration: true, alt: { fr: 'Illustration : plat sénégalais', en: 'Illustration: Senegalese dish' } },
-  storyMarket: { src: `${IMG}/04_Ingredients/etal-marche-dakar-inspire.webp`, illustration: true, alt: { fr: 'Illustration : étal de marché', en: 'Illustration: market stall' } },
-  storyHands: { src: `${IMG}/03_Atelier/decoupe-ingredients.webp`, illustration: true, alt: { fr: 'Illustration : découpe des ingrédients', en: 'Illustration: cutting ingredients' } },
-  storyPot: { src: `${IMG}/03_Atelier/cuisson-poisson.webp`, illustration: true, alt: { fr: 'Illustration : cuisson', en: 'Illustration: cooking' } },
-  storyDetail: { src: `${IMG}/04_Ingredients/produits-locaux.webp`, illustration: true, alt: { fr: 'Illustration : produits locaux', en: 'Illustration: local produce' } },
-  storyBowl: { src: `${IMG}/05_Culture/convivialite-autour-du-plat.webp`, illustration: true, alt: { fr: 'Illustration : convivialité autour du plat', en: 'Illustration: gathering around the dish' } },
-  storyGuests: { src: `${IMG}/05_Culture/experience-repas-collectif.webp`, illustration: true, alt: { fr: 'Illustration : repas collectif', en: 'Illustration: shared meal' } },
-  tasting: { src: `${IMG}/05_Culture/moment-degustation.webp`, illustration: true, alt: { fr: 'Illustration : moment de dégustation', en: 'Illustration: tasting together' } },
-  marinade: { src: `${IMG}/03_Atelier/marinade-poisson.webp`, illustration: true, alt: { fr: 'Illustration : préparation du poisson', en: 'Illustration: preparing the fish' } },
-  aboutHeritage: { src: `${IMG}/05_Culture/repas-partage-teranga.webp`, illustration: true, alt: { fr: 'Illustration : repas partagé', en: 'Illustration: shared meal' } },
-  aboutMarket: { src: `${IMG}/04_Ingredients/marche-produits-frais.webp`, illustration: true, alt: { fr: 'Illustration : marché de produits frais', en: 'Illustration: fresh produce market' } },
-  contact: { src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, illustration: true, alt: { fr: 'Illustration : poissons et légumes', en: 'Illustration: fish and vegetables' } },
+  hero: { src: `${IMG}/01_Accueil/hero-thieboudiene.webp`, illustration: false, alt: { fr: 'Une participante épluche une carotte pendant un atelier Kër Téranga', en: 'A participant peels a carrot during a Kër Téranga workshop' } },
+  intro: { src: `${IMG}/03_Atelier/preparation-herbes.webp`, illustration: false, alt: { fr: 'Une participante souriante prépare les légumes', en: 'A smiling participant prepares the vegetables' } },
+  featured: { src: `${IMG}/01_Accueil/plat-senegalais-photographie.webp`, illustration: false, alt: { fr: 'Un poste de cuisine prêt : poisson, tomates, légumes et mortier', en: 'A cooking station ready: fish, tomatoes, vegetables and a mortar' } },
+  storyMarket: { src: `${IMG}/04_Ingredients/etal-marche-dakar-inspire.webp`, illustration: false, alt: { fr: 'Poisson frais, tomates et légumes du thiéboudiène', en: 'Fresh fish, tomatoes and vegetables for thiéboudiène' } },
+  storyHands: { src: `${IMG}/03_Atelier/decoupe-ingredients.webp`, illustration: false, alt: { fr: 'Une participante émince un oignon sur la terrasse', en: 'A participant chops an onion on the terrace' } },
+  storyPot: { src: `${IMG}/03_Atelier/cuisson-poisson.webp`, illustration: false, alt: { fr: 'Le plat mijote sur le feu pendant l\'atelier', en: 'The dish simmering on the stove during the workshop' } },
+  storyDetail: { src: `${IMG}/04_Ingredients/produits-locaux.webp`, illustration: false, alt: { fr: 'Le poste de travail vu de haut : poisson, légumes et ustensiles', en: 'The workstation from above: fish, vegetables and utensils' } },
+  storyBowl: { src: `${IMG}/05_Culture/convivialite-autour-du-plat.webp`, illustration: false, alt: { fr: 'Une participante ajoute un ingrédient dans le mortier', en: 'A participant adds an ingredient to the mortar' } },
+  storyGuests: { src: `${IMG}/05_Culture/experience-repas-collectif.webp`, illustration: false, alt: { fr: 'Échange chaleureux entre l\'animatrice et une participante', en: 'A warm exchange between the host and a participant' } },
+  tasting: { src: `${IMG}/05_Culture/moment-degustation.webp`, illustration: false, alt: { fr: 'L\'animatrice échange avec une participante', en: 'The host talking with a participant' } },
+  marinade: { src: `${IMG}/03_Atelier/marinade-poisson.webp`, illustration: false, alt: { fr: 'Une participante ajoute un ingrédient dans le mortier', en: 'A participant adds an ingredient to the mortar' } },
+  aboutHeritage: { src: `${IMG}/05_Culture/repas-partage-teranga.webp`, illustration: false, alt: { fr: 'Une participante pile l\'assaisonnement au mortier', en: 'A participant pounds the seasoning in the mortar' } },
+  aboutMarket: { src: `${IMG}/04_Ingredients/marche-produits-frais.webp`, illustration: false, alt: { fr: 'Les ingrédients du thiéboudiène prêts pour l\'atelier', en: 'Thiéboudiène ingredients ready for the workshop' } },
+  contact: { src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, illustration: false, alt: { fr: 'Poisson frais, tomates et légumes du thiéboudiène', en: 'Fresh fish, tomatoes and vegetables for thiéboudiène' } },
   // Real portrait required — never use an illustration for the founder
   founder: { src: null, alt: { fr: 'Portrait de la fondatrice', en: 'Portrait of the founder' } }
 } satisfies Record<string, SitePhoto>;

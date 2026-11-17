@@ -68,13 +68,13 @@ export const fallbackExperiences: Experience[] = [
     featured: true,
     sort_order: 1,
     experience_images: [
-      { id: 'p0', src: `${IMG}/02_Experiences/fiche-atelier-thieboudiene.webp`, alt: { fr: "Illustration d'un plat de thiéboudiène", en: 'Illustration of a thiéboudiène dish' }, is_cover: true, illustration: true, sort_order: 0 },
-      { id: 'p1', src: `${IMG}/03_Atelier/decoupe-ingredients.webp`, alt: { fr: 'Illustration : découpe des ingrédients', en: 'Illustration: cutting the ingredients' }, is_cover: false, illustration: true, sort_order: 1 },
-      { id: 'p2', src: `${IMG}/03_Atelier/marinade-poisson.webp`, alt: { fr: 'Illustration : préparation du poisson', en: 'Illustration: preparing the fish' }, is_cover: false, illustration: true, sort_order: 2 },
-      { id: 'p3', src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, alt: { fr: 'Illustration : poissons et légumes', en: 'Illustration: fish and vegetables' }, is_cover: false, illustration: true, sort_order: 3 },
-      { id: 'p4', src: `${IMG}/03_Atelier/cuisson-poisson.webp`, alt: { fr: 'Illustration : cuisson', en: 'Illustration: cooking' }, is_cover: false, illustration: true, sort_order: 4 },
-      { id: 'p5', src: `${IMG}/05_Culture/moment-degustation.webp`, alt: { fr: 'Illustration : moment de dégustation', en: 'Illustration: tasting moment' }, is_cover: false, illustration: true, sort_order: 5 },
-      { id: 'p6', src: `${IMG}/02_Experiences/detail-plat-thieboudiene.webp`, alt: { fr: 'Illustration : détail du plat', en: 'Illustration: close-up of the dish' }, is_cover: false, illustration: true, sort_order: 6 }
+      { id: 'p0', src: `${IMG}/02_Experiences/fiche-atelier-thieboudiene.webp`, alt: { fr: "Un poste de cuisine prêt pour l'atelier thiéboudiène", en: "A cooking station ready for the thiéboudiène workshop" }, is_cover: true, illustration: false, sort_order: 0 },
+      { id: 'p1', src: `${IMG}/03_Atelier/decoupe-ingredients.webp`, alt: { fr: "Une participante émince un oignon sur la terrasse", en: "A participant chops an onion on the terrace" }, is_cover: false, illustration: false, sort_order: 1 },
+      { id: 'p2', src: `${IMG}/03_Atelier/marinade-poisson.webp`, alt: { fr: "Une participante ajoute un ingrédient dans le mortier", en: "A participant adds an ingredient to the mortar" }, is_cover: false, illustration: false, sort_order: 2 },
+      { id: 'p3', src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, alt: { fr: "Poisson frais, tomates et légumes du thiéboudiène", en: "Fresh fish, tomatoes and vegetables for thiéboudiène" }, is_cover: false, illustration: false, sort_order: 3 },
+      { id: 'p4', src: `${IMG}/03_Atelier/cuisson-poisson.webp`, alt: { fr: "Le plat mijote sur le feu pendant l'atelier", en: "The dish simmering on the stove during the workshop" }, is_cover: false, illustration: false, sort_order: 4 },
+      { id: 'p5', src: `${IMG}/05_Culture/moment-degustation.webp`, alt: { fr: "L'animatrice échange avec une participante", en: "The host talking with a participant" }, is_cover: false, illustration: false, sort_order: 5 },
+      { id: 'p6', src: `${IMG}/02_Experiences/detail-plat-thieboudiene.webp`, alt: { fr: "Le poste de travail vu de haut : poisson, légumes et ustensiles", en: "The workstation from above: fish, vegetables and utensils" }, is_cover: false, illustration: false, sort_order: 6 }
     ]
   }
 ];

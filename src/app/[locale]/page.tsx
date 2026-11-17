@@ -175,7 +175,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </li>
           ))}
         </ol>
-        <p className="container mt-5 text-xs text-ink-muted">{tp('illustrationNote')}</p>
       </section>
 
       {/* ───────────── TERANGA · organic composition ───────────── */}
