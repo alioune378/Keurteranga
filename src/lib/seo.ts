@@ -40,7 +40,7 @@ export function pageMetadata(opts: {
       title: title ? `${title} · ${site.name}` : site.name,
       description,
       // social sharing preview built from the official logo (replace with a photo later if desired)
-      images: [{ url: image || '/images/og.jpg', width: 1200, height: 630, alt: site.name }]
+      images: [{ url: image || '/images/og-ker-teranga.jpg', width: 1200, height: 630, alt: site.name }]
     },
     twitter: {
       card: 'summary_large_image',
@@ -59,7 +59,7 @@ export function organizationJsonLd(locale: Locale) {
     url: siteUrl(`/${locale}`),
     email: site.email,
     telephone: site.phoneDisplay,
-    image: siteUrl('/images/og.jpg'),
+    image: siteUrl('/images/og-ker-teranga.jpg'),
     logo: siteUrl('/images/logo/logo-ker-teranga.png'),
     address: {
       '@type': 'PostalAddress',

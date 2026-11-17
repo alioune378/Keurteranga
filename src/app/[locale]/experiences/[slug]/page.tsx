@@ -29,14 +29,13 @@ export async function generateMetadata({
   const locale = rawLocale as Locale;
   const e = await getExperience(slug);
   if (!e) return {};
-  const cover = coverOf(e);
   return pageMetadata({
     locale,
     pathname: '/experiences/[slug]',
     params: { slug },
     title: `${pick(e.title, locale)} — Dakar`,
-    description: pick(e.summary, locale) ?? '',
-    image: cover?.src
+    description: pick(e.summary, locale) ?? ''
+    // link previews (WhatsApp, iMessage, Facebook…) always show the Kër Téranga logo
   });
 }
 
