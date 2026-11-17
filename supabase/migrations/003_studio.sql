@@ -144,7 +144,7 @@ begin
   end if;
 
   loop
-    ref := 'KT-' || upper(substr(encode(gen_random_bytes(4), 'hex'), 1, 6));
+    ref := 'KT-' || upper(substr(replace(gen_random_uuid()::text, '-', ''), 1, 6));
     exit when not exists (select 1 from public.bookings where reference = ref);
   end loop;
 
