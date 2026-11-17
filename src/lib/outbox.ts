@@ -6,6 +6,7 @@ import {
   bookingCancelledEmail,
   bookingClientEmail,
   bookingReceivedEmail,
+  publicReplyTo,
   setEmailContact,
   contactAdminEmail,
   partnerAdminEmail,
@@ -77,13 +78,13 @@ async function deliver(row: OutboxRow) {
     if (!b) throw new Error('BOOKING_NOT_FOUND');
     if (row.kind === 'booking_received') {
       const m = bookingReceivedEmail(b);
-      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: notifyAddress() || undefined });
+      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: publicReplyTo() || notifyAddress() || undefined });
     } else if (row.kind === 'booking_client') {
       const m = bookingClientEmail(b);
-      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: notifyAddress() || undefined });
+      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: publicReplyTo() || notifyAddress() || undefined });
     } else if (row.kind === 'booking_cancelled') {
       const m = bookingCancelledEmail(b);
-      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: notifyAddress() || undefined });
+      await sendEmail({ to: b.email, subject: m.subject, html: m.html, replyTo: publicReplyTo() || notifyAddress() || undefined });
     } else {
       const m = bookingAdminEmail(b);
       await sendEmail({ to: notifyAddress(), subject: m.subject, html: m.html, replyTo: b.email });

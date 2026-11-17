@@ -14,6 +14,10 @@ const C = {
 
 /** Contact details shown in emails — overridden by the owner's dashboard settings. */
 let contact = { email: site.email, whatsapp: site.whatsapp, phoneDisplay: site.phoneDisplay };
+/** Public address customers see and reply to (e.g. hello@…), never the private inbox. */
+export function publicReplyTo() {
+  return contact.email || undefined;
+}
 export function setEmailContact(c: { email: string | null; whatsapp: string | null; phoneDisplay: string | null }) {
   contact = c;
 }
