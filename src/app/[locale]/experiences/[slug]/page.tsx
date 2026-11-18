@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, CalendarCheck, Check, Clock, Languages, MapPin, MessageCircle, MonitorPlay, Users, Wallet } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, CalendarCheck, CalendarX, Check, Clock, Languages, MapPin, MessageCircle, MonitorPlay, Users, Wallet } from 'lucide-react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -335,6 +335,12 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                 <Wallet className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.payment')}
               </dt>
               <dd className="mt-2">{t('noPayment')}</dd>
+            </div>
+            <div className="rounded-3xl bg-sand-100 p-5 sm:col-span-2">
+              <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
+                <CalendarX className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.cancellation')}
+              </dt>
+              <dd className="mt-2">{t('cancellationText')}</dd>
             </div>
             {(site.whatsapp || site.phoneDisplay) && (
               <div className="rounded-3xl bg-sand-100 p-5 sm:col-span-2">

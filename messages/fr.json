@@ -242,11 +242,13 @@
       "languagesText": "Atelier animé en {languages} — à choisir lors de la réservation.",
       "booking": "Réservation",
       "payment": "Paiement",
-      "questions": "Une question ?"
+      "questions": "Une question ?",
+      "cancellation": "Politique d'annulation"
     },
     "finalTitle": "Prêt à passer en cuisine ?",
     "finalText": "Choisissez votre date et réservez votre place en quelques instants.",
-    "bookShort": "Réserver"
+    "bookShort": "Réserver",
+    "cancellationText": "Annulation gratuite jusqu'à 48 h avant l'atelier. Passé ce délai, aucun remboursement n'est possible : les ingrédients auront déjà été achetés pour vous."
   },
   "contact": {
     "eyebrow": "Contact",
@@ -376,7 +378,8 @@
       "phone": "Numéro de téléphone invalide.",
       "RATE_LIMITED": "Trop de tentatives en peu de temps. Merci de patienter quelques minutes ou de nous contacter.",
       "NOT_CONFIGURED": "Le système de réservation n'est pas encore activé. En attendant, contactez-nous pour réserver votre place.",
-      "consent": "Merci d'accepter l'utilisation de vos informations pour la réservation."
+      "consent": "Merci d'accepter l'utilisation de vos informations pour la réservation.",
+      "policy": "Merci d'accepter la politique d'annulation pour envoyer votre demande."
     },
     "partner": {
       "title": "Vous êtes un hôtel, une agence de voyages, un tour-opérateur, une entreprise ou une association et souhaitez collaborer avec Kër Téranga ?",
@@ -441,7 +444,12 @@
     },
     "legendSelected": "Sélectionné",
     "legendBooked": "Réservé",
-    "booked": "Réservé"
+    "booked": "Réservé",
+    "policy": {
+      "title": "Politique d'annulation",
+      "text": "Annulation gratuite jusqu'à 48 h avant l'atelier. Passé ce délai, aucun remboursement n'est possible : les ingrédients auront déjà été achetés pour vous.",
+      "accept": "J'ai lu et j'accepte la politique d'annulation (annulation gratuite jusqu'à 48 h avant l'atelier, aucun remboursement ensuite)."
+    }
   },
   "notFound": {
     "title": "Page introuvable",
