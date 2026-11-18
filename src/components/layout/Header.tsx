@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, usePathname } from '@/i18n/navigation';
-import { site } from '@/config/site';
+import { defaultContact } from '@/lib/site-settings';
 import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/utils';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -46,7 +46,7 @@ function lockScroll() {
   };
 }
 
-export function Header() {
+export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: string | null }) {
   const t = useTranslations('nav');
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -144,7 +144,7 @@ export function Header() {
         </div>
       </header>
 
-      {mounted && createPortal(<MobileMenu open={open} onClose={close} isActive={isActive} />, document.body)}
+      {mounted && createPortal(<MobileMenu open={open} onClose={close} isActive={isActive} whatsapp={whatsapp} />, document.body)}
     </>
   );
 }
@@ -152,11 +152,13 @@ export function Header() {
 function MobileMenu({
   open,
   onClose,
-  isActive
+  isActive,
+  whatsapp
 }: {
   open: boolean;
   onClose: () => void;
   isActive: (href: string) => boolean;
+  whatsapp: string | null;
 }) {
   const t = useTranslations('nav');
   const reduce = useReducedMotion();
@@ -272,9 +274,9 @@ function MobileMenu({
               <Link href="/reservation" onClick={onClose} className="btn-gold w-full">
                 {t('book')}
               </Link>
-              {site.whatsapp && (
+              {whatsapp && (
                 <a
-                  href={`https://wa.me/${site.whatsapp}`}
+                  href={`https://wa.me/${whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-h-[2.75rem] items-center justify-center gap-2 text-sm text-ink-soft hover:text-forest-700"

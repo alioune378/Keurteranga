@@ -31,6 +31,19 @@ export async function signOut() {
 // ============================================================================
 // Sessions
 // ============================================================================
+/** Optional special price + public title of a session (special events). */
+function sessionExtras(fd: FormData): { price_xof: number | null; label: { fr?: string; en?: string } } | 'invalid' {
+  const raw = String(fd.get('price') ?? '').trim();
+  const price = raw === '' ? null : Math.round(Number(raw));
+  if (price !== null && !(price >= 0)) return 'invalid';
+  const label: { fr?: string; en?: string } = {};
+  const fr = str(fd, 'label_fr', 80);
+  const en = str(fd, 'label_en', 80);
+  if (fr) label.fr = fr;
+  if (en) label.en = en;
+  return { price_xof: price, label };
+}
+
 export async function createSession(fd: FormData) {
   const { supabase } = await requireAdmin();
   const to = back(fd, '/admin/sessions');
@@ -42,9 +55,12 @@ export async function createSession(fd: FormData) {
   if (!experienceId || !isDate(date) || !isTime(start) || (end && !isTime(end)) || !(capacity > 0)) {
     redirect(flash(to, 'err', 'Merci de renseigner une date, une heure de début et une capacité valides.'));
   }
+  const extras = sessionExtras(fd);
+  if (extras === 'invalid') redirect(flash(to, 'err', 'Prix spécial invalide.'));
   const { error } = await supabase.from('sessions').insert({
     experience_id: experienceId, date, start_time: start, end_time: end || null, capacity,
-    notes: str(fd, 'notes', 300) || null
+    notes: str(fd, 'notes', 300) || null,
+    ...extras
   });
   if (error) redirect(flash(to, 'err', adminError(error.message)));
   revalidatePublic();
@@ -120,6 +136,11 @@ export async function updateSession(fd: FormData) {
     patch.status = status; // 'open' becomes 'full' automatically if no spots remain
   }
   if (fd.has('notes')) patch.notes = str(fd, 'notes', 300) || null;
+  if (fd.get('hasExtras') === '1') {
+    const extras = sessionExtras(fd);
+    if (extras === 'invalid') redirect(flash(to, 'err', 'Prix spécial invalide.'));
+    Object.assign(patch, extras);
+  }
 
   const { error } = await supabase.from('sessions').update(patch).eq('id', id);
   if (error) redirect(flash(to, 'err', adminError(error.message)));
@@ -199,16 +220,32 @@ export async function updateBooking(fd: FormData) {
   redirect(flash(to, 'ok', 'Réservation mise à jour.'));
 }
 
+/** Owner accepts a booking request → shown as booked on the website + confirmation email. */
+export async function confirmBooking(fd: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = str(fd, 'id', 40);
+  const to = back(fd, `/admin/bookings/${id}`);
+  const notify = fd.get('notify') !== '0';
+  const { error } = await supabase.rpc('admin_confirm_booking', { p_booking_id: id, p_notify: notify });
+  if (error) redirect(flash(to, 'err', adminError(error.message)));
+  if (notify) await processOutbox({ refIds: [id] }).catch(() => undefined);
+  revalidatePublic();
+  redirect(flash(to, 'ok', notify ? 'Réservation confirmée — le client reçoit son e-mail de confirmation.' : 'Réservation confirmée.'));
+}
+
+/** Cancels a confirmed booking, or declines a pending request (seats released). */
 export async function cancelBooking(fd: FormData) {
   const { supabase } = await requireAdmin();
   const id = str(fd, 'id', 40);
   const to = back(fd, `/admin/bookings/${id}`);
   const notify = fd.get('notify') === '1';
+  const declined = fd.get('wasPending') === '1';
   const { error } = await supabase.rpc('admin_cancel_booking', { p_booking_id: id, p_notify: notify });
   if (error) redirect(flash(to, 'err', adminError(error.message)));
   if (notify) await processOutbox({ refIds: [id] }).catch(() => undefined);
   revalidatePublic();
-  redirect(flash(to, 'ok', notify ? 'Réservation annulée — le client est prévenu par e-mail.' : 'Réservation annulée.'));
+  const what = declined ? 'Demande refusée, les places sont libérées' : 'Réservation annulée';
+  redirect(flash(to, 'ok', notify ? `${what} — le client est prévenu par e-mail.` : `${what}.`));
 }
 
 export async function retryEmails(fd: FormData) {

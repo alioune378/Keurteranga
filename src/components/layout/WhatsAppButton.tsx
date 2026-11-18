@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
-import { site } from '@/config/site';
+import { defaultContact } from '@/lib/site-settings';
 import { WhatsappIcon } from '@/components/ui/SocialIcons';
 import { cn } from '@/lib/utils';
 
@@ -12,12 +12,12 @@ import { cn } from '@/lib/utils';
  * - Raised above the sticky booking bar on experience pages (mobile).
  * - Hidden on the booking page on mobile so it never covers form buttons.
  */
-export function WhatsAppButton() {
+export function WhatsAppButton({ whatsapp = defaultContact.whatsapp }: { whatsapp?: string | null }) {
   const t = useTranslations('whatsapp');
   const pathname = usePathname();
-  if (!site.whatsapp) return null;
+  if (!whatsapp) return null;
 
-  const href = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(t('message'))}`;
+  const href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(t('message'))}`;
   const onExperience = pathname.startsWith('/experiences/');
   const onBooking = pathname === '/reservation';
 

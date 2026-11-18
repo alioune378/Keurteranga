@@ -125,8 +125,8 @@
           "text": "Le nombre de participants et la langue de l'atelier : français ou anglais."
         },
         "confirm": {
-          "title": "C'est réservé",
-          "text": "Votre référence s'affiche dès que votre place est enregistrée."
+          "title": "Kër Téranga confirme",
+          "text": "Vos places sont mises de côté avec une référence, puis confirmées par e-mail."
         }
       },
       "cta": "Choisir ma date",
@@ -283,7 +283,7 @@
   "booking": {
     "eyebrow": "La Table Sénégalaise",
     "title": "Réservez votre place à table",
-    "intro": "Choisissez une date, dites-nous qui vient, et c'est réservé. Aucun paiement en ligne.",
+    "intro": "Choisissez une date, dites-nous qui vient : vos places sont mises de côté et Kër Téranga vous confirme la réservation rapidement. Aucun paiement en ligne.",
     "steps": {
       "experience": "Votre expérience",
       "date": "Votre date",
@@ -298,9 +298,9 @@
     "loading": "Chargement des disponibilités…",
     "noSlots": "Aucune disponibilité ce mois-ci. Essayez le mois suivant ou contactez-nous.",
     "legendAvailable": "Disponible",
-    "legendFull": "Complet",
+    "legendFull": "En attente de confirmation",
     "legendUnavailable": "Indisponible",
-    "full": "Complet",
+    "full": "En attente",
     "spotsLeft": "{count, plural, =0 {Complet} =1 {# place restante} other {# places restantes}}",
     "selectDateFirst": "Sélectionnez d'abord une date dans le calendrier.",
     "prevMonth": "Mois précédent",
@@ -340,13 +340,13 @@
     "consent": "J'accepte que Kër Téranga utilise ces informations pour gérer ma réservation et me contacter à son sujet (aucune utilisation commerciale).",
     "next": "Continuer",
     "back": "Retour",
-    "confirm": "Confirmer ma réservation",
-    "confirming": "Confirmation…",
+    "confirm": "Envoyer ma demande de réservation",
+    "confirming": "Envoi…",
     "success": {
-      "title": "À table ! Votre place est réservée.",
-      "text": "Dalal ak jàmm — bienvenue ! Un e-mail de confirmation est envoyé à {email}.",
+      "title": "Merci ! Votre demande est bien reçue.",
+      "text": "Dalal ak jàmm — bienvenue ! Vos places sont mises de côté. Kër Téranga confirme votre réservation très rapidement : un e-mail de confirmation vous sera envoyé à {email}.",
       "reference": "Référence",
-      "next": "Conservez votre référence. L'adresse exacte et les informations pratiques vous seront communiquées avant l'atelier.",
+      "next": "Conservez votre référence. Une fois la réservation confirmée, l'adresse exacte et les informations pratiques vous seront communiquées.",
       "another": "Faire une autre réservation",
       "home": "Retour à l'accueil",
       "emailDelay": "Pas d'e-mail d'ici quelques minutes ? Pensez à vérifier vos courriers indésirables."
@@ -428,7 +428,9 @@
       "languages": "Atelier en français ou en anglais",
       "payment": "Aucun paiement en ligne"
     },
-    "legendSelected": "Sélectionné"
+    "legendSelected": "Sélectionné",
+    "legendBooked": "Réservé",
+    "booked": "Réservé"
   },
   "notFound": {
     "title": "Page introuvable",

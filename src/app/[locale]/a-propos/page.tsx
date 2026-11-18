@@ -4,6 +4,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { photos, site } from '@/config/site';
+import { getSiteSettings } from '@/lib/studio';
+import { pick } from '@/lib/utils';
 import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -20,6 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
+  // owner-edited texts (Studio → Site & coordonnées) win over the built-in ones
+  const { content } = await getSiteSettings();
+  const founderName = content.founder_name?.trim() || site.founderName;
+  const founderBio = pick(content.founder_bio, locale)?.trim();
+  const historyText = pick(content.history, locale)?.trim();
   const t = await getTranslations('about');
   const points = t.raw('heritage.points') as string[];
 
@@ -76,7 +83,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <Reveal key={k} delay={i * 0.06} className="rounded-3xl bg-sand-100 p-6">
               <h2 className="text-2xl">{t(`${k}.title`)}</h2>
               <p className="mt-4 text-[1.02rem] leading-relaxed text-ink-soft">
-                <Tbc text={t(`${k}.text`)} />
+                <Tbc text={(k === 'history' && historyText) || t(`${k}.text`)} />
               </p>
             </Reveal>
           ))}
@@ -120,12 +127,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <SectionHeading eyebrow={t('founder.eyebrow')} title={t('founder.title')} />
             <Reveal delay={0.1}>
               <p className="mt-6 font-display text-2xl text-forest-700">
-                {site.founderName ?? <Tbc text={t('founder.nameTbc')} />}
+                {founderName ?? <Tbc text={t('founder.nameTbc')} />}
               </p>
               <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">{t('founder.role')}</p>
               <p className="mt-4 text-[1.05rem] leading-relaxed text-ink-soft">
                 {/* 👉 TEXT: replace "founder.bio" in messages/fr.json & en.json with the verified biography */}
-                <Tbc text={t('founder.bio')} />
+                <Tbc text={founderBio || t('founder.bio')} />
               </p>
             </Reveal>
           </div>

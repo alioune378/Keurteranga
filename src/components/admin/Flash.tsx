@@ -34,6 +34,7 @@ export function StatusBadge({ status }: { status: string }) {
     full: ['Complète', 'bg-gold-100 text-gold-600'],
     closed: ['Fermée', 'bg-sand-200 text-ink-soft'],
     confirmed: ['Confirmée', 'bg-forest-100 text-forest-800'],
+    request: ['À confirmer', 'bg-gold-100 text-gold-600'],
     cancelled: ['Annulée', 'bg-terracotta-100 text-terracotta-700'],
     draft: ['Brouillon', 'bg-sand-200 text-ink-soft'],
     published: ['Publiée', 'bg-forest-100 text-forest-800'],

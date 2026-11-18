@@ -1,50 +1,88 @@
-# Guide de l'espace administrateur — Kër Téranga
+# Kër Téranga Studio — guide de la propriétaire
 
-Adresse : **https://votre-site/admin** (fonctionne sur téléphone).
+Adresse : **https://votre-site/admin** (pensé d'abord pour le téléphone).
 Connexion avec votre e-mail et votre mot de passe, ou « Recevoir un lien de connexion par e-mail ».
+Astuce : sur le téléphone, ouvrez l'adresse puis « Ajouter à l'écran d'accueil » pour l'avoir comme une application.
 
-> Toutes les heures sont à l'heure de **Dakar (GMT)**.
+> Toutes les heures sont à l'heure de **Dakar (GMT)**. Rien n'est jamais publié sans que vous cliquiez « Publier ».
 
-## Tableau de bord
-- Séances des 30 prochains jours, taux de remplissage, réservations et annulations récentes.
-- **E-mails en attente** : si un e-mail n'a pas pu partir, la réservation est quand même
-  enregistrée. Le site réessaie tout seul ; vous pouvez aussi cliquer sur « Renvoyer maintenant ».
+## Accueil Studio
+- **Grands boutons** vers chaque rubrique.
+- **Demandes à confirmer** : chaque nouvelle réservation apparaît ici avec deux boutons,
+  **✓ Confirmer** et **Refuser**. Vous recevez aussi un e-mail « Demande à confirmer » avec un lien direct.
+- Chiffres clés : séances à venir, remplissage, réservations, annulations, e-mails en attente.
 
-## Séances
+## Comment fonctionne une réservation
+1. Le client choisit une date sur le site et envoie sa **demande**. Ses places sont **mises de côté**
+   (personne d'autre ne peut les prendre) et il reçoit un e-mail « Demande reçue ».
+2. Vous cliquez **✓ Confirmer** → le client reçoit l'e-mail de **confirmation** et, sur le site,
+   le créneau s'affiche **« Réservé »** dès que toutes ses places sont confirmées.
+3. Ou vous cliquez **Refuser** → les places sont libérées et le client reçoit un e-mail poli
+   l'invitant à choisir une autre date.
+
+Sur le calendrier public : **blanc** = disponible · **doré** = places en attente de votre confirmation ·
+**rouge barré** = réservé (confirmé) · **gris** = pas de séance.
+
+## Calendrier (séances)
 - **Ajouter une séance** : date, heure de début (et de fin), nombre de places.
-- **Séances récurrentes** : choisissez une période, les jours (ex. mardi, jeudi, samedi),
-  les horaires (ex. `10:00-13:30, 15:00-18:30`) et la capacité → toutes les séances sont créées.
-- **Modifier** une séance : horaire, capacité, note interne.
-- **Fermer la séance** : plus personne ne peut réserver (les réservations existantes restent).
-- Une séance devient **« Complète »** automatiquement quand toutes les places sont prises,
-  et se **rouvre** si quelqu'un annule.
+- **Événement spécial** (facultatif) : un **prix spécial** et un **titre** affiché sur le site
+  (ex. « Thiéboudiène spécial 12 décembre »). Le prix spécial remplace le prix normal pour cette date.
+- **Séances récurrentes** : période, jours (ex. mardi, jeudi, samedi), horaires
+  (ex. `10:00-13:30, 15:00-18:30`) et capacité → toutes les séances sont créées.
+- **Modifier** : horaire, capacité, note, prix spécial, titre. **Fermer / Rouvrir** une séance.
 - **Dates bloquées** : jour férié, Tabaski, congé… La date disparaît du calendrier du site.
 
+### Exemple : un Thiéboudiène spécial le 12 décembre
+1. **Calendrier** → *Ajouter une séance* → 12 décembre, 11:00–14:30, 10 places.
+2. Ouvrez *Événement spécial* → prix spécial, titre FR/EN → **Créer la séance**.
+3. (Facultatif) **Annonces** → *Nouvelle annonce* → titre, texte, affiche, bouton « Réserver »
+   avec le lien `/fr/reservation` → **Enregistrer le brouillon** → vérifiez l'aperçu → **Publier**.
+4. La date apparaît aussitôt dans le calendrier de réservation du site.
+
 ## Réservations
+- Filtre **« À confirmer »** pour voir toutes les demandes en attente.
 - Recherche par nom, e-mail, téléphone ou référence (ex. `KT-3F9A2C`) ; filtres par date et statut.
-- **Exporter** : télécharge un fichier qui s'ouvre dans Excel ou Google Sheets.
-- **Ouvrir** une réservation pour :
-  - changer de séance ou le nombre de participants (le site vérifie qu'il reste de la place) ;
-  - corriger les coordonnées, ajouter une note interne ;
-  - **annuler** (les places sont libérées ; cochez « Prévenir le client » pour lui envoyer un e-mail).
+- **Exporter** : fichier pour Excel ou Google Sheets.
+- **Ouvrir** une réservation : confirmer / refuser, changer de séance ou de nombre de participants
+  (le site vérifie qu'il reste de la place), corriger les coordonnées, ajouter une note interne,
+  **annuler** une réservation confirmée (cochez « Prévenir le client »).
 - Boutons rapides : écrire au client par e-mail ou WhatsApp.
 
 ## Expériences
-- Textes en **français à gauche, anglais à droite**.
-- Prix (laisser vide = « Prix à confirmer »), participants min/max, clôture des réservations
-  (ex. 24 h avant), langues, mise en avant sur l'accueil.
+- Textes en **français et en anglais**, prix (vide = « Prix à confirmer »), participants min/max,
+  clôture des réservations (ex. 24 h avant), langues, mise en avant sur l'accueil.
 - **Statut** : *Brouillon* (invisible), *Publiée* (visible), *Archivée* (retirée du site).
-- Écrivez « [À compléter] » pour une information pas encore sûre : elle s'affiche comme provisoire.
-- **Photos** : ajouter, remplacer, monter/descendre, choisir la couverture, décrire la photo
-  (FR/EN, utile pour l'accessibilité et Google). Décochez « Illustration » pour une vraie photo.
+- **Photos** : ajouter, remplacer, réordonner, choisir la couverture, décrire la photo (FR/EN).
+
+## Annonces
+- **Carte sur l'accueil** (rubrique « Actualités ») : titre, texte, affiche (image ou PDF), bouton.
+- **Bandeau en haut du site** : une phrase courte visible sur toutes les pages.
+- Dates d'affichage : l'annonce apparaît et disparaît **toute seule**.
+- **Enregistrer le brouillon** → **Aperçu** (français et anglais) → **Publier sur le site**.
+  « Retirer du site » la remet en brouillon sans la supprimer.
+
+## Offres spéciales
+- Réduction en **%**, **prix spécial**, ou avantage sans prix ; code promo facultatif.
+- Date de **début** et d'**expiration** : l'offre disparaît du site le lendemain de l'expiration.
+- Visuel ou affiche, affichage sur l'accueil, même principe brouillon → aperçu → publier.
+- Les paiements se font sur place : appliquez la réduction au moment du règlement.
+
+## Affiches & photos
+- Ajoutez vos **flyers et affiches** (JPG, PNG, WebP ou **PDF**, 15 Mo max.), directement depuis le téléphone.
+- « Afficher sur l'accueil » → rubrique « Nos affiches ». Dates de visibilité possibles.
+- Chaque fichier a un **lien à partager** (WhatsApp, Instagram, e-mail…).
+
+## Site & coordonnées
+- E-mail, téléphone, WhatsApp, adresse, liens Instagram / Facebook / TikTok / LinkedIn.
+- Grand titre et phrase d'introduction de l'accueil, nom et biographie de la fondatrice,
+  histoire de Kër Téranga — en français et en anglais.
+- Un champ vide garde le texte actuel. Les changements apparaissent sur le site **et dans les e-mails**.
 
 ## Partenaires & messages
-- Demandes des hôtels, agences, tour-opérateurs, entreprises et associations : changez le statut
-  (Nouvelle → En cours → Clôturée).
+- Demandes des hôtels, agences, entreprises, associations : Nouvelle → En cours → Clôturée.
 - Messages du formulaire de contact : marquez-les comme traités.
 
 ## Bonnes pratiques
-- Ne partagez jamais votre mot de passe. Pour ajouter un autre administrateur, demandez au
-  prestataire technique (voir README, « Create the founder's admin account »).
-- Remplacez dès que possible les visuels d'illustration par de vraies photos des ateliers
-  (avec l'accord des personnes photographiées).
+- Confirmez les demandes rapidement : tant qu'elles sont en attente, leurs places restent bloquées.
+- Ne partagez jamais votre mot de passe. Pour ajouter une autre personne, demandez au prestataire technique.
+- Toute suppression demande une confirmation : en cas de doute, préférez « Retirer du site ».

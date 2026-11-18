@@ -63,8 +63,15 @@ export interface AvailabilitySlot {
   start_time: string; // HH:MM:SS
   end_time: string | null;
   capacity: number;
+  /** seats still bookable (capacity minus pending requests and confirmed bookings) */
   remaining: number;
+  /** seats CONFIRMED by Kër Téranga — shown publicly as "booked" */
+  confirmed: number;
   status: 'open' | 'full';
+  /** special price for this session (null = experience price) */
+  price_xof: number | null;
+  /** optional label, e.g. {"fr": "Thiéboudiène spécial"} */
+  label: Localized | null;
 }
 
 export type BookingErrorCode =

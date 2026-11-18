@@ -11,7 +11,7 @@ import { Photo } from '@/components/ui/Photo';
 import { countries } from '@/data/countries';
 import { getBrowserClient } from '@/lib/supabase/browser';
 import type { AvailabilitySlot, BookingErrorCode, ExperienceSummary } from '@/lib/types';
-import { cn, formatDate, formatPrice, formatTime } from '@/lib/utils';
+import { cn, formatDate, formatPrice, formatTime, pick } from '@/lib/utils';
 import { EMAIL_RE } from '@/lib/validation';
 import { Calendar } from './Calendar';
 
@@ -237,7 +237,9 @@ export function BookingWizard({
 
   const set = <K extends keyof Details>(k: K, v: Details[K]) => setDetails((d) => ({ ...d, [k]: v }));
   const countryName = (code: string) => countries.find((c) => c.code === code)?.[locale] ?? code;
-  const total = experience?.price_xof != null ? formatPrice(experience.price_xof * participants, locale) : null;
+  // a special price set on the chosen session wins over the experience price
+  const unitPrice = slot?.price_xof ?? experience?.price_xof ?? null;
+  const total = unitPrice != null ? formatPrice(unitPrice * participants, locale) : null;
 
   // ------------------------------------------------------------------ success
   if (done) {
@@ -382,6 +384,7 @@ export function BookingWizard({
                       next: t('nextMonth'),
                       available: t('legendAvailable'),
                       full: t('legendFull'),
+                      booked: t('legendBooked'),
                       unavailable: t('legendUnavailable'),
                       selected: t('legendSelected')
                     }}
@@ -412,8 +415,20 @@ export function BookingWizard({
                               {formatTime(s.start_time)}
                               {s.end_time && <span className="font-normal text-ink-muted">– {formatTime(s.end_time)}</span>}
                             </span>
-                            <span className={cn('text-xs', s.remaining <= 2 ? 'font-semibold text-terracotta-700' : 'text-ink-muted')}>
-                              {s.remaining <= 0 ? t('full') : t('spotsLeft', { count: s.remaining })}
+                            <span className="flex flex-col items-end gap-0.5 text-right">
+                              <span className={cn('text-xs', s.remaining <= 2 ? 'font-semibold text-terracotta-700' : 'text-ink-muted')}>
+                                {s.remaining > 0
+                                  ? t('spotsLeft', { count: s.remaining })
+                                  : s.confirmed >= s.capacity
+                                    ? t('booked')
+                                    : t('full')}
+                              </span>
+                              {pick(s.label ?? undefined, locale) && (
+                                <span className="text-[0.7rem] font-semibold text-gold-600">{pick(s.label ?? undefined, locale)}</span>
+                              )}
+                              {s.price_xof != null && s.remaining > 0 && (
+                                <span className="text-[0.7rem] text-ink-muted">{formatPrice(s.price_xof, locale)}</span>
+                              )}
                             </span>
                           </button>
                         ))}
@@ -626,9 +641,9 @@ export function BookingWizard({
             {step >= 2 && <p>{t('summary.participants')}: <strong>{participants}</strong></p>}
             {experience && (
               <p className="border-t border-sand-200 pt-3 text-ink-soft">
-                {experience.price_xof != null ? (
+                {unitPrice != null ? (
                   <>
-                    {formatPrice(experience.price_xof, locale)} × {participants} = <strong className="text-ink">{total}</strong>
+                    {formatPrice(unitPrice, locale)} × {participants} = <strong className="text-ink">{total}</strong>
                   </>
                 ) : (
                   tp('priceTbc')

@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   const header = ['Référence', 'Statut', 'Expérience', 'Date', 'Début', 'Fin', 'Participants', 'Langue', 'Prénom', 'Nom', 'E-mail', 'Téléphone', 'Pays', 'Demandes', 'Notes internes', 'Réservée le', 'Annulée le'];
   const lines = rows.map((r) =>
     [
-      r.reference, r.status === 'confirmed' ? 'Confirmée' : 'Annulée', r.experiences?.title?.fr ?? '',
+      r.reference, r.status === 'confirmed' ? 'Confirmée' : r.status === 'pending' ? 'À confirmer' : 'Annulée', r.experiences?.title?.fr ?? '',
       r.sessions?.date, formatTime(r.sessions?.start_time), formatTime(r.sessions?.end_time), r.participants,
       r.language.toUpperCase(), r.first_name, r.last_name, r.email, r.phone, r.country, r.special_requests,
       r.admin_notes, r.created_at, r.cancelled_at

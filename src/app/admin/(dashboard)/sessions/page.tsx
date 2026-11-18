@@ -50,7 +50,7 @@ export default async function SessionsPage({
     <>
       <PageTitle title="Séances & disponibilités" />
       <Flash ok={sp.ok} err={sp.err} />
-      <p className="mb-6 text-sm text-ink-soft">Toutes les heures sont à l’heure de Dakar (GMT). Une séance passe automatiquement en « Complète » quand toutes les places sont prises, et se rouvre si une réservation est annulée.</p>
+      <p className="mb-6 text-sm text-ink-soft">Toutes les heures sont à l’heure de Dakar (GMT). Les demandes des clients mettent des places de côté ; quand vous les confirmez, la séance s’affiche « Réservé » sur le site. Une séance passe automatiquement en « Complète » quand toutes les places sont prises, et se rouvre si une demande est refusée ou annulée.</p>
 
       {/* filters */}
       <form className="card mb-6 flex flex-wrap items-end gap-3 p-4" method="get">
@@ -83,8 +83,14 @@ export default async function SessionsPage({
                       <p className="font-semibold capitalize">
                         {formatDate(s.date, 'fr')} · {formatTime(s.start_time)}{s.end_time ? `–${formatTime(s.end_time)}` : ''}
                       </p>
+                      {(pick(s.label, 'fr') || s.price_xof != null) && (
+                        <p className="text-sm font-semibold text-gold-600">
+                          {pick(s.label, 'fr')}{pick(s.label, 'fr') && s.price_xof != null ? ' · ' : ''}
+                          {s.price_xof != null && `Prix spécial ${s.price_xof.toLocaleString('fr-FR')} FCFA`}
+                        </p>
+                      )}
                       <p className="text-sm text-ink-soft">
-                        {s.booked} / {s.capacity} places réservées
+                        {s.confirmed} confirmée(s){s.booked > s.confirmed ? ` + ${s.booked - s.confirmed} en attente` : ''} / {s.capacity} places
                         {blockedSet.has(s.date) && <span className="ml-2 font-semibold text-terracotta-700">· date bloquée</span>}
                         {s.notes && <span className="ml-2 italic">· {s.notes}</span>}
                       </p>
@@ -105,6 +111,10 @@ export default async function SessionsPage({
                         <label className="text-xs">Fin<input name="end" type="time" defaultValue={formatTime(s.end_time)} className="field-input mt-1 w-28 py-2" /></label>
                         <label className="text-xs">Capacité<input name="capacity" type="number" min={Math.max(1, s.booked)} defaultValue={s.capacity} className="field-input mt-1 w-24 py-2" /></label>
                         <label className="text-xs">Note<input name="notes" defaultValue={s.notes ?? ''} maxLength={300} className="field-input mt-1 w-40 py-2" /></label>
+                        <label className="text-xs">Prix spécial (FCFA)<input name="price" type="number" min={0} step={500} defaultValue={s.price_xof ?? ''} placeholder="prix normal" className="field-input mt-1 w-32 py-2" /></label>
+                        <label className="text-xs">Titre public (FR)<input name="label_fr" defaultValue={pick(s.label, 'fr') ?? ''} maxLength={80} className="field-input mt-1 w-48 py-2" /></label>
+                        <label className="text-xs">Titre public (EN)<input name="label_en" defaultValue={s.label?.en ?? ''} maxLength={80} className="field-input mt-1 w-48 py-2" /></label>
+                        <input type="hidden" name="hasExtras" value="1" />
                         <SubmitButton className="py-2.5">Enregistrer</SubmitButton>
                       </form>
                       <form action={updateSession}>
@@ -142,6 +152,16 @@ export default async function SessionsPage({
               </div>
               <label className="block text-sm">Capacité (places)<input name="capacity" type="number" min={1} required className="field-input mt-1" /></label>
               <label className="block text-sm">Note interne<input name="notes" maxLength={300} className="field-input mt-1" /></label>
+              <details className="rounded-2xl border border-sand-200 p-3">
+                <summary className="cursor-pointer text-sm font-medium text-forest-700">Événement spécial (prix, titre) — facultatif</summary>
+                <div className="mt-3 space-y-3">
+                  <label className="block text-sm">Prix spécial par personne (FCFA)
+                    <input name="price" type="number" min={0} step={500} placeholder="Laisser vide = prix normal" className="field-input mt-1" />
+                  </label>
+                  <label className="block text-sm">Titre affiché (FR)<input name="label_fr" maxLength={80} placeholder="ex. Thiéboudiène spécial fêtes" className="field-input mt-1" /></label>
+                  <label className="block text-sm">Titre affiché (EN)<input name="label_en" maxLength={80} placeholder="e.g. Holiday Thiéboudiène special" className="field-input mt-1" /></label>
+                </div>
+              </details>
               <SubmitButton className="w-full">Créer la séance</SubmitButton>
             </form>
           </section>

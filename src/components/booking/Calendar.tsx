@@ -6,7 +6,8 @@ import type { Locale } from '@/i18n/routing';
 import type { AvailabilitySlot } from '@/lib/types';
 import { cn, toISODate } from '@/lib/utils';
 
-type DayState = 'available' | 'full' | 'unavailable';
+/** full = seats held by requests awaiting confirmation · booked = seats confirmed by Kër Téranga */
+type DayState = 'available' | 'full' | 'booked' | 'unavailable';
 
 interface CalendarProps {
   locale: Locale;
@@ -17,7 +18,7 @@ interface CalendarProps {
   loading: boolean;
   onSelect: (date: string) => void;
   onMonthChange: (month: string) => void;
-  labels: { prev: string; next: string; available: string; full: string; unavailable: string; selected: string };
+  labels: { prev: string; next: string; available: string; full: string; booked: string; unavailable: string; selected: string };
 }
 
 function addMonths(month: string, delta: number) {
@@ -50,7 +51,8 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
   const stateOf = (iso: string): DayState => {
     const list = byDate.get(iso);
     if (!list?.length) return 'unavailable';
-    return list.some((s) => s.remaining > 0) ? 'available' : 'full';
+    if (list.some((s) => s.remaining > 0)) return 'available';
+    return list.every((s) => s.confirmed >= s.capacity) ? 'booked' : 'full';
   };
 
   const days = Array.from({ length: daysInMonth }, (_, i) => toISODate(new Date(Date.UTC(y, m - 1, i + 1))));
@@ -110,7 +112,8 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
           const selected = iso === selectedDate;
           const disabled = state !== 'available';
           const day = Number(iso.slice(8));
-          const stateLabel = state === 'available' ? labels.available : state === 'full' ? labels.full : labels.unavailable;
+          const stateLabel =
+            state === 'available' ? labels.available : state === 'full' ? labels.full : state === 'booked' ? labels.booked : labels.unavailable;
           return (
             <div role="gridcell" key={iso}>
               <button
@@ -125,7 +128,8 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
                   'relative flex aspect-square w-full min-w-0 flex-col items-center justify-center rounded-full text-sm font-semibold tabular-nums transition duration-200',
                   selected && 'bg-forest-700 text-white shadow-soft',
                   !selected && state === 'available' && 'bg-white text-forest-700 ring-1 ring-inset ring-forest-700/30 hover:bg-forest-50 hover:ring-forest-700',
-                  state === 'full' && 'cursor-not-allowed bg-terracotta-100 font-medium text-terracotta-700/70 line-through',
+                  state === 'full' && 'cursor-not-allowed bg-gold-100 font-medium text-gold-600',
+                  state === 'booked' && 'cursor-not-allowed bg-terracotta-100 font-medium text-terracotta-700/70 line-through',
                   state === 'unavailable' && 'cursor-not-allowed bg-sand-100 font-normal text-ink-muted/50'
                 )}
               >
@@ -142,7 +146,8 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
       <ul className="mt-4 flex flex-wrap gap-4 text-xs text-ink-soft" aria-hidden="true">
         <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-white ring-1 ring-inset ring-forest-700/40" /> {labels.available}</li>
         <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-forest-700" /> {labels.selected}</li>
-        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-terracotta-100" /> {labels.full}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-gold-100" /> {labels.full}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-terracotta-100" /> {labels.booked}</li>
         <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-sand-100" /> {labels.unavailable}</li>
       </ul>
     </div>
