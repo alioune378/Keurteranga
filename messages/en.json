@@ -242,11 +242,13 @@
       "languagesText": "Hosted in {languages} — choose when you book.",
       "booking": "Booking",
       "payment": "Payment",
-      "questions": "A question?"
+      "questions": "A question?",
+      "cancellation": "Cancellation policy"
     },
     "finalTitle": "Ready to step into the kitchen?",
     "finalText": "Choose your date and book your spot in a few moments.",
-    "bookShort": "Book"
+    "bookShort": "Book",
+    "cancellationText": "Free cancellation up to 48 hours before the workshop. After that, no refund is possible: the ingredients will already have been bought for you."
   },
   "contact": {
     "eyebrow": "Contact",
@@ -365,7 +367,8 @@
       "phone": "Invalid phone number.",
       "RATE_LIMITED": "Too many attempts. Please wait a few minutes or contact us.",
       "NOT_CONFIGURED": "The booking system isn't activated yet. In the meantime, contact us to book your spot.",
-      "consent": "Please accept the use of your information for the booking."
+      "consent": "Please accept the use of your information for the booking.",
+      "policy": "Please accept the cancellation policy to send your request."
     },
     "partner": {
       "title": "Are you a hotel, travel agency, tour operator, company or association and would like to work with Kër Téranga?",
@@ -430,7 +433,12 @@
     },
     "legendSelected": "Selected",
     "legendBooked": "Booked",
-    "booked": "Booked"
+    "booked": "Booked",
+    "policy": {
+      "title": "Cancellation policy",
+      "text": "Free cancellation up to 48 hours before the workshop. After that, no refund is possible: the ingredients will already have been bought for you.",
+      "accept": "I have read and accept the cancellation policy (free cancellation up to 48 hours before the workshop, no refund after that)."
+    }
   },
   "notFound": {
     "title": "Page not found",

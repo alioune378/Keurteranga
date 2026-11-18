@@ -72,6 +72,8 @@ export function BookingWizard({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<BookingErrorCode | null>(null);
   const [done, setDone] = useState<{ reference: string } | null>(null);
+  const [policyAccepted, setPolicyAccepted] = useState(false);
+  const [policyError, setPolicyError] = useState(false);
 
   // one idempotency key per booking attempt: retries/double-clicks never duplicate
   const idemKey = useRef<string>('');
@@ -182,6 +184,10 @@ export function BookingWizard({
 
   async function confirm() {
     if (!slot || !experience) return;
+    if (!policyAccepted) {
+      setPolicyError(true);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -231,6 +237,8 @@ export function BookingWizard({
     setDate(null);
     setSlotId(null);
     setParticipants(1);
+    setPolicyAccepted(false);
+    setPolicyError(false);
     setStep(initial ? 1 : 0);
     fetchAvailability();
   }
@@ -597,6 +605,24 @@ export function BookingWizard({
                   </div>
                 </dl>
                 <p className="mt-3 text-sm text-ink-muted">{t('summary.totalNote')}</p>
+                <div className="mt-6 rounded-3xl border border-terracotta-300 bg-white p-5">
+                  <h3 className="font-semibold text-ink">{t('policy.title')}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{t('policy.text')}</p>
+                  <label className="mt-4 flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                    <input
+                      type="checkbox"
+                      checked={policyAccepted}
+                      onChange={(e) => {
+                        setPolicyAccepted(e.target.checked);
+                        if (e.target.checked) setPolicyError(false);
+                      }}
+                      aria-invalid={policyError}
+                      className="mt-0.5 h-5 w-5 shrink-0 accent-forest-700"
+                    />
+                    <span>{t('policy.accept')}</span>
+                  </label>
+                  {policyError && <p className="field-error mt-2" role="alert">{t('errors.policy')}</p>}
+                </div>
               </div>
             )}
           </motion.div>

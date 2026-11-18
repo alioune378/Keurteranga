@@ -23,6 +23,9 @@ Astuce : sur le téléphone, ouvrez l'adresse puis « Ajouter à l'écran d'accu
 Sur le calendrier public : **blanc** = disponible · **doré** = places en attente de votre confirmation ·
 **rouge barré** = réservé (confirmé) · **gris** = pas de séance.
 
+**Politique d'annulation** : annulation gratuite jusqu'à 48 h avant l'atelier, aucun remboursement ensuite.
+Le client doit l'accepter avant d'envoyer sa demande, et elle figure dans les e-mails « Demande reçue » et « Confirmation ».
+
 ## Calendrier (séances)
 - **Ajouter une séance** : date, heure de début (et de fin), nombre de places.
 - **Événement spécial** (facultatif) : un **prix spécial** et un **titre** affiché sur le site
