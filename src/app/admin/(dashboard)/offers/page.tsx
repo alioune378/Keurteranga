@@ -23,7 +23,7 @@ export default async function OffersPage({ searchParams }: { searchParams: Promi
       <Flash ok={sp.ok} err={sp.err ?? error?.message} />
       <p className="mb-6 max-w-3xl text-sm text-ink-soft">
         Promotions, réductions, offres de saison : choisissez un pourcentage ou un prix spécial, une date de début et d’expiration.
-        L’offre s’affiche sur l’accueil pendant sa période puis disparaît toute seule. Les prix sont réglés sur place.
+        L’offre s’affiche sur l’accueil pendant sa période puis disparaît toute seule. Le paiement se fait à l’avance par Orange Money ou Wave.
         Pour un prix spécial sur une date précise, vous pouvez aussi l’indiquer directement sur la séance (Calendrier → Modifier).
       </p>
       {items.length === 0 ? (

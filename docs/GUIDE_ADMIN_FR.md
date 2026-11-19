@@ -68,7 +68,7 @@ Le client doit l'accepter avant d'envoyer sa demande, et elle figure dans les e-
 - Réduction en **%**, **prix spécial**, ou avantage sans prix ; code promo facultatif.
 - Date de **début** et d'**expiration** : l'offre disparaît du site le lendemain de l'expiration.
 - Visuel ou affiche, affichage sur l'accueil, même principe brouillon → aperçu → publier.
-- Les paiements se font sur place : appliquez la réduction au moment du règlement.
+- Les paiements se font à l’avance par Orange Money ou Wave (au plus tard 48 h avant l’atelier) : appliquez la réduction au montant demandé.
 
 ## Codes partenaires
 Pour les influenceurs, hôtels, agences… : **un code par partenaire** (ex. `AWA10`).
@@ -84,7 +84,7 @@ Pour les influenceurs, hôtels, agences… : **un code par partenaire** (ex. `AW
   client, la date, le nombre de personnes et son total de réservations confirmées — jamais le nom complet, l'e-mail ni
   le téléphone du client.
 - **Mettre en pause** un code : il n'est plus accepté sur le site, l'historique est conservé.
-- La réduction s'applique au moment du règlement sur place : elle est indiquée sur la réservation.
+- La réduction s’applique au montant demandé par Orange Money ou Wave : elle est indiquée sur la réservation.
 
 ## Affiches & photos
 - Ajoutez vos **flyers et affiches** (JPG, PNG, WebP ou **PDF**, 15 Mo max.), directement depuis le téléphone.

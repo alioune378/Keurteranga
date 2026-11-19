@@ -139,7 +139,7 @@ export default async function BookingDetail({
                     {booking.promo_partner_id
                       ? <Link href={`/admin/promo-codes/${booking.promo_partner_id}`} className="font-mono text-forest-700 underline">{booking.promo_code}</Link>
                       : <span className="font-mono">{booking.promo_code}</span>}
-                    {' '}({discountLabel({ discount_percent: booking.promo_discount_percent, discount_xof: booking.promo_discount_xof })} à appliquer sur place)
+                    {' '}({discountLabel({ discount_percent: booking.promo_discount_percent, discount_xof: booking.promo_discount_xof })} à appliquer au paiement)
                   </dd>
                 </div>
               )}

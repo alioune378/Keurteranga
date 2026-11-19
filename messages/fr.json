@@ -130,7 +130,7 @@
         }
       },
       "cta": "Choisir ma date",
-      "note": "Aucun paiement en ligne — règlement sur place."
+      "note": "Paiement à l'avance par Orange Money ou Wave, au plus tard 48 h avant l'atelier."
     },
     "host": {
       "tag": "Votre hôte",
@@ -222,7 +222,7 @@
       "fr": "Français",
       "en": "Anglais"
     },
-    "noPayment": "Réservation gratuite et sans paiement en ligne — règlement sur place.",
+    "noPayment": "Après confirmation de votre réservation, nous vous contactons : paiement à l'avance par Orange Money ou Wave, au plus tard 48 h avant l'atelier. Pas de paiement sur place.",
     "notFound": "Cette expérience n'existe pas ou n'est plus disponible.",
     "cutoff": "Réservation en ligne jusqu'à {hours, plural, =0 {l'heure du début} one {# heure avant} other {# heures avant}} l'atelier",
     "heroEyebrow": "La Table Sénégalaise · Dakar",
@@ -285,7 +285,7 @@
   "booking": {
     "eyebrow": "La Table Sénégalaise",
     "title": "Réservez votre place à table",
-    "intro": "Choisissez une date, dites-nous qui vient : vos places sont mises de côté et Kër Téranga vous confirme la réservation rapidement. Aucun paiement en ligne.",
+    "intro": "Choisissez une date, dites-nous qui vient : vos places sont mises de côté et Kër Téranga vous confirme la réservation rapidement. Nous vous contactons ensuite pour le paiement par Orange Money ou Wave, au plus tard 48 h avant l'atelier.",
     "steps": {
       "experience": "Votre expérience",
       "date": "Votre date",
@@ -345,7 +345,7 @@
       "contact": "Contact",
       "requests": "Demandes",
       "total": "Total indicatif",
-      "totalNote": "À régler sur place. Aucun paiement en ligne.",
+      "totalNote": "À régler à l'avance par Orange Money ou Wave, au plus tard 48 h avant l'atelier. Nous vous contactons après confirmation de votre réservation. Pas de paiement sur place.",
       "edit": "Modifier",
       "priceTbc": "Communiqué par Kër Téranga"
     },
@@ -358,7 +358,7 @@
       "title": "Merci ! Votre demande est bien reçue.",
       "text": "Dalal ak jàmm — bienvenue ! Vos places sont mises de côté. Kër Téranga confirme votre réservation très rapidement : un e-mail de confirmation vous sera envoyé à {email}.",
       "reference": "Référence",
-      "next": "Conservez votre référence. Une fois la réservation confirmée, l'adresse exacte et les informations pratiques vous seront communiquées.",
+      "next": "Conservez votre référence. Une fois la réservation confirmée, nous vous contactons pour le paiement (Orange Money ou Wave, au plus tard 48 h avant l'atelier), puis vous communiquons l'adresse exacte et les informations pratiques.",
       "another": "Faire une autre réservation",
       "home": "Retour à l'accueil",
       "emailDelay": "Pas d'e-mail d'ici quelques minutes ? Pensez à vérifier vos courriers indésirables."
@@ -440,7 +440,7 @@
     "assurance": {
       "realtime": "Disponibilités en temps réel",
       "languages": "Atelier en français ou en anglais",
-      "payment": "Aucun paiement en ligne"
+      "payment": "Paiement par Orange Money ou Wave"
     },
     "legendSelected": "Sélectionné",
     "legendBooked": "Réservé",

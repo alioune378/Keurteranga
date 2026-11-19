@@ -104,13 +104,13 @@ const T = {
   fr: {
     reference: 'Référence', experience: 'Expérience', date: 'Date', time: 'Horaire',
     guests: 'Participants', wsLang: "Langue de l'atelier", location: 'Lieu',
-    total: 'Total indicatif', payOnSite: ' — à régler sur place', priceTbc: 'Prix communiqué par Kër Téranga',
+    total: 'Total indicatif', payOnSite: " — à régler à l'avance par Orange Money ou Wave, au plus tard 48 h avant l'atelier", priceTbc: 'Prix communiqué par Kër Téranga',
     langFr: 'Français', langEn: 'Anglais'
   },
   en: {
     reference: 'Reference', experience: 'Experience', date: 'Date', time: 'Time',
     guests: 'Guests', wsLang: 'Workshop language', location: 'Location',
-    total: 'Estimated total', payOnSite: ' — payable on site', priceTbc: 'Price confirmed by Kër Téranga',
+    total: 'Estimated total', payOnSite: ' — payable in advance by Orange Money or Wave, at least 48 hours before the workshop', priceTbc: 'Price confirmed by Kër Téranga',
     langFr: 'French', langEn: 'English'
   }
 } as const;

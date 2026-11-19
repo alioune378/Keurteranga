@@ -130,7 +130,7 @@
         }
       },
       "cta": "Pick my date",
-      "note": "No online payment — pay on site."
+      "note": "Pay in advance by Orange Money or Wave, at least 48 hours before the workshop."
     },
     "host": {
       "tag": "Your host",
@@ -222,7 +222,7 @@
       "fr": "French",
       "en": "English"
     },
-    "noPayment": "Free booking, no online payment — pay on site.",
+    "noPayment": "Once your booking is confirmed, we contact you: pay in advance by Orange Money or Wave, at least 48 hours before the workshop. No payment on site.",
     "notFound": "This experience doesn't exist or is no longer available.",
     "cutoff": "Online booking until {hours, plural, =0 {the start time} one {# hour before} other {# hours before}} the workshop",
     "heroEyebrow": "The Senegalese Table · Dakar",
@@ -285,7 +285,7 @@
   "booking": {
     "eyebrow": "The Senegalese Table",
     "title": "Book your seat at the table",
-    "intro": "Pick a date and tell us who's coming: your places are held and Kër Téranga confirms your booking shortly. No online payment.",
+    "intro": "Pick a date and tell us who's coming: your places are held and Kër Téranga confirms your booking shortly. We then contact you for payment by Orange Money or Wave, at least 48 hours before the workshop.",
     "steps": {
       "experience": "Your experience",
       "date": "Your date",
@@ -345,7 +345,7 @@
       "contact": "Contact",
       "requests": "Requests",
       "total": "Estimated total",
-      "totalNote": "Payable on site. No online payment.",
+      "totalNote": "Payable in advance by Orange Money or Wave, at least 48 hours before the workshop. We contact you once your booking is confirmed. No payment on site.",
       "edit": "Edit",
       "priceTbc": "Confirmed by Kër Téranga"
     },
@@ -358,7 +358,7 @@
       "title": "Thank you! Your request has been received.",
       "text": "Dalal ak jàmm — welcome! Your places are being held. Kër Téranga will confirm your booking shortly — a confirmation email will be sent to {email}.",
       "reference": "Reference",
-      "next": "Keep your reference. Once your booking is confirmed, the exact address and practical information will be sent to you.",
+      "next": "Keep your reference. Once your booking is confirmed, we contact you for payment (Orange Money or Wave, at least 48 hours before the workshop), then send you the exact address and practical information.",
       "another": "Make another booking",
       "home": "Back to home",
       "emailDelay": "No email within a few minutes? Please check your spam folder."
@@ -440,7 +440,7 @@
     "assurance": {
       "realtime": "Real-time availability",
       "languages": "Hosted in French or English",
-      "payment": "No online payment"
+      "payment": "Pay by Orange Money or Wave"
     },
     "legendSelected": "Selected",
     "legendBooked": "Booked",
