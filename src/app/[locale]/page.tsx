@@ -308,7 +308,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <Reveal className="flex flex-col items-center gap-6 rounded-4xl border border-sand-200 p-6 text-center md:flex-row md:gap-10 md:p-10 md:text-left">
             {/* 👉 Authentic portrait required — never an illustration (src/config/site.ts → photos.founder) */}
             <Photo
-              src={photos.founder.src}
+              src={photos.founder.square ?? photos.founder.src}
               alt={photos.founder.alt[locale]}
               hint={ta('founder.photo')}
               tone="sand"

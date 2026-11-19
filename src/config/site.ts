@@ -34,6 +34,8 @@ export type SitePhoto = {
   alt: { fr: string; en: string };
   /** true = temporary AI-generated illustration → labelled "Illustration" on the site */
   illustration?: boolean;
+  /** Optional tighter square crop, used where the photo is shown in a circle */
+  square?: string;
   /** Optional short silent clip (mp4) shown instead of the photo; the photo is its poster */
   video?: string;
 };
@@ -60,5 +62,5 @@ export const photos = {
   aboutMarket: { src: `${IMG}/04_Ingredients/marche-produits-frais.webp`, illustration: false, alt: { fr: 'Les ingrédients du thiéboudiène prêts pour l\'atelier', en: 'Thiéboudiène ingredients ready for the workshop' } },
   contact: { src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, illustration: false, alt: { fr: 'Poisson frais, tomates et légumes du thiéboudiène', en: 'Fresh fish, tomatoes and vegetables for thiéboudiène' } },
   // Real portrait required — never use an illustration for the founder
-  founder: { src: null, alt: { fr: 'Portrait de la fondatrice', en: 'Portrait of the founder' } }
+  founder: { src: `${IMG}/06_Fondatrice/fondatrice-portrait.webp`, square: `${IMG}/06_Fondatrice/fondatrice-portrait-carre.webp`, illustration: false, alt: { fr: 'Portrait de la fondatrice de Kër Téranga, souriante, coiffée d\'un bonnet aux couleurs du Sénégal', en: 'Portrait of the founder of Kër Téranga, smiling, wearing a cap in Senegal\'s colours' } }
 } satisfies Record<string, SitePhoto>;
