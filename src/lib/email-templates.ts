@@ -133,6 +133,17 @@ function bookingRows(d: BookingEmailData, l: Locale) {
   ]);
 }
 
+/** 48-hour cancellation policy, shown in every booking email sent to the guest. */
+function policyBlock(fr: boolean) {
+  return `
+<div style="border:1px solid #DD9E80;border-radius:12px;padding:14px 16px;margin:0 0 20px;">
+  <p style="font-size:14px;font-weight:bold;margin:0 0 6px;">${fr ? "Politique d'annulation" : 'Cancellation policy'}</p>
+  <p style="font-size:14px;line-height:1.6;margin:0;">${fr
+    ? "Annulation gratuite jusqu'à 48 h avant l'atelier. Passé ce délai, aucun remboursement n'est possible : les ingrédients auront déjà été achetés pour vous."
+    : 'Free cancellation up to 48 hours before the workshop. After that, no refund is possible: the ingredients will already have been bought for you.'}</p>
+</div>`;
+}
+
 export function bookingClientEmail(d: BookingEmailData) {
   const fr = d.locale === 'fr';
   const subject = fr
@@ -158,6 +169,7 @@ ${bookingRows(d, d.locale)}
     ? 'Pour modifier ou annuler, répondez simplement à cet e-mail en indiquant votre référence.'
     : 'To change or cancel, simply reply to this email quoting your reference.'}
 </p>
+${policyBlock(fr)}
 ${contact.whatsapp ? button(`https://wa.me/${contact.whatsapp}`, fr ? 'Nous écrire sur WhatsApp' : 'Message us on WhatsApp') : ''}
 <p style="font-size:15px;margin:28px 0 0;">${fr ? 'À très bientôt,' : 'See you soon,'}<br><strong>Kër Téranga</strong></p>`;
 
@@ -184,6 +196,7 @@ ${bookingRows(d, d.locale)}
     ? 'Une question ? Répondez simplement à cet e-mail en indiquant votre référence.'
     : 'Any question? Simply reply to this email quoting your reference.'}
 </p>
+${policyBlock(fr)}
 ${contact.whatsapp ? button(`https://wa.me/${contact.whatsapp}`, fr ? 'Nous écrire sur WhatsApp' : 'Message us on WhatsApp') : ''}
 <p style="font-size:15px;margin:28px 0 0;">${fr ? 'À très bientôt,' : 'See you soon,'}<br><strong>Kër Téranga</strong></p>`;
 
