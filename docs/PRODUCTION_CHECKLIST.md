@@ -15,7 +15,7 @@ Legend: ✅ done in the code · ⬜ to do before launch (needs real information 
 - ⬜ Privacy notice / mentions légales page (recommended: Senegal law 2008-12 on personal data; GDPR for EU visitors)
 
 ## Infrastructure
-- ⬜ Supabase project created; migrations 001 + 002 applied; seed run
+- ⬜ Supabase project created; migrations 001 → 005 applied; seed run
 - ⬜ Auth: sign-ups disabled; redirect URL `/admin/auth/callback` added
 - ⬜ Founder admin user created + row in `admin_profiles`
 - ⬜ Resend: domain verified (SPF/DKIM), `RESEND_API_KEY`, `EMAIL_FROM`, `NOTIFY_EMAIL`

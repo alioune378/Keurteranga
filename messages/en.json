@@ -323,6 +323,16 @@
     "requests": "Special requests",
     "requestsPlaceholder": "Allergies, dietary needs, special occasion, accessibility…",
     "optional": "optional",
+    "promo": {
+      "label": "Promo or partner code",
+      "placeholder": "e.g. AWA10",
+      "apply": "Apply",
+      "applied": "Code {code} applied: {discount}",
+      "remove": "Remove",
+      "invalid": "This code is not valid or has expired. You can book without a code.",
+      "summary": "Promo code",
+      "before": "Total before discount"
+    },
     "summary": {
       "title": "Check your booking",
       "experience": "Experience",
@@ -360,6 +370,7 @@
       "INVALID_PARTICIPANTS": "The number of guests isn't valid for this experience.",
       "INVALID_INPUT": "Some information is missing or invalid.",
       "SESSION_NOT_FOUND": "This time slot no longer exists. Please choose another one.",
+      "INVALID_PROMO": "This promo code is no longer valid. It has been removed — you can send your request without it.",
       "required": "This field is required.",
       "email": "Invalid email address.",
       "phone": "Invalid phone number.",

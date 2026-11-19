@@ -94,7 +94,9 @@ bookings are never simulated.
    3. `supabase/migrations/003_studio.sql` (Kër Téranga Studio: booking requests confirmed by the owner,
       special session prices, announcements, offers, media library, editable site content)
    4. `supabase/migrations/004_media_storage.sql` (public `media` bucket for flyers — images and PDF)
-   5. `supabase/seed.sql` (**sample** Thiéboudiène experience + sample sessions + temporary images)
+   5. `supabase/migrations/005_partner_codes.sql` (partner / influencer promo codes: tracking per partner,
+      partner email at each booking made with their code)
+   6. `supabase/seed.sql` (**sample** Thiéboudiène experience + sample sessions + temporary images)
    *(or with the CLI: `supabase link` then `supabase db push`, and run the seed.)*
 3. **Project Settings → API**: copy *Project URL*, *anon public* key and *service_role*
    key into `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,

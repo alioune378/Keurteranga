@@ -67,6 +67,22 @@ Sur le calendrier public : **blanc** = disponible · **doré** = places en atten
 - Visuel ou affiche, affichage sur l'accueil, même principe brouillon → aperçu → publier.
 - Les paiements se font sur place : appliquez la réduction au moment du règlement.
 
+## Codes partenaires
+Pour les influenceurs, hôtels, agences… : **un code par partenaire** (ex. `AWA10`).
+- **Nouveau partenaire** : nom, e-mail, code, réduction (% ou montant en FCFA, ou « suivi seulement » sans réduction),
+  dates de validité facultatives.
+- **Lien à partager** : la page du partenaire affiche un lien (`…/fr/reservation?code=AWA10`). Le client qui l'ouvre a
+  le code déjà appliqué ; il peut aussi le taper lui-même à l'étape « Vos coordonnées ».
+- **Suivi** : chaque réservation faite avec un code est rattachée au partenaire. La page *Codes partenaires* montre,
+  pour chacun, le nombre de demandes, de réservations confirmées et d'invités. Le code apparaît aussi dans la liste des
+  réservations, dans l'e-mail que vous recevez et dans l'export CSV (on peut chercher une réservation par code).
+- **Notification au partenaire** : il reçoit un e-mail à chaque réservation avec son code — par défaut **quand vous
+  confirmez** la réservation (ou, si vous le choisissez, dès que la demande arrive). L'e-mail indique le prénom du
+  client, la date, le nombre de personnes et son total de réservations confirmées — jamais le nom complet, l'e-mail ni
+  le téléphone du client.
+- **Mettre en pause** un code : il n'est plus accepté sur le site, l'historique est conservé.
+- La réduction s'applique au moment du règlement sur place : elle est indiquée sur la réservation.
+
 ## Affiches & photos
 - Ajoutez vos **flyers et affiches** (JPG, PNG, WebP ou **PDF**, 15 Mo max.), directement depuis le téléphone.
 - « Afficher sur l'accueil » → rubrique « Nos affiches ». Dates de visibilité possibles.

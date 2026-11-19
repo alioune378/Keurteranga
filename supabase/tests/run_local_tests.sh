@@ -26,6 +26,7 @@ echo "▶ Applying local Supabase stub, migration and sample seed"
 "${PSQL[@]}" -f supabase/tests/00_local_supabase_stub.sql
 "${PSQL[@]}" -f supabase/migrations/001_schema.sql
 "${PSQL[@]}" -f supabase/migrations/003_studio.sql
+"${PSQL[@]}" -f supabase/migrations/005_partner_codes.sql
 "${PSQL[@]}" -c "grant all on all tables in schema public to service_role; grant all on all sequences in schema public to service_role;"
 "${PSQL[@]}" -f supabase/seed.sql
 "${PSQL[@]}" -tA -c "select 'seed: ' || count(*) || ' sample sessions' from public.sessions;"
@@ -89,6 +90,10 @@ PGOPTIONS="-c client_min_messages=notice" "${PSQL[@]}" -f supabase/tests/accepta
 echo
 echo "▶ STUDIO — booking requests (pending → confirmed), public 'booked' state, content modules"
 PGOPTIONS="-c client_min_messages=notice" "${PSQL[@]}" -f supabase/tests/studio.sql 2>&1 | sed 's/^psql:[^:]*:[0-9]*: //'
+
+echo
+echo "▶ PARTNER CODES — promo codes, tracking per partner, partner notifications"
+PGOPTIONS="-c client_min_messages=notice" "${PSQL[@]}" -f supabase/tests/partner_codes.sql 2>&1 | sed 's/^psql:[^:]*:[0-9]*: //'
 
 echo
 echo "▶ TEST 8 — persistence: a NEW connection (like a page refresh) reads the data back"
