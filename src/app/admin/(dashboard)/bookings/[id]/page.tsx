@@ -4,6 +4,7 @@ import { SubmitButton } from '@/components/admin/AdminUi';
 import { Flash, PageTitle, StatusBadge } from '@/components/admin/Flash';
 import { requireAdmin } from '@/lib/admin';
 import type { Localized } from '@/lib/types';
+import { discountLabel } from '@/lib/promo';
 import { formatDate, formatTime, pick } from '@/lib/utils';
 import { cancelBooking, confirmBooking, updateBooking } from '../../../actions';
 
@@ -131,6 +132,17 @@ export default async function BookingDetail({
               {booking.confirmed_at && <div><dt className="text-ink-muted">Confirmée le</dt><dd>{new Date(booking.confirmed_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>}
               <div><dt className="text-ink-muted">Demandée le</dt><dd>{new Date(booking.created_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>
               <div><dt className="text-ink-muted">Langue du site</dt><dd className="uppercase">{booking.locale}</dd></div>
+              {booking.promo_code && (
+                <div>
+                  <dt className="text-ink-muted">Code partenaire</dt>
+                  <dd className="font-medium">
+                    {booking.promo_partner_id
+                      ? <Link href={`/admin/promo-codes/${booking.promo_partner_id}`} className="font-mono text-forest-700 underline">{booking.promo_code}</Link>
+                      : <span className="font-mono">{booking.promo_code}</span>}
+                    {' '}({discountLabel({ discount_percent: booking.promo_discount_percent, discount_xof: booking.promo_discount_xof })} à appliquer sur place)
+                  </dd>
+                </div>
+              )}
               {booking.cancelled_at && <div><dt className="text-ink-muted">Annulée le</dt><dd>{new Date(booking.cancelled_at).toLocaleString('fr-FR', { timeZone: 'Africa/Dakar' })}</dd></div>}
             </dl>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -145,7 +157,7 @@ export default async function BookingDetail({
               {(emails ?? []).map((e) => (
                 <li key={e.kind} className="flex flex-wrap items-center gap-2">
                   <StatusBadge status={e.status} />
-                  <span>{{ booking_received: 'Accusé de réception client', booking_client: 'Confirmation client', booking_admin: 'Notification admin', booking_cancelled: 'Annulation / refus client' }[e.kind as string] ?? e.kind}</span>
+                  <span>{{ booking_received: 'Accusé de réception client', booking_client: 'Confirmation client', booking_admin: 'Notification admin', booking_cancelled: 'Annulation / refus client', partner_booking: 'Notification partenaire' }[e.kind as string] ?? e.kind}</span>
                   {e.last_error && e.status !== 'sent' && <span className="w-full text-xs text-terracotta-700">{e.last_error}</span>}
                 </li>
               ))}

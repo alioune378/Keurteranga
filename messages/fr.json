@@ -323,6 +323,16 @@
     "requests": "Demandes particulières",
     "requestsPlaceholder": "Allergies, régime alimentaire, occasion spéciale, accessibilité…",
     "optional": "facultatif",
+    "promo": {
+      "label": "Code promo ou partenaire",
+      "placeholder": "Ex. AWA10",
+      "apply": "Appliquer",
+      "applied": "Code {code} appliqué : {discount}",
+      "remove": "Retirer",
+      "invalid": "Ce code n'est pas valide ou a expiré. Vous pouvez réserver sans code.",
+      "summary": "Code promo",
+      "before": "Total avant réduction"
+    },
     "summary": {
       "title": "Vérifiez votre réservation",
       "experience": "Expérience",
@@ -360,6 +370,7 @@
       "INVALID_PARTICIPANTS": "Le nombre de participants n'est pas valide pour cette expérience.",
       "INVALID_INPUT": "Certaines informations sont incomplètes ou invalides.",
       "SESSION_NOT_FOUND": "Ce créneau n'existe plus. Merci d'en choisir un autre.",
+      "INVALID_PROMO": "Ce code promo n'est plus valide. Il a été retiré : vous pouvez envoyer votre demande sans code.",
       "required": "Ce champ est requis.",
       "email": "Adresse e-mail invalide.",
       "phone": "Numéro de téléphone invalide.",

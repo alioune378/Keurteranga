@@ -66,7 +66,10 @@ export default async function BookingsPage({
           <tbody className="divide-y divide-sand-200">
             {rows.map((r) => (
               <tr key={r.id} className="grid grid-cols-2 gap-1 p-3 md:table-row md:p-0">
-                <td className="font-mono font-semibold md:p-3">{r.reference}</td>
+                <td className="font-mono font-semibold md:p-3">
+                  {r.reference}
+                  {r.promo_code && <span className="ml-2 rounded-full bg-gold-100 px-2 py-0.5 text-[0.7rem] font-bold text-gold-600" title="Code partenaire">{r.promo_code}</span>}
+                </td>
                 <td className="text-right md:p-3 md:text-left">
                   {r.sessions ? <span className="capitalize">{formatDate(r.sessions.date, 'fr', { weekday: 'short', year: undefined })} · {formatTime(r.sessions.start_time)}</span> : '—'}
                   <span className="block text-xs text-ink-muted">{pick(r.experiences?.title, 'fr')}</span>

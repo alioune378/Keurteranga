@@ -26,6 +26,7 @@ export interface AdminBookingRow {
   created_at: string;
   cancelled_at: string | null;
   confirmed_at?: string | null;
+  promo_code?: string | null;
   session_id: string;
   sessions: { date: string; start_time: string; end_time: string | null } | null;
   experiences: { title: { fr?: string; en?: string } } | null;
@@ -37,7 +38,7 @@ export async function queryBookings(supabase: SupabaseClient, f: BookingFilters,
     .from('bookings')
     .select(
       `id, reference, status, participants, language, first_name, last_name, email, phone, country,
-       special_requests, admin_notes, locale, created_at, cancelled_at, session_id,
+       special_requests, admin_notes, locale, created_at, cancelled_at, session_id, promo_code,
        sessions!inner ( date, start_time, end_time ), experiences ( title )`
     )
     .order('created_at', { ascending: false })
@@ -45,7 +46,7 @@ export async function queryBookings(supabase: SupabaseClient, f: BookingFilters,
 
   // only letters, digits and a few safe characters — prevents filter injection
   const q = (f.q ?? '').replace(/[^\p{L}\p{N}@.\- ]/gu, '').trim().slice(0, 80);
-  if (q) query = query.or(`reference.ilike.%${q}%,email.ilike.%${q}%,last_name.ilike.%${q}%,first_name.ilike.%${q}%,phone.ilike.%${q}%`);
+  if (q) query = query.or(`reference.ilike.%${q}%,email.ilike.%${q}%,last_name.ilike.%${q}%,first_name.ilike.%${q}%,phone.ilike.%${q}%,promo_code.ilike.%${q}%`);
   if (f.status === 'pending' || f.status === 'confirmed' || f.status === 'cancelled') query = query.eq('status', f.status);
   if (f.session && /^[0-9a-f-]{36}$/i.test(f.session)) query = query.eq('session_id', f.session);
   if (f.from && /^\d{4}-\d{2}-\d{2}$/.test(f.from)) query = query.gte('sessions.date', f.from);

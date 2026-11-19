@@ -14,6 +14,7 @@ const NAV = [
   { href: '/admin/experiences', label: 'Expériences' },
   { href: '/admin/communications', label: 'Annonces' },
   { href: '/admin/offers', label: 'Offres spéciales' },
+  { href: '/admin/promo-codes', label: 'Codes partenaires' },
   { href: '/admin/media', label: 'Affiches & photos' },
   { href: '/admin/settings', label: 'Site & coordonnées' },
   { href: '/admin/partners', label: 'Partenaires & messages' }

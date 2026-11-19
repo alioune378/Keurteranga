@@ -1,10 +1,10 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Check, CheckCircle2, Clock, Loader2, Minus, Plus, Radio } from 'lucide-react';
+import { Check, CheckCircle2, Clock, Loader2, Minus, Plus, Radio, Tag, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { createBooking } from '@/app/actions';
+import { checkPromoCode, createBooking } from '@/app/actions';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { Photo } from '@/components/ui/Photo';
@@ -12,6 +12,7 @@ import { countries } from '@/data/countries';
 import { getBrowserClient } from '@/lib/supabase/browser';
 import type { AvailabilitySlot, BookingErrorCode, ExperienceSummary } from '@/lib/types';
 import { cn, formatDate, formatPrice, formatTime, pick } from '@/lib/utils';
+import { discountedTotal, discountLabel, normalizeCode, type PromoDiscount } from '@/lib/promo';
 import { EMAIL_RE } from '@/lib/validation';
 import { Calendar } from './Calendar';
 
@@ -42,10 +43,13 @@ interface Details {
 
 export function BookingWizard({
   experiences,
-  initialSlug
+  initialSlug,
+  initialCode
 }: {
   experiences: ExperienceSummary[];
   initialSlug?: string;
+  /** partner / influencer code from the link (?code=AWA10) */
+  initialCode?: string;
 }) {
   const t = useTranslations('booking');
   const tp = useTranslations('placeholder');
@@ -65,6 +69,11 @@ export function BookingWizard({
   const [slotId, setSlotId] = useState<string | null>(null);
   const [participants, setParticipants] = useState(1);
   const [language, setLanguage] = useState<'fr' | 'en'>(locale);
+  // partner / influencer promo code
+  const [promoInput, setPromoInput] = useState('');
+  const [promo, setPromo] = useState<PromoDiscount | null>(null);
+  const [promoError, setPromoError] = useState<string | null>(null);
+  const [promoChecking, setPromoChecking] = useState(false);
   const [details, setDetails] = useState<Details>({
     firstName: '', lastName: '', email: '', dialCode: '+221', phone: '', country: '', specialRequests: '', consent: false
   });
@@ -82,6 +91,66 @@ export function BookingWizard({
     idemKey.current = crypto.randomUUID();
     startedAt.current = Date.now();
   }, []);
+
+  // a partner link (?code=AWA10) applies the code automatically; it is kept for
+  // this visit so the guest can browse the site and book later
+  useEffect(() => {
+    let code = initialCode ? normalizeCode(initialCode) : '';
+    try {
+      if (code) sessionStorage.setItem('kt-promo', code);
+      else code = sessionStorage.getItem('kt-promo') ?? '';
+    } catch {
+      /* storage unavailable: the code from the link still works */
+    }
+    if (code) {
+      setPromoInput(code);
+      void applyPromo(code, true);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function applyPromo(raw = promoInput, silent = false) {
+    const code = normalizeCode(raw);
+    setPromoError(null);
+    if (!code) return;
+    setPromoChecking(true);
+    try {
+      const res = await checkPromoCode(code);
+      if (res.ok) {
+        setPromo(res.promo);
+        setPromoInput(res.promo.code);
+        try {
+          sessionStorage.setItem('kt-promo', res.promo.code);
+        } catch {
+          /* ignore */
+        }
+      } else {
+        setPromo(null);
+        if (!silent) setPromoError(t(res.error === 'RATE_LIMITED' ? 'errors.RATE_LIMITED' : 'promo.invalid'));
+        if (res.error === 'INVALID_PROMO') {
+          try {
+            sessionStorage.removeItem('kt-promo');
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+    } catch {
+      if (!silent) setPromoError(t('errors.generic'));
+    } finally {
+      setPromoChecking(false);
+    }
+  }
+
+  function removePromo() {
+    setPromo(null);
+    setPromoInput('');
+    setPromoError(null);
+    try {
+      sessionStorage.removeItem('kt-promo');
+    } catch {
+      /* ignore */
+    }
+  }
 
   const slot = slots.find((s) => s.id === slotId) ?? null;
   const daySlots = useMemo(() => slots.filter((s) => s.date === date), [slots, date]);
@@ -197,6 +266,7 @@ export function BookingWizard({
         phone: details.phone,
         country: details.country,
         specialRequests: details.specialRequests,
+        promoCode: promo?.code ?? '',
         consent: details.consent,
         website: honeypot.current?.value ?? '',
         startedAt: startedAt.current,
@@ -207,6 +277,12 @@ export function BookingWizard({
         return;
       }
       setError(res.error);
+      if (res.error === 'INVALID_PROMO') {
+        // the code expired or was paused meanwhile: remove it, the guest can book without it
+        removePromo();
+        setPromoError(t('promo.invalid'));
+        setStep(3);
+      }
       if (res.fields) {
         const map: Record<string, string> = {};
         for (const [k, v] of Object.entries(res.fields)) map[k] = t(`errors.${v === 'required' && k === 'consent' ? 'consent' : v}`);
@@ -239,7 +315,8 @@ export function BookingWizard({
   const countryName = (code: string) => countries.find((c) => c.code === code)?.[locale] ?? code;
   // a special price set on the chosen session wins over the experience price
   const unitPrice = slot?.price_xof ?? experience?.price_xof ?? null;
-  const total = unitPrice != null ? formatPrice(unitPrice * participants, locale) : null;
+  const subtotal = unitPrice != null ? unitPrice * participants : null;
+  const total = subtotal != null ? formatPrice(discountedTotal(subtotal, promo), locale) : null;
 
   // ------------------------------------------------------------------ success
   if (done) {
@@ -553,6 +630,52 @@ export function BookingWizard({
                   </label>
                   <textarea id="b-req" rows={3} maxLength={1000} value={details.specialRequests} onChange={(e) => set('specialRequests', e.target.value)} placeholder={t('requestsPlaceholder')} className="field-input resize-y" />
                 </div>
+                <div>
+                  <label htmlFor="b-promo" className="field-label">
+                    {t('promo.label')} <span className="font-normal text-ink-muted">({t('optional')})</span>
+                  </label>
+                  {promo ? (
+                    <div className="flex items-center justify-between gap-3 rounded-2xl border border-forest-300 bg-forest-50 px-4 py-3" role="status">
+                      <span className="flex items-center gap-2 text-sm font-semibold text-forest-800">
+                        <Tag className="h-4 w-4" aria-hidden="true" />
+                        {t('promo.applied', { code: promo.code, discount: discountLabel(promo, locale) })}
+                      </span>
+                      <button type="button" onClick={removePromo} className="inline-flex items-center gap-1 text-xs font-semibold text-ink-soft hover:text-terracotta-700">
+                        <X className="h-3.5 w-3.5" aria-hidden="true" /> {t('promo.remove')}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input
+                        id="b-promo"
+                        type="text"
+                        value={promoInput}
+                        onChange={(e) => {
+                          setPromoInput(e.target.value.toUpperCase());
+                          setPromoError(null);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            void applyPromo();
+                          }
+                        }}
+                        placeholder={t('promo.placeholder')}
+                        autoComplete="off"
+                        autoCapitalize="characters"
+                        maxLength={30}
+                        className="field-input uppercase"
+                        aria-invalid={!!promoError}
+                        aria-describedby={promoError ? 'b-promo-error' : undefined}
+                      />
+                      <button type="button" onClick={() => applyPromo()} disabled={!promoInput.trim() || promoChecking} className="btn-outline shrink-0 px-5">
+                        {promoChecking && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
+                        {t('promo.apply')}
+                      </button>
+                    </div>
+                  )}
+                  {promoError && <p id="b-promo-error" className="field-error" role="alert">{promoError}</p>}
+                </div>
                 <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-ink-soft">
                   <input
                     type="checkbox"
@@ -579,7 +702,8 @@ export function BookingWizard({
                     [t('summary.participants'), String(participants), 2],
                     [t('summary.language'), language === 'fr' ? t('languageFr') : t('languageEn'), 2],
                     [t('summary.contact'), `${details.firstName} ${details.lastName} · ${details.email} · ${details.dialCode} ${details.phone}${details.country ? ` · ${details.country}` : ''}`, 3],
-                    ...(details.specialRequests ? [[t('summary.requests'), details.specialRequests, 3]] : [])
+                    ...(details.specialRequests ? [[t('summary.requests'), details.specialRequests, 3]] : []),
+                    ...(promo ? [[t('promo.summary'), `${promo.code} (${discountLabel(promo, locale)})`, 3]] : [])
                   ] as Array<[string, string, number]>).map(([k, v, s]) => (
                     <div key={String(k)} className="flex flex-col gap-1 py-3.5 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                       <dt className="text-sm text-ink-muted">{k}</dt>
@@ -591,6 +715,12 @@ export function BookingWizard({
                       </dd>
                     </div>
                   ))}
+                  {promo && subtotal != null && (
+                    <div className="flex items-center justify-between py-3.5 text-sm">
+                      <dt className="text-ink-muted">{t('promo.before')}</dt>
+                      <dd className="text-ink-muted line-through">{formatPrice(subtotal, locale)}</dd>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between py-4">
                     <dt className="font-semibold">{t('summary.total')}</dt>
                     <dd className="font-display text-2xl font-bold text-forest-700">{total ?? <span className="text-base italic text-ink-soft">{t('summary.priceTbc')}</span>}</dd>
@@ -643,11 +773,17 @@ export function BookingWizard({
               <p className="border-t border-sand-200 pt-3 text-ink-soft">
                 {unitPrice != null ? (
                   <>
-                    {formatPrice(unitPrice, locale)} × {participants} = <strong className="text-ink">{total}</strong>
+                    {formatPrice(unitPrice, locale)} × {participants}
+                    {promo && <> {discountLabel(promo, locale)}</>} = <strong className="text-ink">{total}</strong>
                   </>
                 ) : (
                   tp('priceTbc')
                 )}
+              </p>
+            )}
+            {promo && (
+              <p className="flex items-center gap-1.5 font-semibold text-forest-700">
+                <Tag className="h-4 w-4" aria-hidden="true" /> {promo.code} · {discountLabel(promo, locale)}
               </p>
             )}
           </div>

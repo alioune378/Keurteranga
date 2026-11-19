@@ -4,6 +4,7 @@ import type { Locale } from '@/i18n/routing';
 import { processOutboxQuickly } from '@/lib/outbox';
 import { rateLimit } from '@/lib/rate-limit';
 import { getServiceClient } from '@/lib/supabase/service';
+import { CODE_RE, normalizeCode, type PromoDiscount } from '@/lib/promo';
 import type { BookingErrorCode, BookingResult, FormState } from '@/lib/types';
 import { buildPhone, cleanLine, cleanText, isEmail, isUuid, looksLikeSpam } from '@/lib/validation';
 
@@ -14,7 +15,8 @@ const KNOWN_ERRORS: BookingErrorCode[] = [
   'DATE_BLOCKED',
   'INVALID_PARTICIPANTS',
   'INVALID_INPUT',
-  'SESSION_NOT_FOUND'
+  'SESSION_NOT_FOUND',
+  'INVALID_PROMO'
 ];
 
 export interface BookingInput {
@@ -29,6 +31,8 @@ export interface BookingInput {
   phone: string;
   country: string;
   specialRequests: string;
+  /** optional partner / influencer code */
+  promoCode?: string;
   consent: boolean;
   website: string; // honeypot
   startedAt: number;
@@ -53,6 +57,8 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
   const participants = Math.trunc(Number(input.participants));
   const language = input.language === 'en' ? 'en' : 'fr';
   const locale: Locale = input.locale === 'en' ? 'en' : 'fr';
+  const promoCode = normalizeCode(String(input.promoCode ?? ''));
+  if (promoCode && !CODE_RE.test(promoCode)) return { ok: false, error: 'INVALID_PROMO' };
 
   if (!firstName) fields.firstName = 'required';
   if (!lastName) fields.lastName = 'required';
@@ -80,7 +86,8 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
     p_phone: phone,
     p_country: country,
     p_special_requests: specialRequests,
-    p_locale: locale
+    p_locale: locale,
+    p_promo_code: promoCode || null
   });
 
   if (error) {
@@ -96,6 +103,27 @@ export async function createBooking(input: BookingInput): Promise<BookingResult>
   await processOutboxQuickly([result.booking_id]);
 
   return { ok: true, reference: result.reference };
+}
+
+// ---------------------------------------------------------------------------
+// Partner promo code — checked as the guest types it (discount only, never the
+// partner's details). Rate-limited so codes cannot be guessed by brute force.
+// ---------------------------------------------------------------------------
+export async function checkPromoCode(raw: string): Promise<{ ok: true; promo: PromoDiscount } | { ok: false; error: 'INVALID_PROMO' | 'RATE_LIMITED' | 'NOT_CONFIGURED' }> {
+  const supabase = getServiceClient();
+  if (!supabase) return { ok: false, error: 'NOT_CONFIGURED' };
+  const code = normalizeCode(String(raw ?? ''));
+  if (!CODE_RE.test(code)) return { ok: false, error: 'INVALID_PROMO' };
+  if (!(await rateLimit('promo', 15, 15 * 60))) return { ok: false, error: 'RATE_LIMITED' };
+
+  const { data, error } = await supabase.rpc('check_promo', { p_code: code });
+  if (error) {
+    console.error('[promo] check_promo failed', error.message);
+    return { ok: false, error: 'INVALID_PROMO' };
+  }
+  const r = data as { valid: boolean; code?: string; discount_percent?: number | null; discount_xof?: number | null };
+  if (!r?.valid || !r.code) return { ok: false, error: 'INVALID_PROMO' };
+  return { ok: true, promo: { code: r.code, discount_percent: r.discount_percent ?? null, discount_xof: r.discount_xof ?? null } };
 }
 
 // ---------------------------------------------------------------------------

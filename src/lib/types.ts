@@ -82,6 +82,7 @@ export type BookingErrorCode =
   | 'INVALID_PARTICIPANTS'
   | 'INVALID_INPUT'
   | 'SESSION_NOT_FOUND'
+  | 'INVALID_PROMO'
   | 'RATE_LIMITED'
   | 'NOT_CONFIGURED'
   | 'generic';

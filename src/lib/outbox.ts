@@ -10,6 +10,7 @@ import {
   setEmailContact,
   contactAdminEmail,
   partnerAdminEmail,
+  partnerBookingEmail,
   type BookingEmailData
 } from './email-templates';
 import { resolveContact, type SiteSettingsRow } from './site-settings';
@@ -21,7 +22,7 @@ const MAX_ATTEMPTS = 8;
 
 interface OutboxRow {
   id: string;
-  kind: 'booking_received' | 'booking_client' | 'booking_admin' | 'booking_cancelled' | 'partner_admin' | 'contact_admin';
+  kind: 'booking_received' | 'booking_client' | 'booking_admin' | 'booking_cancelled' | 'partner_admin' | 'contact_admin' | 'partner_booking';
   ref_id: string;
   attempts: number;
 }
@@ -32,6 +33,7 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
     .from('bookings')
     .select(
       `id, status, confirmed_at, reference, participants, language, first_name, last_name, email, phone, country, special_requests, locale,
+       promo_code, promo_discount_percent, promo_discount_xof,
        sessions ( date, start_time, end_time, price_xof ),
        experiences ( title, location, price_xof )`
     )
@@ -43,6 +45,7 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
     id: string; status: string; confirmed_at: string | null;
     reference: string; participants: number; language: 'fr' | 'en'; first_name: string; last_name: string;
     email: string; phone: string; country: string | null; special_requests: string | null; locale: Locale;
+    promo_code: string | null; promo_discount_percent: number | null; promo_discount_xof: number | null;
     sessions: { date: string; start_time: string; end_time: string | null; price_xof: number | null };
     experiences: { title: Localized; location: Localized; price_xof: number | null };
   };
@@ -66,7 +69,10 @@ async function loadBooking(id: string): Promise<BookingEmailData | null> {
     location: pick(row.experiences.location, locale) ?? '',
     // a special price set on the session wins over the experience price
     priceXof: row.sessions.price_xof ?? row.experiences.price_xof,
-    locale
+    locale,
+    promoCode: row.promo_code,
+    discountPercent: row.promo_discount_percent,
+    discountXof: row.promo_discount_xof
   };
 }
 
@@ -89,6 +95,28 @@ async function deliver(row: OutboxRow) {
       const m = bookingAdminEmail(b);
       await sendEmail({ to: notifyAddress(), subject: m.subject, html: m.html, replyTo: b.email });
     }
+    return;
+  }
+
+  if (row.kind === 'partner_booking') {
+    const { data: bk } = await supabase.from('bookings').select('promo_partner_id').eq('id', row.ref_id).maybeSingle();
+    if (!bk?.promo_partner_id) return; // code removed from the booking meanwhile: nothing to send
+    const { data: p } = await supabase
+      .from('promo_partners')
+      .select('name, email, code, locale, notify')
+      .eq('id', bk.promo_partner_id)
+      .maybeSingle();
+    if (!p?.email || !p.notify) return; // partner deleted, no email, or notifications switched off
+    const b = await loadBooking(row.ref_id);
+    if (!b) throw new Error('BOOKING_NOT_FOUND');
+    const { count } = await supabase
+      .from('bookings')
+      .select('id', { count: 'exact', head: true })
+      .eq('promo_partner_id', bk.promo_partner_id)
+      .eq('status', 'confirmed');
+    const partnerLocale: Locale = p.locale === 'en' ? 'en' : 'fr';
+    const m = partnerBookingEmail(b, { name: p.name, code: p.code, locale: partnerLocale, totalConfirmed: count ?? 0 });
+    await sendEmail({ to: p.email, subject: m.subject, html: m.html, replyTo: publicReplyTo() || notifyAddress() || undefined });
     return;
   }
 

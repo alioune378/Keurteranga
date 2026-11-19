@@ -26,10 +26,10 @@ export default async function ReservationPage({
   searchParams
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ experience?: string }>;
+  searchParams: Promise<{ experience?: string; code?: string; promo?: string }>;
 }) {
   const locale = (await params).locale as Locale;
-  const { experience } = await searchParams;
+  const { experience, code, promo } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations('booking');
 
@@ -67,7 +67,7 @@ export default async function ReservationPage({
       <section className="bg-white py-6 md:py-10">
         <div className="container">
           {enabled && experiences.length > 0 ? (
-            <BookingWizard experiences={experiences} initialSlug={experience} />
+            <BookingWizard experiences={experiences} initialSlug={experience} initialCode={code ?? promo} />
           ) : (
             // Booking is never simulated: without a database, the flow is not offered.
             <div className="card mx-auto max-w-xl p-8 text-center md:p-10">

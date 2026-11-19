@@ -1,5 +1,6 @@
 import { site } from '@/config/site';
 import type { Locale } from '@/i18n/routing';
+import { discountedTotal, discountLabel } from './promo';
 import { escapeHtml, formatDate, formatPrice, siteUrl } from './utils';
 
 const C = {
@@ -89,6 +90,14 @@ export interface BookingEmailData {
   location: string;
   priceXof: number | null;
   locale: Locale;
+  /** partner / influencer code used for this booking */
+  promoCode: string | null;
+  discountPercent: number | null;
+  discountXof: number | null;
+}
+
+function promoOf(d: BookingEmailData) {
+  return d.promoCode ? { discount_percent: d.discountPercent, discount_xof: d.discountXof } : null;
 }
 
 const T = {
@@ -109,7 +118,8 @@ const T = {
 function bookingRows(d: BookingEmailData, l: Locale) {
   const t = T[l];
   const time = d.endTime ? `${d.startTime} – ${d.endTime}` : d.startTime;
-  const total = d.priceXof != null ? `${formatPrice(d.priceXof * d.participants, l)}${t.payOnSite}` : t.priceTbc;
+  const promo = promoOf(d);
+  const total = d.priceXof != null ? `${formatPrice(discountedTotal(d.priceXof * d.participants, promo), l)}${t.payOnSite}` : t.priceTbc;
   return rows([
     [t.reference, d.reference],
     [t.experience, d.experienceTitle],
@@ -118,6 +128,7 @@ function bookingRows(d: BookingEmailData, l: Locale) {
     [t.guests, String(d.participants)],
     [t.wsLang, d.language === 'fr' ? t.langFr : t.langEn],
     [t.location, d.location],
+    ...(d.promoCode ? [[l === 'fr' ? 'Code promo' : 'Promo code', `${d.promoCode} (${discountLabel(promo, l)})`] as [string, string]] : []),
     [t.total, total]
   ]);
 }
@@ -254,6 +265,7 @@ ${rows([
   ['Téléphone', d.phone],
   ['Pays de résidence', d.country || '—'],
   ['Demandes particulières', d.specialRequests || '—'],
+  ...(d.promoCode ? [['Code partenaire', `${d.promoCode} (${discountLabel(promoOf(d))})`] as [string, string]] : []),
   ['Langue du site', d.locale.toUpperCase()]
 ])}
 ${button(siteUrl(`/admin/bookings/${d.bookingId}`), 'Confirmer ou refuser', true)}`;
@@ -308,4 +320,46 @@ ${rows([
 ])}
 <p style="font-size:15px;line-height:1.7;white-space:pre-wrap;">${escapeHtml(d.message)}</p>`;
   return { subject, html: layout('fr', subject, body) };
+}
+
+/**
+ * Sent to the partner / influencer whose code was used. Only what they need to
+ * follow their results — never the guest's surname, email or phone number.
+ */
+export function partnerBookingEmail(
+  d: BookingEmailData,
+  p: { name: string; code: string; locale: Locale; totalConfirmed: number }
+) {
+  const fr = p.locale === 'fr';
+  const l = p.locale;
+  const subject = d.confirmed
+    ? fr
+      ? `Nouvelle réservation confirmée avec votre code ${p.code}`
+      : `New confirmed booking with your code ${p.code}`
+    : fr
+      ? `Nouvelle demande de réservation avec votre code ${p.code}`
+      : `New booking request with your code ${p.code}`;
+  const body = `
+<h1 style="font-family:Georgia,serif;font-weight:normal;font-size:24px;margin:0 0 12px;color:${C.green};">
+  ${fr ? `Bonjour ${escapeHtml(p.name)},` : `Hello ${escapeHtml(p.name)},`}
+</h1>
+<p style="font-size:16px;line-height:1.6;margin:0;">
+  ${d.confirmed
+    ? fr
+      ? `Bonne nouvelle : une réservation avec votre code <strong>${escapeHtml(p.code)}</strong> vient d'être confirmée. Merci de faire découvrir Kër Téranga !`
+      : `Good news: a booking with your code <strong>${escapeHtml(p.code)}</strong> has just been confirmed. Thank you for sharing Kër Téranga!`
+    : fr
+      ? `Une nouvelle demande de réservation vient d'arriver avec votre code <strong>${escapeHtml(p.code)}</strong>. Kër Téranga la confirmera très prochainement.`
+      : `A new booking request has just arrived with your code <strong>${escapeHtml(p.code)}</strong>. Kër Téranga will confirm it shortly.`}
+</p>
+${rows([
+  [fr ? 'Invité' : 'Guest', d.firstName],
+  [fr ? 'Expérience' : 'Experience', d.experienceTitle],
+  [fr ? 'Date' : 'Date', formatDate(d.date, l)],
+  [fr ? 'Participants' : 'Guests', String(d.participants)],
+  [fr ? 'Code utilisé' : 'Code used', `${p.code} (${discountLabel(promoOf(d), l)})`],
+  [fr ? 'Réservations confirmées avec votre code' : 'Confirmed bookings with your code', String(p.totalConfirmed)]
+])}
+<p style="font-size:15px;margin:28px 0 0;">${fr ? 'Avec toute notre reconnaissance,' : 'With our warm thanks,'}<br><strong>Kër Téranga</strong></p>`;
+  return { subject, html: layout(l, subject, body, `${p.code} · ${formatDate(d.date, l)}`) };
 }
