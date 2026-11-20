@@ -17,7 +17,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
     { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
-  const heading = 'font-hand text-[1.6rem] font-semibold leading-none text-saffron-300';
+  const heading = 'font-hand text-[1.6rem] leading-none text-saffron-300';
   const link = 'text-white/75 transition-colors hover:text-white';
 
   return (
@@ -25,7 +25,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
       {/* Closing statement */}
       <div className="border-b border-white/10">
         <div className="container flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between md:py-16">
-          <p className="max-w-2xl font-hand text-[2.4rem] font-semibold leading-[1.05] text-saffron-200 md:text-[3.2rem]">
+          <p className="max-w-2xl font-hand text-[2.4rem] leading-[1.05] text-saffron-200 md:text-[3.2rem]">
             {t('footer.statement')}
           </p>
           <Link href="/reservation" className="btn-gold btn-lg shrink-0 self-start md:self-auto">

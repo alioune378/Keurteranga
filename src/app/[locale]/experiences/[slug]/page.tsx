@@ -186,7 +186,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
           {included.length > 0 && (
             <Reveal delay={0.1} className="lg:col-span-5">
               <div className="rounded-[1.75rem] bg-clay-50 p-6 md:p-8">
-                <h3 className="font-hand text-[1.9rem] font-semibold leading-none text-clay-500">{t('included')}</h3>
+                <h3 className="font-hand text-[1.9rem] leading-none text-clay-500">{t('included')}</h3>
                 <ul className="mt-5 space-y-3.5">
                   {included.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-[0.95rem] leading-relaxed">

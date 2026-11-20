@@ -84,7 +84,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="space-y-5 lg:col-span-5">
             {(['mission', 'vision'] as const).map((k, i) => (
               <Reveal key={k} delay={0.06 * (i + 1)} className={i === 0 ? 'rounded-[1.75rem] bg-clay-50 p-6 md:p-8' : 'rounded-[1.75rem] bg-kola-800 p-6 text-white md:p-8'}>
-                <h2 className={i === 0 ? 'font-hand text-[1.8rem] font-semibold leading-none text-clay-500' : 'font-hand text-[1.8rem] font-semibold leading-none text-saffron-300'}>
+                <h2 className={i === 0 ? 'font-hand text-[1.8rem] leading-none text-clay-500' : 'font-hand text-[1.8rem] leading-none text-saffron-300'}>
                   {t(`${k}.title`)}
                 </h2>
                 <p className={i === 0 ? 'mt-3 leading-relaxed text-ink-soft' : 'mt-3 leading-relaxed text-white/85'}>{t(`${k}.text`)}</p>

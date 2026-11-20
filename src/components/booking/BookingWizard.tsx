@@ -466,7 +466,7 @@ export function BookingWizard({
                 </p>
                 {upcoming && upcoming.length > 0 && (
                   <div className="mt-6">
-                    <h3 className="font-hand text-[1.6rem] font-semibold leading-none text-clay-500">{t('upcoming.title')}</h3>
+                    <h3 className="font-hand text-[1.6rem] leading-none text-clay-500">{t('upcoming.title')}</h3>
                     <ul className="no-scrollbar -mx-1 mt-3 flex gap-3 overflow-x-auto px-1 pb-2">
                       {upcoming.map((s) => {
                         const selected = slotId === s.id;
@@ -845,7 +845,7 @@ export function BookingWizard({
             <Photo src={experience.cover?.src} alt={experience.cover?.alt ?? experience.title} illustration={experience.cover?.illustration} className="aspect-[3/2]" sizes="340px" />
           )}
           <div className="space-y-3 p-6 text-sm">
-            <p className="font-hand text-[1.6rem] font-semibold leading-none text-clay-500">{t('invitation')}</p>
+            <p className="font-hand text-[1.6rem] leading-none text-clay-500">{t('invitation')}</p>
             <p className="font-display text-lg font-semibold leading-tight text-kola-700">{experience?.title ?? '—'}</p>
             {experience && <p className="text-ink-soft">{experience.duration} · {experience.location}</p>}
             {slot && (

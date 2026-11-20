@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Caveat, Figtree } from 'next/font/google';
+import { Bricolage_Grotesque, Figtree, Patrick_Hand } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -23,9 +23,10 @@ const display = Bricolage_Grotesque({
 });
 
 // handwritten accent — Wolof words, the steps of the afternoon, little notes
-const hand = Caveat({
+// (Patrick Hand: upright, clear letters — its "f" stays on the line)
+const hand = Patrick_Hand({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: '400',
   variable: '--font-hand',
   display: 'swap'
 });
