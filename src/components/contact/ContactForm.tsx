@@ -16,7 +16,7 @@ export function ContactForm() {
   if (state.status === 'success') {
     return (
       <div className="card flex flex-col items-center p-10 text-center" role="status">
-        <CheckCircle2 className="h-12 w-12 text-forest-600" aria-hidden="true" />
+        <CheckCircle2 className="h-12 w-12 text-kola-600" aria-hidden="true" />
         <p className="mt-4 text-lg">{t('success')}</p>
       </div>
     );

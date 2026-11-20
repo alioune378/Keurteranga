@@ -30,7 +30,7 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <h3 className="text-2xl">
-          <Link href={href} className="hover:text-forest-600">
+          <Link href={href} className="hover:text-kola-600">
             {title}
           </Link>
         </h3>
@@ -38,15 +38,15 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
 
         <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-soft">
           <li className="inline-flex items-center gap-1.5">
-            <Clock className="h-4 w-4 text-terracotta-500" aria-hidden="true" />
+            <Clock className="h-4 w-4 text-clay-500" aria-hidden="true" />
             {pick(experience.duration, locale)}
           </li>
           <li className="inline-flex items-center gap-1.5">
-            <Languages className="h-4 w-4 text-terracotta-500" aria-hidden="true" />
+            <Languages className="h-4 w-4 text-clay-500" aria-hidden="true" />
             {experience.languages.map((l) => l.toUpperCase()).join(' / ')}
           </li>
           <li className="inline-flex items-center gap-1.5">
-            <Users className="h-4 w-4 text-terracotta-500" aria-hidden="true" />
+            <Users className="h-4 w-4 text-clay-500" aria-hidden="true" />
             {experience.max_participants
               ? t('participants', { min: experience.min_participants, max: experience.max_participants })
               : tp('groupTbc')}
@@ -58,7 +58,7 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
             {experience.price_xof != null ? (
               <>
                 {t('from')}
-                <span className="block font-display text-2xl text-forest-700">
+                <span className="block font-display text-2xl text-kola-700">
                   {formatPrice(experience.price_xof, locale)}
                 </span>
                 {t('perPerson')}
@@ -71,7 +71,7 @@ export function ExperienceCard({ experience, locale }: { experience: Experience;
             <Link href={{ pathname: '/reservation', query: { experience: experience.slug } }} className="btn-gold px-5">
               {t('book')}
             </Link>
-            <Link href={href} className="inline-flex items-center gap-1 text-sm font-medium text-forest-700 hover:gap-2 hover:text-forest-600">
+            <Link href={href} className="inline-flex items-center gap-1 text-sm font-medium text-kola-700 hover:gap-2 hover:text-kola-600">
               {t('discover')} <ArrowRight className="h-4 w-4 transition-all" aria-hidden="true" />
             </Link>
           </div>

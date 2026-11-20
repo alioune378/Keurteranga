@@ -19,10 +19,10 @@ interface PhotoProps {
 
 // Placeholder surfaces (no patterns) — clearly read as "photo to come"
 const tones = {
-  green: 'bg-forest-800 text-white/75 border-white/25',
+  green: 'bg-kola-800 text-white/75 border-white/25',
   sand: 'bg-sand-100 text-ink-muted border-sand-300',
   terracotta: 'bg-terracotta-100 text-terracotta-700 border-terracotta-300',
-  gold: 'bg-gold-100 text-gold-600 border-gold-300'
+  gold: 'bg-saffron-100 text-saffron-600 border-saffron-300'
 };
 
 /**

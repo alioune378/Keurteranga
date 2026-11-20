@@ -123,7 +123,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       {/* ───────── Hero ───────── */}
       <section className="bg-white">
         <div className="container pb-6 pt-4 md:pb-10 md:pt-8">
-          <Link href="/experiences" className="inline-flex min-h-[2.75rem] items-center gap-2 text-sm font-medium text-ink-soft hover:text-forest-700">
+          <Link href="/experiences" className="inline-flex min-h-[2.75rem] items-center gap-2 text-sm font-medium text-ink-soft hover:text-kola-700">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" /> {t('back')}
           </Link>
           <div className="mt-4 grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
@@ -146,7 +146,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                 hint={title}
                 priority
                 tone="green"
-                className="aspect-[3/2] w-full rounded-3xl"
+                className="aspect-[3/2] w-full rounded-[2rem] rounded-bl-[6rem]"
                 sizes="(min-width:1024px) 58vw, 100vw"
               />
             </Reveal>
@@ -157,8 +157,8 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
         <div className="container pb-10 md:pb-14">
           <dl className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
             {facts.map(({ Icon, label, value, tbc }) => (
-              <div key={label} className="flex items-center gap-2.5 rounded-2xl bg-sand-100 px-3.5 py-2.5 sm:rounded-full sm:pr-5">
-                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-terracotta-500">
+              <div key={label} className="flex items-center gap-2.5 rounded-2xl bg-kola-50 px-3.5 py-2.5 sm:rounded-full sm:pr-5">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-clay-500">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                 </span>
                 <div className="min-w-0 leading-tight">
@@ -185,12 +185,12 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
           </Reveal>
           {included.length > 0 && (
             <Reveal delay={0.1} className="lg:col-span-5">
-              <div className="rounded-3xl bg-forest-50 p-6 md:p-8">
-                <h3 className="text-xl">{t('included')}</h3>
+              <div className="rounded-[1.75rem] bg-clay-50 p-6 md:p-8">
+                <h3 className="font-hand text-[1.9rem] font-semibold leading-none text-clay-500">{t('included')}</h3>
                 <ul className="mt-5 space-y-3.5">
                   {included.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-[0.95rem] leading-relaxed">
-                      <Check className="mt-1 h-4 w-4 shrink-0 text-forest-600" aria-hidden="true" />
+                      <Check className="mt-1 h-4 w-4 shrink-0 text-kola-600" aria-hidden="true" />
                       <Tbc text={item} />
                     </li>
                   ))}
@@ -213,11 +213,10 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
             <ol className="mt-8 space-y-6 md:mt-12 md:space-y-10">
               {steps.map((s, i) => {
                 const visual = STEP_VISUALS[i];
-                const num = String(i + 1).padStart(2, '0');
-                if (!visual?.src) {
+                                if (!visual?.src) {
                   return (
-                    <Reveal as="li" key={s.title} className="grid gap-3 rounded-3xl bg-sand-100 p-5 md:grid-cols-12 md:items-center md:gap-6 md:p-6">
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-forest-50 text-sm font-bold text-forest-700 md:col-span-1">{num}</span>
+                    <Reveal as="li" key={s.title} className="grid gap-3 rounded-[1.75rem] bg-clay-50 p-5 md:grid-cols-12 md:items-center md:gap-6 md:p-6">
+                      <span className="font-hand text-5xl leading-none text-clay-500 md:col-span-1">{i + 1}</span>
                       <div className="md:col-span-11">
                         <h3 className="text-xl">{s.title}</h3>
                         {s.text && <p className="mt-2 text-[1.02rem] leading-relaxed text-ink-soft">{s.text}</p>}
@@ -233,12 +232,12 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
                         src={visual.src}
                         alt={visual.alt[locale]}
                         illustration={visual.illustration}
-                        className="aspect-[3/2] w-full rounded-3xl"
+                        className={cn('aspect-[3/2] w-full rounded-[2rem]', flip ? 'rounded-tr-[5rem]' : 'rounded-bl-[5rem]')}
                         sizes="(min-width:768px) 55vw, 100vw"
                       />
                     </div>
                     <div className={cn('md:col-span-5', flip && 'md:order-1')}>
-                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold-100 text-sm font-bold text-gold-600">{num}</span>
+                      <span className="font-hand text-6xl leading-none text-clay-500">{i + 1}</span>
                       <h3 className="mt-3 text-2xl">{s.title}</h3>
                       {s.text && <p className="mt-3 text-[1.02rem] leading-relaxed text-ink-soft">{s.text}</p>}
                     </div>
@@ -253,17 +252,17 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       {/* ───────── Cultural background & UNESCO ───────── */}
       <section className="bg-white pb-14 md:pb-20" aria-labelledby="heritage-title">
         <div className="container">
-        <div className="grid gap-8 overflow-hidden rounded-4xl bg-forest-700 p-6 text-white md:p-10 lg:grid-cols-12 lg:items-center lg:gap-14 lg:p-14">
+        <div className="grid gap-8 overflow-hidden rounded-[2.5rem] bg-kola-800 p-6 text-white md:p-10 lg:grid-cols-12 lg:items-center lg:gap-14 lg:p-14">
           <Reveal className="lg:col-span-6">
             <p className="eyebrow eyebrow-light">{t('heritage.eyebrow')}</p>
             <h2 id="heritage-title" className="mt-4 text-display-lg text-white">{t('heritage.title')}</h2>
             <p className="mt-6 text-[1.05rem] leading-relaxed text-white/80">{t('heritage.text1')}</p>
             <p className="mt-4 text-[1.05rem] leading-relaxed text-white/80">{t('heritage.text2')}</p>
-            <a href={UNESCO_URL[locale]} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-300 hover:text-gold-200">
+            <a href={UNESCO_URL[locale]} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-saffron-300 hover:text-saffron-200">
               {t('heritage.link')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <div className="mt-8 flex gap-4 border-t border-white/15 pt-6">
-              <MonitorPlay className="mt-1 h-5 w-5 shrink-0 text-gold-300" aria-hidden="true" />
+              <MonitorPlay className="mt-1 h-5 w-5 shrink-0 text-saffron-300" aria-hidden="true" />
               <div>
                 <h3 className="text-lg text-white">{t('presentationTitle')}</h3>
                 <p className="mt-1 text-[0.95rem] leading-relaxed text-white/70">{t('presentationText')}</p>
@@ -307,55 +306,55 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
             <h2 id="practical-title" className="mt-4 text-display-lg">{t('practical.title')}</h2>
           </div>
           <dl className="grid gap-3 sm:grid-cols-2 lg:col-span-8">
-            <div className="rounded-3xl bg-sand-100 p-5">
+            <div className="rounded-[1.5rem] bg-clay-50 p-5">
               <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                <MapPin className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.meeting')}
+                <MapPin className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('practical.meeting')}
               </dt>
               <dd className="mt-2">
                 <Tbc text={pick(e.location, locale)} />
-                <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center gap-1 text-sm font-semibold text-forest-600 hover:text-forest-700">
+                <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center gap-1 text-sm font-semibold text-kola-600 hover:text-kola-700">
                   {t('practical.map')} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </a>
               </dd>
             </div>
-            <div className="rounded-3xl bg-sand-100 p-5">
+            <div className="rounded-[1.5rem] bg-clay-50 p-5">
               <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                <Languages className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('languages')}
+                <Languages className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('languages')}
               </dt>
               <dd className="mt-2">{t('practical.languagesText', { languages })}</dd>
             </div>
-            <div className="rounded-3xl bg-sand-100 p-5">
+            <div className="rounded-[1.5rem] bg-clay-50 p-5">
               <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                <CalendarCheck className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.booking')}
+                <CalendarCheck className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('practical.booking')}
               </dt>
               <dd className="mt-2">{t('cutoff', { hours: e.booking_cutoff_hours })}</dd>
             </div>
-            <div className="rounded-3xl bg-sand-100 p-5">
+            <div className="rounded-[1.5rem] bg-clay-50 p-5">
               <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                <Wallet className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.payment')}
+                <Wallet className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('practical.payment')}
               </dt>
               <dd className="mt-2">{t('noPayment')}</dd>
             </div>
-            <div className="rounded-3xl bg-sand-100 p-5 sm:col-span-2">
+            <div className="rounded-[1.5rem] bg-clay-50 p-5 sm:col-span-2">
               <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                <CalendarX className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.cancellation')}
+                <CalendarX className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('practical.cancellation')}
               </dt>
               <dd className="mt-2">{t('cancellationText')}</dd>
             </div>
             {(site.whatsapp || site.phoneDisplay) && (
-              <div className="rounded-3xl bg-sand-100 p-5 sm:col-span-2">
+              <div className="rounded-[1.5rem] bg-clay-50 p-5 sm:col-span-2">
                 <dt className="flex items-center gap-2 text-sm font-semibold text-ink-muted">
-                  <MessageCircle className="h-4 w-4 text-terracotta-500" aria-hidden="true" /> {t('practical.questions')}
+                  <MessageCircle className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t('practical.questions')}
                 </dt>
                 <dd className="mt-2 flex flex-wrap gap-x-6 gap-y-1">
                   {site.whatsapp && (
-                    <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="font-medium text-forest-600 hover:text-forest-700">WhatsApp</a>
+                    <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="font-medium text-kola-600 hover:text-kola-700">WhatsApp</a>
                   )}
                   {site.phoneDisplay && site.phoneHref && (
-                    <a href={`tel:${site.phoneHref}`} className="font-medium text-forest-600 hover:text-forest-700">{site.phoneDisplay}</a>
+                    <a href={`tel:${site.phoneHref}`} className="font-medium text-kola-600 hover:text-kola-700">{site.phoneDisplay}</a>
                   )}
                   {site.email && (
-                    <a href={`mailto:${site.email}`} className="break-all font-medium text-forest-600 hover:text-forest-700">{site.email}</a>
+                    <a href={`mailto:${site.email}`} className="break-all font-medium text-kola-600 hover:text-kola-700">{site.email}</a>
                   )}
                 </dd>
               </div>
@@ -367,7 +366,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       {/* ───────── Final CTA ───────── */}
       <section className="bg-white pb-14 md:pb-20">
         <div className="container">
-        <div className="flex flex-col items-start gap-5 rounded-4xl bg-forest-50 p-6 md:flex-row md:items-center md:justify-between md:p-12">
+        <div className="flex flex-col items-start gap-5 rounded-[2.25rem] bg-saffron-100/70 p-6 md:flex-row md:items-center md:justify-between md:p-12">
           <div className="max-w-2xl">
             <h2 className="text-display-lg">{t('finalTitle')}</h2>
             <p className="mt-3 text-[1.05rem] text-ink-soft">{t('finalText')}</p>
@@ -383,7 +382,7 @@ export default async function ExperiencePage({ params }: { params: Promise<{ loc
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-sand-200 bg-white/95 backdrop-blur lg:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
         <div className="container flex items-center justify-between gap-4 py-3">
           <div className="min-w-0 text-sm leading-tight">
-            <span className="block truncate font-display font-semibold text-forest-700">{title}</span>
+            <span className="block truncate font-display font-semibold text-kola-700">{title}</span>
             <span className="block truncate text-ink-muted">{price ?? tp('priceTbc')}</span>
           </div>
           <Link href={bookHref} className="btn-gold shrink-0 px-5">

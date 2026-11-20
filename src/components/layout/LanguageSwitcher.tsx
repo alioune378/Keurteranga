@@ -37,17 +37,43 @@ export function LanguageSwitcher({
     });
   }
 
+  // compact (header): plain "FR · EN" text toggle; full (mobile menu): two pill buttons
+  if (!full) {
+    return (
+      <div role="group" aria-label={t('language')} className={cn('inline-flex items-center gap-1 text-[0.8rem] font-semibold', pending && 'opacity-60', className)}>
+        {routing.locales.map((l, i) => (
+          <span key={l} className="inline-flex items-center gap-1">
+            {i > 0 && <span aria-hidden="true" className={light ? 'text-white/40' : 'text-kola-300'}>·</span>}
+            <button
+              type="button"
+              onClick={() => switchTo(l)}
+              aria-pressed={l === locale}
+              aria-label={NAMES[l]}
+              lang={l}
+              className={cn(
+                'min-h-[2rem] px-1 uppercase tracking-wide transition',
+                l === locale
+                  ? light
+                    ? 'text-white underline decoration-saffron-300 decoration-2 underline-offset-[6px]'
+                    : 'text-kola-700 underline decoration-clay-400 decoration-2 underline-offset-[6px]'
+                  : light
+                    ? 'text-white/70 hover:text-white'
+                    : 'text-ink-muted hover:text-kola-700'
+              )}
+            >
+              {l}
+            </button>
+          </span>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div
       role="group"
       aria-label={t('language')}
-      className={cn(
-        'inline-flex rounded-full border p-0.5 font-semibold',
-        full ? 'text-sm' : 'text-xs',
-        light ? 'border-white/30' : 'border-forest-700/20',
-        pending && 'opacity-60',
-        className
-      )}
+      className={cn('inline-flex rounded-full bg-kola-50 p-0.5 text-sm font-semibold', pending && 'opacity-60', className)}
     >
       {routing.locales.map((l) => (
         <button
@@ -57,19 +83,9 @@ export function LanguageSwitcher({
           aria-pressed={l === locale}
           aria-label={NAMES[l]}
           lang={l}
-          className={cn(
-            'rounded-full transition',
-            full ? 'min-h-[2.25rem] px-4' : 'min-h-[2rem] px-3 uppercase',
-            l === locale
-              ? light
-                ? 'bg-white text-forest-900'
-                : 'bg-forest-700 text-white'
-              : light
-                ? 'text-white/80 hover:text-white'
-                : 'text-forest-700/70 hover:text-forest-700'
-          )}
+          className={cn('min-h-[2.25rem] rounded-full px-4 transition', l === locale ? 'bg-clay-500 text-white' : 'text-kola-700/70 hover:text-kola-700')}
         >
-          {full ? NAMES[l] : l}
+          {NAMES[l]}
         </button>
       ))}
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Figtree } from 'next/font/google';
+import { Bricolage_Grotesque, Caveat, Figtree } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -19,6 +19,14 @@ import '../globals.css';
 const display = Bricolage_Grotesque({
   subsets: ['latin'],
   variable: '--font-display',
+  display: 'swap'
+});
+
+// handwritten accent — Wolof words, the steps of the afternoon, little notes
+const hand = Caveat({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-hand',
   display: 'swap'
 });
 
@@ -75,7 +83,7 @@ export default async function LocaleLayout({
   const banner = announcements.find((a) => a.placement === 'banner');
 
   return (
-    <html lang={locale} className={`${display.variable} ${sans.variable}`}>
+    <html lang={locale} className={`${display.variable} ${sans.variable} ${hand.variable}`}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {banner && <AnnouncementBanner a={banner} locale={locale} />}

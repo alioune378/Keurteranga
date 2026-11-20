@@ -145,7 +145,44 @@
       "title": "A seat is waiting for you",
       "text": "Choose your date — we'll take care of the rest.",
       "cta": "Book an experience"
-    }
+    },
+    "next": {
+      "label": "Next workshop",
+      "book": "Book this date",
+      "more": "More dates",
+      "none": "New dates are coming soon",
+      "noneText": "Message us to hear about the next dates.",
+      "calendar": "See the calendar"
+    },
+    "day": {
+      "tag": "The afternoon",
+      "title": "An afternoon at the house",
+      "intro": "On a terrace in Mermoz, {duration}. Here’s how it unfolds.",
+      "introNoTime": "On a terrace in Mermoz. Here’s how it unfolds.",
+      "steps": {
+        "welcome": "We arrive",
+        "market": "We discover",
+        "prep": "We cook",
+        "cook": "We wait",
+        "share": "We share"
+      }
+    },
+    "menu": {
+      "tag": "On the menu",
+      "included": "Included",
+      "duration": "Duration",
+      "languages": "Language",
+      "group": "Group",
+      "price": "Price"
+    },
+    "gallery": {
+      "tag": "Around the table",
+      "title": "Moments from our workshops"
+    },
+    "ticket": {
+      "tag": "Booking, simply"
+    },
+    "scroll": "Discover"
   },
   "about": {
     "eyebrow": "About",
@@ -449,7 +486,13 @@
       "title": "Cancellation policy",
       "text": "Free cancellation up to 48 hours before the workshop. After that, no refund is possible: the ingredients will already have been bought for you.",
       "accept": "I have read and accept the cancellation policy (free cancellation up to 48 hours before the workshop, no refund after that)."
-    }
+    },
+    "upcoming": {
+      "title": "Next dates",
+      "calendar": "Or browse the calendar",
+      "none": "No open dates at the moment."
+    },
+    "invitation": "Your invitation"
   },
   "notFound": {
     "title": "Page not found",

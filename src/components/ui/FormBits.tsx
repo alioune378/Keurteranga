@@ -77,7 +77,7 @@ export function Consent({
           checked={checked}
           onChange={onChange ? (e) => onChange(e.target.checked) : undefined}
           aria-invalid={!!error}
-          className="mt-0.5 h-5 w-5 shrink-0 rounded border-sand-300 text-forest-700 accent-forest-700"
+          className="mt-0.5 h-5 w-5 shrink-0 rounded border-sand-300 text-kola-700 accent-kola-700"
         />
         <span>{label}</span>
       </label>

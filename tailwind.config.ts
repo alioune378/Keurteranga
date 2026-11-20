@@ -28,6 +28,48 @@ const config: Config = {
           800: '#0E3226',
           900: '#0A261D'
         },
+        // ── "An afternoon at the house" palette (public site) ──────────────
+        // Clay / terracotta — primary actions (the mortar, the clay pots)
+        clay: {
+          50: '#FCF3EE',
+          100: '#F8E3D7',
+          200: '#F0C4AB',
+          300: '#E4A07E',
+          400: '#D47F57',
+          500: '#BC5E36',
+          600: '#A04A27',
+          700: '#7F391E',
+          800: '#5C2915',
+          900: '#3E1C0E'
+        },
+        // Kola — warm dark brown for text, dark surfaces and the footer
+        kola: {
+          50: '#FBF6F2',
+          100: '#F3E9E1',
+          200: '#E4D3C5',
+          300: '#C9AE98',
+          400: '#A1836C',
+          500: '#7A5D49',
+          600: '#5B4334',
+          700: '#3B2A21',
+          800: '#2C1F18',
+          900: '#1E1510'
+        },
+        // Saffron — warm highlights (rice, sun)
+        saffron: {
+          100: '#FDF4DA',
+          200: '#FAE6A9',
+          300: '#F4D06A',
+          400: '#EBB738',
+          500: '#C9961B',
+          600: '#9C7213'
+        },
+        // Bissap — deep hibiscus red, used sparingly
+        bissap: {
+          100: '#F7E1E5',
+          500: '#9B2537',
+          700: '#6E1626'
+        },
         // Primary background is pure white (legacy "cream" name kept for compatibility)
         cream: {
           DEFAULT: '#FFFFFF',
@@ -53,9 +95,9 @@ const config: Config = {
         },
         // Neutral hairlines & quiet surfaces (no beige backgrounds)
         sand: {
-          100: '#F6F6F3',
-          200: '#E8E8E3',
-          300: '#D5D5CE'
+          100: '#F8F4F0',
+          200: '#ECE4DC',
+          300: '#DCD0C5'
         },
         wood: {
           400: '#8A8F8B',
@@ -63,16 +105,19 @@ const config: Config = {
           700: '#4B514D'
         },
         ink: {
-          DEFAULT: '#14211B',
-          soft: '#4A5750',
-          muted: '#6B7770'
+          DEFAULT: '#241A15',
+          soft: '#55473F',
+          muted: '#7C6D63'
         }
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif']
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        // handwritten accent: Wolof words, little notes, the steps of the afternoon
+        hand: ['var(--font-hand)', 'cursive']
       },
       fontSize: {
+        'display-hero': ['clamp(2.6rem, 6.6vw, 5.6rem)', { lineHeight: '0.98', letterSpacing: '-0.035em' }],
         // Warm grotesque headings — confident but never oversized
         'display-2xl': ['clamp(2.1rem, 5.4vw, 3.9rem)', { lineHeight: '1.04', letterSpacing: '-0.03em' }],
         'display-xl': ['clamp(1.9rem, 4.2vw, 3.1rem)', { lineHeight: '1.08', letterSpacing: '-0.025em' }],

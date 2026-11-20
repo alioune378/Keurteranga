@@ -145,7 +145,44 @@
       "title": "Une place vous attend à table",
       "text": "Choisissez votre date : nous nous occupons du reste.",
       "cta": "Réserver une expérience"
-    }
+    },
+    "next": {
+      "label": "Prochain atelier",
+      "book": "Réserver cette date",
+      "more": "Autres dates",
+      "none": "De nouvelles dates arrivent bientôt",
+      "noneText": "Écrivez-nous pour connaître les prochaines dates.",
+      "calendar": "Voir le calendrier"
+    },
+    "day": {
+      "tag": "L’après-midi",
+      "title": "Un après-midi à la maison",
+      "intro": "Sur une terrasse de Mermoz, {duration}. Voici comment il se déroule.",
+      "introNoTime": "Sur une terrasse de Mermoz. Voici comment il se déroule.",
+      "steps": {
+        "welcome": "On arrive",
+        "market": "On découvre",
+        "prep": "On cuisine",
+        "cook": "On patiente",
+        "share": "On partage"
+      }
+    },
+    "menu": {
+      "tag": "Au menu",
+      "included": "Compris",
+      "duration": "Durée",
+      "languages": "Langue",
+      "group": "Groupe",
+      "price": "Prix"
+    },
+    "gallery": {
+      "tag": "Autour de la table",
+      "title": "Des moments de nos ateliers"
+    },
+    "ticket": {
+      "tag": "Réserver, simplement"
+    },
+    "scroll": "Découvrir"
   },
   "about": {
     "eyebrow": "À propos",
@@ -449,7 +486,13 @@
       "title": "Politique d'annulation",
       "text": "Annulation gratuite jusqu'à 48 h avant l'atelier. Passé ce délai, aucun remboursement n'est possible : les ingrédients auront déjà été achetés pour vous.",
       "accept": "J'ai lu et j'accepte la politique d'annulation (annulation gratuite jusqu'à 48 h avant l'atelier, aucun remboursement ensuite)."
-    }
+    },
+    "upcoming": {
+      "title": "Prochaines dates",
+      "calendar": "Ou parcourez le calendrier",
+      "none": "Aucune date ouverte pour le moment."
+    },
+    "invitation": "Votre invitation"
   },
   "notFound": {
     "title": "Page introuvable",

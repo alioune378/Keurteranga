@@ -17,18 +17,18 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
     { href: site.social.tiktok, label: 'TikTok', Icon: TiktokIcon }
   ].filter((s) => s.href);
 
-  const heading = 'font-sans text-sm font-semibold text-gold-300';
+  const heading = 'font-hand text-[1.6rem] font-semibold leading-none text-saffron-300';
   const link = 'text-white/75 transition-colors hover:text-white';
 
   return (
-    <footer className="rounded-t-4xl bg-forest-700 text-white">
+    <footer className="rounded-t-[2.5rem] bg-kola-800 text-white">
       {/* Closing statement */}
       <div className="border-b border-white/10">
-        <div className="container flex flex-col gap-5 py-10 md:flex-row md:items-center md:justify-between md:py-12">
-          <p className="max-w-xl font-display text-2xl font-semibold leading-tight tracking-tight text-white md:text-[2rem]">
+        <div className="container flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between md:py-16">
+          <p className="max-w-2xl font-hand text-[2.4rem] font-semibold leading-[1.05] text-saffron-200 md:text-[3.2rem]">
             {t('footer.statement')}
           </p>
-          <Link href="/reservation" className="btn-gold shrink-0 self-start md:self-auto">
+          <Link href="/reservation" className="btn-gold btn-lg shrink-0 self-start md:self-auto">
             {t('nav.book')}
           </Link>
         </div>
@@ -47,7 +47,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition hover:border-gold-300 hover:text-gold-300"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition hover:border-saffron-300 hover:text-saffron-300"
                 >
                   <Icon className="h-[18px] w-[18px]" />
                 </a>
@@ -58,7 +58,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
 
         <nav aria-label={t('footer.quickLinks')}>
           <h2 className={heading}>{t('footer.quickLinks')}</h2>
-          <ul className="mt-4 space-y-2.5 text-[0.95rem]">
+          <ul className="mt-5 space-y-2.5 text-[0.95rem]">
             <li><Link href="/" className={link}>{t('nav.home')}</Link></li>
             <li><Link href="/experiences" className={link}>{t('nav.experiences')}</Link></li>
             <li><Link href="/a-propos" className={link}>{t('nav.about')}</Link></li>
@@ -69,27 +69,27 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
 
         <div>
           <h2 className={heading}>{t('footer.contact')}</h2>
-          <ul className="mt-4 space-y-2.5 text-[0.95rem]">
+          <ul className="mt-5 space-y-2.5 text-[0.95rem]">
             {site.email && (
               <li className="flex items-start gap-3">
-                <Mail className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                <Mail className="mt-1 h-4 w-4 shrink-0 text-saffron-300" aria-hidden="true" />
                 <a href={`mailto:${site.email}`} className={`${link} break-all`}>{site.email}</a>
               </li>
             )}
             {site.phoneDisplay && site.phoneHref && (
               <li className="flex items-start gap-3">
-                <Phone className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+                <Phone className="mt-1 h-4 w-4 shrink-0 text-saffron-300" aria-hidden="true" />
                 <a href={`tel:${site.phoneHref}`} className={link}>{site.phoneDisplay}</a>
               </li>
             )}
             {site.whatsapp && (
               <li className="flex items-start gap-3">
-                <WhatsappIcon className="mt-1 h-4 w-4 shrink-0 text-gold-300" />
+                <WhatsappIcon className="mt-1 h-4 w-4 shrink-0 text-saffron-300" />
                 <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className={link}>WhatsApp</a>
               </li>
             )}
             <li className="flex items-start gap-3 text-white/75">
-              <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-saffron-300" aria-hidden="true" />
               <span>
                 {site.street && <>{site.street}<br /></>}
                 {site.city}, {country}
@@ -101,7 +101,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
         <div>
           <h2 className={heading}>{t('footer.professionals')}</h2>
           <p className="mt-5 text-[0.95rem] leading-relaxed text-white/70">{t('footer.partnersText')}</p>
-          <Link href={{ pathname: '/', hash: 'partenaires' }} className="mt-4 inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-gold-300 hover:text-gold-200">
+          <Link href={{ pathname: '/', hash: 'partenaires' }} className="mt-4 inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-saffron-300 hover:text-saffron-200">
             {t('footer.partnersLink')} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
@@ -110,7 +110,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
       {/* Privacy */}
       <div className="container">
         <p className="flex items-start gap-3 border-t border-white/10 py-6 text-sm leading-relaxed text-white/60">
-          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-saffron-300" aria-hidden="true" />
           <span>
             <strong className="font-semibold text-white/80">{t('footer.privacyTitle')}</strong> {t('footer.privacyText')}
           </span>
@@ -123,7 +123,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>
               {t('footer.credit')}{' '}
-              <a href="https://dalaltechnologies.com" target="_blank" rel="noopener" className="font-semibold text-gold-300 hover:text-gold-200">
+              <a href="https://dalaltechnologies.com" target="_blank" rel="noopener" className="font-semibold text-saffron-300 hover:text-saffron-200">
                 Dalal Technologies
               </a>
             </span>

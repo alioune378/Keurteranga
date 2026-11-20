@@ -53,21 +53,21 @@ export function PartnerSection({ className }: { className?: string }) {
   }, [open]);
 
   return (
-    <section id="partenaires" aria-labelledby="partners-title" className={cn('scroll-mt-20 bg-white pb-14 md:pb-20', className)}>
+    <section id="partenaires" aria-labelledby="partners-title" className={cn('scroll-mt-20 bg-white pb-20 md:pb-28', className)}>
       <div className="container">
-        <div className="grid gap-8 rounded-4xl border border-sand-200 p-6 md:p-10 lg:grid-cols-12 lg:gap-12">
+        <div className="grid gap-8 rounded-[2.25rem] bg-saffron-100/70 p-6 md:p-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
             <p className="eyebrow">{t('eyebrow')}</p>
             <h2 id="partners-title" className="mt-3 text-display-lg">{t('heading')}</h2>
             <p className="mt-4 leading-relaxed text-ink-soft">{t('text')}</p>
-            <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className="btn-green mt-6" aria-haspopup="dialog">
+            <button ref={triggerRef} type="button" onClick={() => setOpen(true)} className="btn-gold mt-6" aria-haspopup="dialog">
               {t('cta')}
             </button>
           </div>
           <ul className="grid gap-3 self-center sm:grid-cols-2 lg:col-span-7">
             {AUDIENCES.map(({ key, Icon }) => (
-              <li key={key} className="flex gap-3 rounded-3xl bg-sand-100 p-4 md:p-5">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-terracotta-500">
+              <li key={key} className="flex gap-3 rounded-[1.5rem] bg-white p-4 md:p-5">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-clay-500">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
@@ -85,7 +85,7 @@ export function PartnerSection({ className }: { className?: string }) {
           <AnimatePresence>
             {open && (
               <motion.div
-                className="fixed inset-0 z-[80] flex items-end justify-center bg-forest-900/60 p-0 sm:items-center sm:p-6"
+                className="fixed inset-0 z-[80] flex items-end justify-center bg-kola-900/60 p-0 sm:items-center sm:p-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -128,7 +128,7 @@ function PartnerForm({ onClose }: { onClose: () => void }) {
     if (state.status === 'success') {
       return (
         <div className="flex flex-col items-center p-10 text-center" role="status">
-          <CheckCircle2 className="h-12 w-12 text-forest-600" aria-hidden="true" />
+          <CheckCircle2 className="h-12 w-12 text-kola-600" aria-hidden="true" />
           <p className="mt-4 text-lg">{t('success')}</p>
           <button type="button" onClick={onClose} className="btn-green mt-6">{t('close')}</button>
         </div>

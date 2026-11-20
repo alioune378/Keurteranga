@@ -58,6 +58,7 @@ export const photos = {
   storyGuests: { src: `${IMG}/05_Culture/experience-repas-collectif.webp`, illustration: false, alt: { fr: 'Échange chaleureux entre l\'animatrice et une participante', en: 'A warm exchange between the host and a participant' } },
   tasting: { src: `${IMG}/05_Culture/echange-animatrice.webp`, illustration: false, alt: { fr: 'L\'animatrice échange avec une participante', en: 'The host talking with a participant' } },
   marinade: { src: `${IMG}/03_Atelier/ajout-mortier.webp`, illustration: false, alt: { fr: 'Une participante ajoute un ingrédient dans le mortier', en: 'A participant adds an ingredient to the mortar' } },
+  momentStove: { src: `${IMG}/05_Culture/moment-degustation.webp`, illustration: false, alt: { fr: 'Les participantes aux fourneaux pendant l\'atelier', en: 'Guests at the stove during the workshop' } },
   aboutHeritage: { src: `${IMG}/05_Culture/repas-partage-teranga.webp`, illustration: false, alt: { fr: 'Une participante pile l\'assaisonnement au mortier', en: 'A participant pounds the seasoning in the mortar' } },
   aboutMarket: { src: `${IMG}/04_Ingredients/marche-produits-frais.webp`, illustration: false, alt: { fr: 'Les ingrédients du thiéboudiène prêts pour l\'atelier', en: 'Thiéboudiène ingredients ready for the workshop' } },
   contact: { src: `${IMG}/04_Ingredients/poissons-et-legumes.webp`, illustration: false, alt: { fr: 'Poisson frais, tomates et légumes du thiéboudiène', en: 'Fresh fish, tomatoes and vegetables for thiéboudiène' } },

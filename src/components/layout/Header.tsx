@@ -57,7 +57,7 @@ export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: stri
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -83,47 +83,58 @@ export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: stri
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
+  // Home: the header floats over the full-screen hero video until the visitor scrolls.
+  const overlay = pathname === '/' && !scrolled && !open;
+
   return (
     <>
       <header
+        data-overlay={overlay || undefined}
         className={cn(
-          'pt-safe sticky top-0 z-40 bg-white/95 backdrop-blur-sm transition-shadow duration-300 supports-[backdrop-filter]:bg-white/85',
-          scrolled ? 'shadow-[0_1px_0_0_#E8E8E3]' : 'shadow-none'
+          'pt-safe sticky top-0 z-40 transition-[background-color,box-shadow] duration-300',
+          overlay
+            ? 'bg-transparent'
+            : 'bg-white/95 shadow-[0_1px_0_0_rgba(59,42,33,.08)] backdrop-blur-sm supports-[backdrop-filter]:bg-white/85'
         )}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-forest-700 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-clay-500 focus:px-4 focus:py-2 focus:text-white"
         >
           {t('skip')}
         </a>
-        <div className="container flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
+        <div className="container flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
           <Link href="/" aria-label={`Kër Téranga — ${t('home')}`} className="shrink-0">
-            <Logo priority className="h-10 w-auto md:h-12" />
+            <Logo priority light={overlay} className="h-10 w-auto md:h-12" />
           </Link>
 
-          <nav aria-label={t('mainNav')} className="hidden lg:block">
-            <ul className="flex items-center gap-1 rounded-full bg-sand-100 p-1">
-              {NAV.map((item) => (
-                <li key={item.key}>
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={cn(
-                      'block rounded-full px-4 py-2 text-[0.92rem] font-semibold transition',
-                      isActive(item.href) ? 'bg-white text-forest-700 shadow-soft' : 'text-ink-soft hover:text-forest-700'
-                    )}
-                  >
-                    {t(item.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 lg:gap-7">
+            <nav aria-label={t('mainNav')} className="hidden lg:block">
+              <ul className="flex items-center gap-7">
+                {NAV.filter((n) => n.href !== '/').map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <li key={item.key}>
+                      <Link
+                        href={item.href}
+                        aria-current={active ? 'page' : undefined}
+                        className={cn(
+                          'relative block py-2 text-[0.95rem] font-semibold transition-colors',
+                          overlay ? 'text-white/90 hover:text-white' : active ? 'text-kola-700' : 'text-ink-soft hover:text-kola-700'
+                        )}
+                      >
+                        {t(item.key)}
+                        {active && (
+                          <span aria-hidden="true" className={cn('absolute -bottom-0.5 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full', overlay ? 'bg-saffron-300' : 'bg-clay-500')} />
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
             <div className="hidden lg:block">
-              <LanguageSwitcher />
+              <LanguageSwitcher light={overlay} />
             </div>
             <Link href="/reservation" className="btn-gold min-h-[2.5rem] px-4 py-2 text-sm">
               <span className="sm:hidden">{t('bookShort')}</span>
@@ -133,7 +144,10 @@ export function Header({ whatsapp = defaultContact.whatsapp }: { whatsapp?: stri
               ref={menuButtonRef}
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sand-300 text-forest-700 transition hover:border-forest-700 lg:hidden"
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-full transition lg:hidden',
+                overlay ? 'bg-white/15 text-white backdrop-blur hover:bg-white/25' : 'bg-kola-50 text-kola-700 hover:bg-kola-100'
+              )}
               aria-label={t('menu')}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -208,7 +222,7 @@ function MobileMenu({
           {/* dimmed page — tap to close; the panel itself is fully opaque */}
           <motion.div
             data-menu-backdrop
-            className="absolute inset-0 bg-forest-900/45"
+            className="absolute inset-0 bg-kola-900/45"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
@@ -235,7 +249,7 @@ function MobileMenu({
                 type="button"
                 onClick={onClose}
                 data-autofocus
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sand-100 text-forest-700 hover:bg-sand-200"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sand-100 text-kola-700 hover:bg-sand-200"
                 aria-label={t('close')}
               >
                 <X className="h-5 w-5" aria-hidden="true" />
@@ -243,22 +257,22 @@ function MobileMenu({
             </div>
 
             <nav aria-label={t('mainNav')} className="container pb-2">
-              <ul className="overflow-hidden rounded-2xl border border-sand-200">
+              <ul className="overflow-hidden rounded-2xl ring-1 ring-kola-100">
                 {NAV.map(({ href, key, Icon }) => (
-                  <li key={key} className="border-b border-sand-200 last:border-b-0">
+                  <li key={key} className="border-b border-kola-100 last:border-b-0">
                     <Link
                       href={href}
                       onClick={onClose}
                       aria-current={isActive(href) ? 'page' : undefined}
                       className={cn(
                         'flex min-h-[3.25rem] items-center gap-3 px-4 py-2.5 transition',
-                        isActive(href) ? 'bg-forest-50' : 'hover:bg-sand-100'
+                        isActive(href) ? 'bg-clay-50' : 'hover:bg-kola-50'
                       )}
                     >
-                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-forest-50 text-forest-700">
+                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-clay-50 text-clay-500">
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </span>
-                      <span className="flex-1 text-[1.02rem] font-semibold text-forest-700">{t(key)}</span>
+                      <span className="flex-1 text-[1.02rem] font-semibold text-kola-700">{t(key)}</span>
                       <ChevronRight className="h-4 w-4 text-ink-muted" aria-hidden="true" />
                     </Link>
                   </li>
@@ -279,10 +293,10 @@ function MobileMenu({
                   href={`https://wa.me/${whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-h-[2.75rem] items-center justify-center gap-2 text-sm text-ink-soft hover:text-forest-700"
+                  className="flex min-h-[2.75rem] items-center justify-center gap-2 text-sm text-ink-soft hover:text-kola-700"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  {t('questions')} <span className="font-semibold text-forest-700">WhatsApp</span>
+                  {t('questions')} <span className="font-semibold text-kola-700">WhatsApp</span>
                 </a>
               )}
             </div>

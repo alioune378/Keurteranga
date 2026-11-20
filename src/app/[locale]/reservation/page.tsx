@@ -26,10 +26,10 @@ export default async function ReservationPage({
   searchParams
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ experience?: string; code?: string; promo?: string }>;
+  searchParams: Promise<{ experience?: string; code?: string; promo?: string; date?: string }>;
 }) {
   const locale = (await params).locale as Locale;
-  const { experience, code, promo } = await searchParams;
+  const { experience, code, promo, date } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations('booking');
 
@@ -38,36 +38,34 @@ export default async function ReservationPage({
 
   return (
     <>
-      <section className="bg-white pt-4 md:pt-8">
-        <div className="container">
-          <div className="grid gap-5 overflow-hidden rounded-4xl bg-forest-50 md:grid-cols-[1fr_auto]">
-            <Reveal className="self-center p-6 md:p-10">
-              <p className="eyebrow bg-white">{t('eyebrow')}</p>
-              <h1 className="mt-3 text-display-xl">{t('title')}</h1>
-              <p className="mt-3 max-w-xl leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {(['realtime', 'languages', 'payment'] as const).map((k) => (
-                  <li key={k} className="chip">
-                    <Check className="h-4 w-4 text-forest-600" aria-hidden="true" /> {t(`assurance.${k}`)}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Photo
-              src={photos.tasting.src}
-              alt={photos.tasting.alt[locale]}
-              illustration={photos.tasting.illustration}
-              className="hidden min-h-[16rem] w-[22rem] md:block md:rounded-l-[3rem] lg:w-[28rem]"
-              sizes="28rem"
-            />
-          </div>
+      <section className="bg-white pt-8 md:pt-12">
+        <div className="container grid items-center gap-8 md:grid-cols-[1fr_auto]">
+          <Reveal>
+            <p className="eyebrow">{t('eyebrow')}</p>
+            <h1 className="mt-2 text-display-xl">{t('title')}</h1>
+            <p className="mt-3 max-w-2xl leading-relaxed text-ink-soft md:text-lg">{t('intro')}</p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {(['realtime', 'languages', 'payment'] as const).map((k) => (
+                <li key={k} className="chip">
+                  <Check className="h-4 w-4 text-clay-500" aria-hidden="true" /> {t(`assurance.${k}`)}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Photo
+            src={photos.tasting.src}
+            alt={photos.tasting.alt[locale]}
+            illustration={photos.tasting.illustration}
+            className="bowl hidden w-56 md:block lg:w-64"
+            sizes="16rem"
+          />
         </div>
       </section>
 
       <section className="bg-white py-6 md:py-10">
         <div className="container">
           {enabled && experiences.length > 0 ? (
-            <BookingWizard experiences={experiences} initialSlug={experience} initialCode={code ?? promo} />
+            <BookingWizard experiences={experiences} initialSlug={experience} initialCode={code ?? promo} initialDate={date} />
           ) : (
             // Booking is never simulated: without a database, the flow is not offered.
             <div className="card mx-auto max-w-xl p-8 text-center md:p-10">

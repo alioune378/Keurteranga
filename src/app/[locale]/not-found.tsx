@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <section className="section">
       <div className="container max-w-xl text-center">
-        <p className="font-display text-7xl text-gold-400">404</p>
+        <p className="font-display text-7xl text-saffron-400">404</p>
         <h1 className="mt-4 text-display-md">{t('title')}</h1>
         <p className="mt-3 text-ink-soft">{t('text')}</p>
         <Link href="/" className="btn-green mt-8">{t('cta')}</Link>

@@ -28,12 +28,12 @@ export function AnnouncementBanner({ a, locale }: { a: Announcement; locale: Loc
   const cta = pick(a.cta_label, locale);
   if (!title) return null;
   return (
-    <div className="bg-forest-700 text-cream">
+    <div className="bg-kola-700 text-cream">
       <div className="container flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 text-center text-sm">
-        <Megaphone className="h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
+        <Megaphone className="h-4 w-4 shrink-0 text-saffron-300" aria-hidden="true" />
         <span className="font-medium">{title}</span>
         {a.cta_url && (
-          <a href={a.cta_url} className="font-semibold text-gold-300 underline underline-offset-2 hover:text-gold-200">
+          <a href={a.cta_url} className="font-semibold text-saffron-300 underline underline-offset-2 hover:text-saffron-200">
             {cta || L[locale].book} →
           </a>
         )}
@@ -57,7 +57,7 @@ export function AnnouncementCard({ a, locale }: { a: Announcement; locale: Local
         {a.event_date && (
           <p className="eyebrow flex items-center gap-1.5"><CalendarDays className="h-3.5 w-3.5" aria-hidden="true" />{t.event} {short(a.event_date, locale)}</p>
         )}
-        <h3 className="mt-2 font-display text-xl text-forest-800">{title || '—'}</h3>
+        <h3 className="mt-2 font-display text-xl text-kola-800">{title || '—'}</h3>
         {body && <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-soft">{body}</p>}
         <div className="mt-auto flex flex-wrap gap-2 pt-4">
           {a.cta_url && <a href={a.cta_url} className="btn-green px-5 py-2 text-sm">{cta || t.book}</a>}
@@ -84,18 +84,18 @@ export function OfferCard({ o, locale }: { o: Offer; locale: Locale }) {
         ? `-${o.discount_percent} % ${t.off}`
         : null;
   return (
-    <article className="card relative flex h-full flex-col overflow-hidden ring-1 ring-gold-300">
+    <article className="card relative flex h-full flex-col overflow-hidden ring-1 ring-saffron-300">
       {o.image_url && !isPdf(o.image_url) && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={o.image_url} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
       )}
       <div className="flex flex-1 flex-col p-5">
         {badge && (
-          <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-100 px-3 py-1 text-xs font-bold text-gold-600">
+          <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-saffron-100 px-3 py-1 text-xs font-bold text-saffron-600">
             <Tag className="h-3.5 w-3.5" aria-hidden="true" /> {badge}
           </p>
         )}
-        <h3 className="mt-3 font-display text-xl text-forest-800">{title || '—'}</h3>
+        <h3 className="mt-3 font-display text-xl text-kola-800">{title || '—'}</h3>
         {desc && <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-soft">{desc}</p>}
         {o.offer_price_xof != null && base != null && base > o.offer_price_xof && (
           <p className="mt-2 text-sm text-ink-muted"><s>{formatPrice(base, locale)}</s></p>
@@ -131,7 +131,7 @@ export function FlyerCard({ m, locale, className }: { m: MediaItem; locale: Loca
       aria-label={`${pdf ? t.pdf : t.open}${title ? ` — ${title}` : ''}`}
     >
       {pdf ? (
-        <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 bg-sand-100 text-forest-700">
+        <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 bg-sand-100 text-kola-700">
           <FileText className="h-12 w-12" aria-hidden="true" />
           <span className="text-sm font-semibold">PDF</span>
         </div>
@@ -139,7 +139,7 @@ export function FlyerCard({ m, locale, className }: { m: MediaItem; locale: Loca
         // eslint-disable-next-line @next/next/no-img-element
         <img src={m.file_url} alt={title} className="aspect-[3/4] w-full object-cover transition duration-300 group-hover:scale-[1.02]" loading="lazy" />
       )}
-      {title && <p className="p-3 text-sm font-semibold text-forest-800">{title}</p>}
+      {title && <p className="p-3 text-sm font-semibold text-kola-800">{title}</p>}
     </a>
   );
 }

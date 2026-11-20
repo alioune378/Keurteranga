@@ -80,7 +80,7 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
           onClick={() => onMonthChange(addMonths(month, -1))}
           disabled={!canPrev}
           aria-label={labels.prev}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sand-300 text-forest-700 transition hover:bg-forest-50 disabled:opacity-30"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-sand-300 text-kola-700 transition hover:bg-kola-50 disabled:opacity-30"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -92,7 +92,7 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
           type="button"
           onClick={() => onMonthChange(addMonths(month, 1))}
           aria-label={labels.next}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sand-300 text-forest-800 transition hover:bg-forest-50"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sand-300 text-kola-800 transition hover:bg-kola-50"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
@@ -126,16 +126,16 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
                 onClick={() => onSelect(iso)}
                 className={cn(
                   'relative flex aspect-square w-full min-w-0 flex-col items-center justify-center rounded-full text-sm font-semibold tabular-nums transition duration-200',
-                  selected && 'bg-forest-700 text-white shadow-soft',
-                  !selected && state === 'available' && 'bg-white text-forest-700 ring-1 ring-inset ring-forest-700/30 hover:bg-forest-50 hover:ring-forest-700',
-                  state === 'full' && 'cursor-not-allowed bg-gold-100 font-medium text-gold-600',
+                  selected && 'bg-clay-500 text-white shadow-soft',
+                  !selected && state === 'available' && 'bg-white text-kola-700 ring-1 ring-inset ring-clay-400/60 hover:bg-clay-50 hover:ring-clay-500',
+                  state === 'full' && 'cursor-not-allowed bg-saffron-100 font-medium text-saffron-600',
                   state === 'booked' && 'cursor-not-allowed bg-terracotta-100 font-medium text-terracotta-700/70 line-through',
                   state === 'unavailable' && 'cursor-not-allowed bg-sand-100 font-normal text-ink-muted/50'
                 )}
               >
                 {day}
                 {state === 'available' && !selected && (
-                  <span className="absolute bottom-1 h-1 w-1 rounded-full bg-gold-400 sm:bottom-1.5" aria-hidden="true" />
+                  <span className="absolute bottom-1 h-1 w-1 rounded-full bg-saffron-400 sm:bottom-1.5" aria-hidden="true" />
                 )}
               </button>
             </div>
@@ -144,9 +144,9 @@ export function Calendar({ locale, month, minMonth, slots, selectedDate, loading
       </div>
 
       <ul className="mt-4 flex flex-wrap gap-4 text-xs text-ink-soft" aria-hidden="true">
-        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-white ring-1 ring-inset ring-forest-700/40" /> {labels.available}</li>
-        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-forest-700" /> {labels.selected}</li>
-        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-gold-100" /> {labels.full}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-white ring-1 ring-inset ring-clay-400/60" /> {labels.available}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-clay-500" /> {labels.selected}</li>
+        <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-saffron-100" /> {labels.full}</li>
         <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-terracotta-100" /> {labels.booked}</li>
         <li className="flex items-center gap-1.5"><span className="h-3.5 w-3.5 rounded-full bg-sand-100" /> {labels.unavailable}</li>
       </ul>

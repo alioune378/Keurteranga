@@ -22,16 +22,20 @@
     overflow-x: clip;
   }
   h1, h2, h3, h4 {
-    @apply font-display font-semibold tracking-tight text-forest-700;
+    @apply font-display font-semibold tracking-tight text-kola-700;
   }
   img {
     -webkit-user-drag: none;
   }
   ::selection {
-    @apply bg-gold-200 text-forest-900;
+    @apply bg-saffron-200 text-kola-900;
   }
   :focus-visible {
-    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-white;
+    @apply outline-none ring-2 ring-clay-400 ring-offset-2 ring-offset-white;
+  }
+  /* headings focused by script (booking steps) for screen readers: no visible ring */
+  [tabindex='-1']:focus-visible {
+    @apply ring-0 ring-offset-0;
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -43,68 +47,70 @@
 }
 
 @layer components {
-  /* Small rounded tag above titles */
+  /* "An afternoon at the house": no institutional pills or numbered kickers.
+     Section labels are a handwritten note in clay, like a word jotted in a recipe book. */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full bg-forest-50 px-3 py-1 font-sans text-[0.78rem] font-semibold text-forest-700;
-  }
-  .eyebrow::before {
-    content: '';
-    @apply h-1.5 w-1.5 rounded-full bg-terracotta-500;
+    @apply inline-block font-hand text-[1.45rem] leading-none text-clay-500 md:text-[1.6rem];
   }
   .eyebrow-light {
-    @apply bg-white/10 text-gold-200;
+    @apply text-saffron-300;
   }
 
   .btn {
     @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[0.95rem] font-semibold transition duration-300 ease-elegant disabled:cursor-not-allowed disabled:opacity-50;
   }
+  /* primary action — clay */
   .btn-gold {
-    @apply btn bg-gold-400 text-forest-900 hover:bg-gold-300;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full bg-clay-500 px-5 py-2.5 text-[0.95rem] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(188,94,54,.8)] transition duration-300 ease-elegant hover:bg-clay-600 disabled:cursor-not-allowed disabled:opacity-50;
   }
+  /* secondary solid — kola brown */
   .btn-green {
-    @apply btn bg-forest-700 text-white hover:bg-forest-600;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full bg-kola-700 px-5 py-2.5 text-[0.95rem] font-semibold text-white transition duration-300 ease-elegant hover:bg-kola-600 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-outline {
-    @apply btn border border-forest-700/25 bg-white text-forest-700 hover:border-forest-700;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full border border-kola-700/25 bg-white px-5 py-2.5 text-[0.95rem] font-semibold text-kola-700 transition duration-300 ease-elegant hover:border-kola-700 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-ghost-light {
-    @apply btn bg-white/15 text-white backdrop-blur hover:bg-white hover:text-forest-800;
+    @apply inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-full bg-white/15 px-5 py-2.5 text-[0.95rem] font-semibold text-white backdrop-blur transition duration-300 ease-elegant hover:bg-white hover:text-kola-800;
   }
   .btn-lg {
-    @apply min-h-[3rem] px-6 text-base;
+    @apply min-h-[3.1rem] px-7 text-base;
   }
 
-  /* Text link with arrow */
+  /* Text link with a hand-drawn-feeling underline */
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 font-semibold text-forest-700 underline decoration-gold-400 decoration-2 underline-offset-[6px] transition-colors hover:text-forest-500;
+    @apply inline-flex items-center gap-1.5 font-semibold text-kola-700 underline decoration-clay-300 decoration-[3px] underline-offset-[7px] transition-colors hover:text-clay-600 hover:decoration-clay-500;
   }
 
-  /* Small info pill */
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-sand-200 bg-white px-3 py-1.5 text-sm font-medium text-ink;
+    @apply inline-flex items-center gap-1.5 rounded-full bg-kola-50 px-3 py-1.5 text-sm font-medium text-ink;
   }
 
   .card {
-    @apply rounded-3xl border border-sand-200 bg-white;
+    @apply rounded-[1.75rem] bg-white shadow-soft ring-1 ring-kola-100;
   }
 
   .field-label {
     @apply mb-1.5 block text-sm font-semibold text-ink;
   }
   .field-input {
-    @apply block w-full rounded-xl border border-sand-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-muted transition focus:border-forest-600 focus:outline-none focus:ring-2 focus:ring-forest-600/15 aria-[invalid=true]:border-terracotta-500;
+    @apply block w-full rounded-2xl border border-kola-200 bg-kola-50/40 px-4 py-3 text-base text-ink placeholder:text-ink-muted transition focus:border-clay-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-clay-500/15 aria-[invalid=true]:border-bissap-500;
   }
   .field-error {
-    @apply mt-1.5 text-sm text-terracotta-700;
+    @apply mt-1.5 text-sm text-bissap-500;
   }
 
   .section {
-    @apply py-14 md:py-20;
+    @apply py-16 md:py-24;
   }
 
-  /* Highlighted words inside headings */
   .accent {
-    @apply not-italic text-terracotta-500;
+    @apply not-italic text-clay-500;
+  }
+
+  /* Circular crop — the communal bowl */
+  .bowl {
+    @apply aspect-square rounded-full;
   }
 }
 
