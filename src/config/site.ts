@@ -20,7 +20,7 @@ export const site = {
     countryCode: 'SN'
   },
   /** Google Maps embed query: an exact address once known */
-  mapQuery: 'Rond-point Mermoz, Dakar, Sénégal',
+  mapQuery: 'Mermoz, Dakar, Senegal',
   social: {
     instagram: 'https://www.instagram.com/ker.teranga.sn' as string | null,
     facebook: null as string | null, // [À compléter] full URL

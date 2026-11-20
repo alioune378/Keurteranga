@@ -47,6 +47,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             alt={photos.aboutHeritage.alt[locale]}
             illustration={photos.aboutHeritage.illustration}
             priority
+            imgClassName="object-[50%_40%]"
             className="aspect-[3/2] w-full rounded-3xl md:aspect-[16/9]"
             sizes="(min-width:1280px) 1200px, 100vw"
           />

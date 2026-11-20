@@ -54,7 +54,8 @@ export function resolveContact(row: SiteSettingsRow | null | undefined): Resolve
     street,
     city: site.address.city,
     country: site.address.country,
-    mapQuery: street ? `${street}, ${site.address.city}, ${site.address.country}` : site.mapQuery,
+    // neighbourhood-level only: a street query can pin an unrelated business
+    mapQuery: site.mapQuery,
     social: {
       instagram: v(c.instagram) ?? site.social.instagram,
       facebook: v(c.facebook) ?? site.social.facebook,

@@ -1,5 +1,5 @@
 import { ArrowUpRight, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { defaultContact, type ResolvedContact } from '@/lib/site-settings';
 import { Logo } from '@/components/ui/Logo';
@@ -8,6 +8,7 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, TiktokIcon, WhatsappIcon } f
 export function Footer({ contact: site = defaultContact }: { contact?: ResolvedContact }) {
   const t = useTranslations();
   const year = new Date().getFullYear();
+  const country = useLocale() === 'en' ? 'Senegal' : site.country;
   // Only verified links are shown (null = hidden)
   const socials = [
     { href: site.social.instagram, label: 'Instagram', Icon: InstagramIcon },
@@ -91,7 +92,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
               <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
               <span>
                 {site.street && <>{site.street}<br /></>}
-                {site.city}, {site.country}
+                {site.city}, {country}
               </span>
             </li>
           </ul>
@@ -117,7 +118,7 @@ export function Footer({ contact: site = defaultContact }: { contact?: ResolvedC
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col gap-2 pb-20 pt-6 text-[0.8rem] text-white/50 sm:flex-row sm:items-center sm:justify-between md:pb-6">
+        <div className="container flex flex-col gap-2 pb-20 pt-6 text-[0.8rem] text-white/50 sm:flex-row sm:items-center sm:justify-between md:pb-24">
           <p>© {year} Kër Téranga. {t('footer.rights')}</p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>

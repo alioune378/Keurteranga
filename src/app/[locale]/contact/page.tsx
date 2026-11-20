@@ -80,7 +80,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-muted">{t('address')}</p>
                   <p className="font-medium">
                     {site.street ? `${site.street}, ` : ''}
-                    {site.city}, {site.country}
+                    {site.city}, {locale === 'en' ? 'Senegal' : site.country}
                   </p>
                   {!site.street && <Tbc text={tbc} className="mt-1 inline-block text-sm" />}
                 </div>
