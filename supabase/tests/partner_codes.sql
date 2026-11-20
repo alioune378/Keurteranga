@@ -8,7 +8,7 @@ insert into auth.users (id, email) values ('11111111-1111-1111-1111-111111111111
 insert into public.admin_profiles (user_id, full_name) values ('11111111-1111-1111-1111-111111111111', 'Test Admin') on conflict do nothing;
 
 insert into public.sessions (experience_id, date, start_time, capacity)
-select id, (now() at time zone 'Africa/Dakar')::date + 20, '10:00', 10
+select id, (now() at time zone 'Africa/Dakar')::date + 20, '08:15', 10
   from public.experiences where slug = 'atelier-thieboudiene'
 returning id as pc_sid \gset
 
