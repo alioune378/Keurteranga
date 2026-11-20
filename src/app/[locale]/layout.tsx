@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Caveat, Figtree } from 'next/font/google';
+import { Caveat, Figtree, Outfit } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -16,7 +16,7 @@ import { siteUrl } from '@/lib/utils';
 import '../globals.css';
 
 // Warm, characterful grotesque for headings + friendly humanist sans for reading
-const display = Bricolage_Grotesque({
+const display = Outfit({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap'
