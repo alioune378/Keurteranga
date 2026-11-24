@@ -40,15 +40,29 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <p className="mt-6 max-w-xl text-[1.1rem] leading-relaxed text-ink-soft md:text-xl">{t('intro')}</p>
           </Reveal>
           <Reveal delay={0.08} className="lg:col-span-6">
-            <Photo
-              src={photos.aboutHeritage.src}
-              alt={photos.aboutHeritage.alt[locale]}
-              illustration={photos.aboutHeritage.illustration}
-              priority
-              imgClassName="object-[50%_40%]"
-              className="aspect-[4/3] w-full rounded-[2rem] rounded-tr-[7rem]"
-              sizes="(min-width:1024px) 50vw, 100vw"
-            />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] rounded-tr-[7rem]">
+              <Photo
+                src={photos.aboutSpace.src}
+                alt={photos.aboutSpace.alt[locale]}
+                illustration={photos.aboutSpace.illustration}
+                priority
+                className="!absolute inset-0 h-full w-full"
+                sizes="(min-width:1024px) 50vw, 100vw"
+              />
+              {photos.aboutSpace.video && (
+                <video
+                  src={photos.aboutSpace.video}
+                  poster={photos.aboutSpace.src ?? undefined}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+                />
+              )}
+            </div>
           </Reveal>
         </div>
       </section>
