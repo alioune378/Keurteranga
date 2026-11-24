@@ -218,7 +218,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <Reveal delay={0.08} className="relative order-1 mx-auto w-full max-w-[30rem] md:order-2">
             <Photo {...P(photos.intro)} className="bowl w-[86%]" sizes="(min-width:768px) 40vw, 80vw" />
             <div className="absolute -bottom-2 right-0 w-[42%] rounded-full bg-white p-1.5 shadow-lift">
-              <Photo {...P(photos.storyHands)} className="bowl w-full" sizes="(min-width:768px) 18vw, 36vw" />
+              <Photo {...P(photos.storyHandsSquare)} className="bowl w-full" sizes="(min-width:768px) 18vw, 36vw" />
             </div>
           </Reveal>
         </div>
