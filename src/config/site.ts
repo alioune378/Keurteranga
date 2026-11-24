@@ -48,7 +48,7 @@ const IMG = '/images/ker-teranga';
  */
 export const photos = {
   hero: { src: `${IMG}/01_Accueil/hero-thieboudiene.webp`, illustration: false, alt: { fr: 'Une participante épluche une carotte pendant un atelier Kër Téranga', en: 'A participant peels a carrot during a Kër Téranga workshop' } },
-  intro: { src: `${IMG}/03_Atelier/preparation-herbes.webp`, illustration: false, alt: { fr: 'Une participante souriante prépare les légumes', en: 'A smiling participant prepares the vegetables' } },
+  intro: { src: `${IMG}/03_Atelier/pilon-mortier-terrasse.webp`, illustration: false, alt: { fr: 'Une participante pile l\'assaisonnement au mortier sur la terrasse', en: 'A participant pounds the seasoning in the mortar on the terrace' } },
   featured: { src: `${IMG}/01_Accueil/plat-senegalais-photographie.webp`, illustration: false, alt: { fr: 'Un poste de cuisine prêt : poisson, tomates, légumes et mortier', en: 'A cooking station ready: fish, tomatoes, vegetables and a mortar' } },
   storyMarket: { src: `${IMG}/04_Ingredients/etal-marche-dakar-inspire.webp`, illustration: false, alt: { fr: 'Poisson frais, tomates et légumes du thiéboudiène', en: 'Fresh fish, tomatoes and vegetables for thiéboudiène' } },
   storyHands: { src: `${IMG}/03_Atelier/emincer-oignon.webp`, illustration: false, alt: { fr: 'Une participante émince un oignon sur la terrasse', en: 'A participant chops an onion on the terrace' } },
