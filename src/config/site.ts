@@ -21,6 +21,8 @@ export const site = {
   },
   /** Google Maps embed query: an exact address once known */
   mapQuery: 'Mermoz, Dakar, Senegal',
+  /** Google Business Profile link used by the post-workshop thank-you emails (overridable in Studio → Site & coordonnées) */
+  googleReview: 'https://share.google/d99Cso8XJyH6GkkUb' as string | null,
   social: {
     instagram: 'https://www.instagram.com/ker.teranga.sn' as string | null,
     facebook: null as string | null, // [À compléter] full URL

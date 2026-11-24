@@ -39,6 +39,14 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
             <label className="text-sm">TikTok<input name="tiktok" defaultValue={c.tiktok ?? ''} placeholder="https://tiktok.com/@…" className="field-input mt-1" /></label>
             <label className="text-sm">LinkedIn<input name="linkedin" defaultValue={c.linkedin ?? ''} placeholder="https://linkedin.com/…" className="field-input mt-1" /></label>
           </div>
+          <h3 className="pt-2 text-base font-semibold">Avis Google</h3>
+          <label className="block text-sm">
+            Lien « Laisser un avis » de votre fiche Google
+            <input name="google_review" defaultValue={c.google_review ?? ''} placeholder={site.googleReview ?? 'https://g.page/r/…/review'} className="field-input mt-1" />
+            <span className="mt-1 block text-xs text-ink-muted">
+              Sur votre fiche Google (Google Business Profile) : « Demander des avis » → copiez le lien et collez-le ici. Il sert au bouton des e-mails de remerciement.
+            </span>
+          </label>
         </section>
 
         <section className="card space-y-4 p-5">

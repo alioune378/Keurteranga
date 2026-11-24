@@ -13,6 +13,7 @@ const NAV = [
   { href: '/admin/sessions', label: 'Calendrier' },
   { href: '/admin/experiences', label: 'Expériences' },
   { href: '/admin/communications', label: 'Annonces' },
+  { href: '/admin/remerciements', label: 'Remerciements & avis' },
   { href: '/admin/offers', label: 'Offres spéciales' },
   { href: '/admin/promo-codes', label: 'Codes partenaires' },
   { href: '/admin/media', label: 'Affiches & photos' },

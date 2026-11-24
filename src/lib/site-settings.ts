@@ -17,6 +17,8 @@ export interface SiteSettingsRow {
     facebook?: string;
     tiktok?: string;
     linkedin?: string;
+    /** Google Business Profile "leave a review" link, used in thank-you emails */
+    google_review?: string;
   } | null;
   content?: {
     hero_title?: Localized;

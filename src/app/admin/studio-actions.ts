@@ -254,10 +254,11 @@ export async function saveSettings(fd: FormData) {
     instagram: social('instagram'),
     facebook: social('facebook'),
     tiktok: social('tiktok'),
-    linkedin: social('linkedin')
+    linkedin: social('linkedin'),
+    google_review: social('google_review')
   };
   if (email && !isEmail(email)) redirect(flash(to, 'err', 'Adresse e-mail invalide.'));
-  for (const k of ['instagram', 'facebook', 'tiktok', 'linkedin'] as const) {
+  for (const k of ['instagram', 'facebook', 'tiktok', 'linkedin', 'google_review'] as const) {
     if (str(fd, k, 300) && !contact[k]) redirect(flash(to, 'err', `Lien ${k} invalide : il doit commencer par https://`));
   }
   if (contact.whatsapp && contact.whatsapp.replace(/\D/g, '').length < 8) {

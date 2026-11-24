@@ -376,3 +376,24 @@ ${rows([
 <p style="font-size:15px;margin:28px 0 0;">${fr ? 'Avec toute notre reconnaissance,' : 'With our warm thanks,'}<br><strong>Kër Téranga</strong></p>`;
   return { subject, html: layout(l, subject, body, `${p.code} · ${formatDate(d.date, l)}`) };
 }
+
+
+/** Thank-you email sent after a workshop, inviting guests to leave a Google review. */
+export function reviewThanksEmail(d: { locale: Locale; firstName?: string | null; reviewUrl: string; note?: string | null }) {
+  const fr = d.locale === 'fr';
+  const name = d.firstName ? ` ${escapeHtml(d.firstName)}` : '';
+  const subject = fr ? 'Merci d’avoir cuisiné avec nous — Kër Téranga' : 'Thank you for cooking with us — Kër Téranga';
+  const note = d.note ? `<p style="margin:0 0 16px;font-size:16px;line-height:1.6;white-space:pre-line;">${escapeHtml(d.note)}</p>` : '';
+  const body = fr
+    ? `<h1 style="margin:0 0 16px;font-size:24px;color:${C.green};">Jërëjëf${name} !</h1>
+<p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Merci d’avoir partagé ce moment avec nous autour du thiéboudiène. C’était un plaisir de vous accueillir à Kër Téranga.</p>
+${note}<p style="margin:0 0 24px;font-size:16px;line-height:1.6;">Si vous avez apprécié l’atelier, un petit avis sur Google nous aiderait énormément : il permet à d’autres voyageurs et curieux de découvrir Kër Téranga. Cela ne prend qu’une minute.</p>
+<p style="margin:0 0 28px;">${button(d.reviewUrl, 'Laisser un avis sur Google')}</p>
+<p style="margin:0;font-size:15px;line-height:1.6;color:${C.soft};">À très bientôt,<br>L’équipe Kër Téranga</p>`
+    : `<h1 style="margin:0 0 16px;font-size:24px;color:${C.green};">Jërëjëf${name}!</h1>
+<p style="margin:0 0 16px;font-size:16px;line-height:1.6;">Thank you for sharing this moment with us around the thiéboudiène. It was a joy to welcome you to Kër Téranga.</p>
+${note}<p style="margin:0 0 24px;font-size:16px;line-height:1.6;">If you enjoyed the workshop, a short Google review would help us enormously: it lets other travellers and food lovers discover Kër Téranga. It only takes a minute.</p>
+<p style="margin:0 0 28px;">${button(d.reviewUrl, 'Leave a Google review')}</p>
+<p style="margin:0;font-size:15px;line-height:1.6;color:${C.soft};">See you soon,<br>The Kër Téranga team</p>`;
+  return { subject, html: layout(d.locale, subject, body, fr ? 'Merci pour votre visite — votre avis compte' : 'Thank you for your visit — your review matters') };
+}
