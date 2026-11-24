@@ -46,6 +46,9 @@ const IMG = '/images/ker-teranga';
  * Page photos — real photos from a Kër Téranga workshop (14 November 2026).
  * `src: null` shows a placeholder describing the photo needed.
  */
+/** Home banner video (silent loop) — Kër Téranga workshop, 14 November 2026. */
+export const heroVideo = { src: '/videos/hero-cuisson.mp4', poster: `${IMG}/01_Accueil/hero-video-poster.webp` };
+
 export const photos = {
   hero: { src: `${IMG}/01_Accueil/hero-thieboudiene.webp`, illustration: false, alt: { fr: 'Une participante épluche une carotte pendant un atelier Kër Téranga', en: 'A participant peels a carrot during a Kër Téranga workshop' } },
   intro: { src: `${IMG}/03_Atelier/pilon-mortier-terrasse.webp`, illustration: false, alt: { fr: 'Une participante pile l\'assaisonnement au mortier sur la terrasse', en: 'A participant pounds the seasoning in the mortar on the terrace' } },

@@ -2,7 +2,7 @@ import { ArrowRight, CalendarDays, Clock, Languages, MapPin, PartyPopper, Users 
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
-import { photos, site, type SitePhoto } from '@/config/site';
+import { heroVideo, photos, site, type SitePhoto } from '@/config/site';
 import { testimonials } from '@/config/testimonials';
 import { PartnerSection } from '@/components/booking/PartnerSection';
 import { NextSession } from '@/components/home/NextSession';
@@ -87,10 +87,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* ───────────── HERO · the kitchen, full screen ───────────── */}
       <section className="relative -mt-16 flex min-h-[88svh] flex-col overflow-hidden bg-kola-900 md:-mt-[4.5rem] lg:min-h-[100svh]">
         <Photo {...P(photos.hero)} priority className="!absolute inset-0 h-full w-full" sizes="100vw" />
-        {photos.storyPot.video && (
+        {heroVideo.src && (
           <video
-            src={photos.storyPot.video}
-            poster={photos.hero.src ?? undefined}
+            src={heroVideo.src}
+            poster={heroVideo.poster}
             autoPlay
             muted
             loop
