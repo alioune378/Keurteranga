@@ -30,7 +30,8 @@ export async function sendReviewThanks(fd: FormData) {
 
   const noteFr = cleanText(fd.get('note_fr'), 800) || null;
   const noteEn = cleanText(fd.get('note_en'), 800) || null;
-  const extraLocale = fd.get('extra_locale') === 'en' ? 'en' : 'fr';
+  const xl = fd.get('extra_locale');
+  const extraLocale: 'fr' | 'en' | 'both' = xl === 'en' ? 'en' : xl === 'fr' ? 'fr' : 'both';
 
   // guests ticked from the session's bookings
   const ids = fd.getAll('booking').map((v) => cleanLine(v, 60)).filter(Boolean);
@@ -52,11 +53,11 @@ export async function sendReviewThanks(fd: FormData) {
 
   const seen = new Set<string>();
   const messages: Array<{ to: string; subject: string; html: string; replyTo?: string }> = [];
-  const add = (email: string, locale: 'fr' | 'en', firstName: string | null) => {
+  const add = (email: string, locale: 'fr' | 'en' | 'both', firstName: string | null) => {
     const key = email.trim().toLowerCase();
     if (!isEmail(key) || seen.has(key)) return;
     seen.add(key);
-    const { subject, html } = reviewThanksEmail({ locale, firstName, reviewUrl, note: locale === 'fr' ? noteFr : noteEn });
+    const { subject, html } = reviewThanksEmail({ locale, firstName, reviewUrl, note: locale === 'en' ? noteEn : noteFr, noteEn });
     messages.push({ to: key, subject, html, replyTo: publicReplyTo() });
   };
   for (const g of guests) add(g.email, g.locale === 'en' ? 'en' : 'fr', g.first_name);

@@ -52,7 +52,7 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
       <p className="mb-6 max-w-3xl text-sm text-ink-soft">
         Après un atelier, envoyez en un clic un e-mail de remerciement à vos participants, avec un bouton pour laisser un avis sur votre fiche Google.
         Les participants qui ont réservé sur le site sont déjà listés ; ajoutez à la main ceux qui ont réservé autrement (WhatsApp, téléphone, sur place).
-        Chacun reçoit son propre e-mail, dans sa langue : personne ne voit les adresses des autres.
+        Chacun reçoit son propre e-mail : personne ne voit les adresses des autres. Les e-mails ajoutés à la main partent par défaut en français et en anglais dans le même message.
       </p>
 
       {reviewUrl && (
@@ -115,7 +115,8 @@ export default async function ThanksPage({ searchParams }: { searchParams: Promi
             <p className="mt-1 text-xs text-ink-muted">Une adresse par ligne (ou séparées par des virgules). Les doublons sont ignorés.</p>
             <div className="mt-3 flex flex-wrap gap-4 text-sm">
               <span className="font-medium">Langue pour ces adresses :</span>
-              <label className="flex items-center gap-2"><input type="radio" name="extra_locale" value="fr" defaultChecked /> Français</label>
+              <label className="flex items-center gap-2"><input type="radio" name="extra_locale" value="both" defaultChecked /> Français + English (recommandé)</label>
+              <label className="flex items-center gap-2"><input type="radio" name="extra_locale" value="fr" /> Français</label>
               <label className="flex items-center gap-2"><input type="radio" name="extra_locale" value="en" /> English</label>
             </div>
           </div>
